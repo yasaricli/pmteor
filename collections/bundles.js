@@ -1,5 +1,7 @@
 Bundles = new FS.Collection("bundles", {
-  stores: [ BundlesStore ],
+  stores: [
+    new FS.Store.FileSystem("bundles", { path: BUNDLE_DIR })
+  ],
   filter: {
     allow: {
       contentTypes: ['application/x-gzip'],
@@ -9,7 +11,7 @@ Bundles = new FS.Collection("bundles", {
 });
 
 isServer(() => {
-  Bundles.on('stored', Meteor.bindEnvironment(function(file, storeName) {
+  Bundles.on('stored', (file, storeName) => {
     const tar = `${file.collectionName}-${file._id}-${file.name()}`;
 
     // CD BUNDLE DIR
@@ -23,5 +25,11 @@ isServer(() => {
 
     // REMOVE
     shell.rm('-rf', tar);
-  }));
+
+    // CD SERVER PACKAGES
+    shell.cd(`${file._id}/programs/server`);
+
+    // NPM PACKAGES INSTALL
+    shell.exec('npm install');
+  });
 });

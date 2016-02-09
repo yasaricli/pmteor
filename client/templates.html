@@ -16,7 +16,10 @@
 <template name="applications">
   <ul>
     {{# each applications }}
-      <li>{{ name }}</li>
+      <li>
+        {{ name }} - {{ status }} - {{ port }} {{ livestamp createdAt }}
+        <button class="start">Start</button>
+      </li>
     {{/each}}
   </ul>
 </template>

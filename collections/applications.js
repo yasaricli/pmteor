@@ -20,6 +20,14 @@ Applications.attachSchema(new SimpleSchema({
     }
   },
 
+  port: {
+    type: Number,
+    optional: true,
+    autoform: {
+      type: 'hidden'
+    }
+  },
+
   // environments
   env: {
     type: [Object]
@@ -44,4 +52,26 @@ Applications.helpers({
   bundle() {
     return Bundles.findOne(this.bundleId);
   }
+});
+
+isServer(() => {
+  Applications.helpers({
+    toEnv() {
+      let out = {};
+      _.forEach(this.env, (env) => {
+        Object.assign(out, {
+          [env.key]: env.val
+        })
+      });
+      return out;
+    },
+    toPm2(PORT) {
+      return {
+        name: this.bundleId,
+        cwd: `${BUNDLE_DIR}/${this.bundleId}`,
+        script: 'main.js',
+        env: _.extend(this.toEnv(), { PORT })
+      }
+    }
+  });
 });
