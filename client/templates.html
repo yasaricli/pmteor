@@ -1,0 +1,22 @@
+<head>
+  <title>pm</title>
+</head>
+
+<template name="layout">
+  <div id="Surface">
+    {{ > yield }}
+  </div>
+</template>
+
+<template name="index">
+  {{ > applications }}
+  {{ > quickForm collection="Applications" id="insertApplicationForm" type="insert" }}
+</template>
+
+<template name="applications">
+  <ul>
+    {{# each applications }}
+      <li>{{ name }}</li>
+    {{/each}}
+  </ul>
+</template>
