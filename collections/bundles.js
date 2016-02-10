@@ -21,7 +21,7 @@ isServer(() => {
     shell.mkdir(file._id);
 
     // EXTRACT APPLICATION
-    shell.exec(`tar -xf ${tar} -C ${file._id} --strip 1`);
+    shell.exec(`tar -xf ${tar} -C ${file._id} --strip 1`, { silent: true });
 
     // REMOVE
     shell.rm('-rf', tar);
@@ -30,6 +30,6 @@ isServer(() => {
     shell.cd(`${file._id}/programs/server`);
 
     // NPM PACKAGES INSTALL
-    shell.exec('npm install');
+    shell.exec('npm install', { silent: true });
   });
 });

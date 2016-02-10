@@ -24,6 +24,9 @@
             <button class="stop">Stop</button>
           {{/if}}
         {{/unless}}
+        {{# unless isEqual status 'RUNNING' }}
+          <button class="delete">Delete</button>
+        {{/unless}}
       </li>
     {{/each}}
   </ul>

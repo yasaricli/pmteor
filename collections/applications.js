@@ -74,4 +74,20 @@ isServer(() => {
       }
     }
   });
+
+  Applications.after.remove((userId, doc) => {
+
+    // PROGRESS
+    Applications.update(doc._id, {
+      $set: {
+        status: STATUS_ALLOWED_VALUES[1]
+      }
+    });
+  });
+
+  Applications.after.remove((userId, doc) => {
+    pm2.connect((err) => {
+      pm2.delete(doc.bundleId, () => pm2.disconnect());
+    });
+  });
 });
