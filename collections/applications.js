@@ -7,6 +7,7 @@ Applications.attachBehaviour('timestampable');
 Applications.attachSchema(new SimpleSchema({
   name: {
     type: String,
+    unique: true,
     label: 'Application Name'
   },
 
@@ -33,7 +34,14 @@ Applications.attachSchema(new SimpleSchema({
     type: [Object]
   },
 
-  'env.$.key': { type: String },
+  'env.$.key': {
+    type: String,
+    allowedValues: ENVIRONMENT_VARIABLES,
+    autoform: {
+      firstOption: false
+    }
+  },
+
   'env.$.val': { type: String },
 
   bundleId: {
@@ -107,8 +115,12 @@ isServer(() => {
     pm2.connect((connect_err) => {
       pm2.delete(doc.bundleId, (delete_err) => {
 
-        // REMOVE DIR
-        shell.rm('-rf', application.dir());
+        // EXIST DIR
+        if (shell.test('-e', application.dir())) {
+
+          // REMOVE DIR
+          shell.rm('-rf', application.dir());
+        }
 
         // DISCONNECT
         pm2.disconnect();

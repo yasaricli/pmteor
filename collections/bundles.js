@@ -19,32 +19,37 @@ isServer(() => {
 
     // IF NOT EXISTS DIR
     if (!shell.test('-e', file._id)) {
+
       // GENERATE BUNDLE DIR
       shell.mkdir(file._id);
 
       // EXTRACT APPLICATION
-      shell.exec(`tar -xf ${tar} -C ${file._id} --strip 1`, { silent: true });
+      const extract = shell.exec(`tar -xf ${tar} -C ${file._id} --strip 1`, EXEC_OPTIONS);
 
-      // REMOVE
-      shell.rm('-rf', tar);
+      // extract ended callback.
+      extract.stdout.on('end', Meteor.bindEnvironment(() => {
 
-      // CD SERVER PACKAGES
-      shell.cd(`${file._id}/programs/server`);
+        // REMOVE
+        shell.rm('-rf', tar);
 
-      // NPM PACKAGES INSTALL
-      const child = shell.exec('npm install', { silent: true, async: true  });
+        // CD SERVER PACKAGES
+        shell.cd(`${file._id}/programs/server`);
 
-      /* || bindEnvironment
-       *
-       * if npm install completed then update
-       * application status READY..
-       */
-      child.stdout.on('end', Meteor.bindEnvironment(() => {
-        Applications.update({ bundleId: file._id }, {
-          $set: {
-            status: STATUS_ALLOWED_VALUES[3] // READY
-          }
-        });
+        // NPM PACKAGES INSTALL
+        const install = shell.exec('npm install', EXEC_OPTIONS);
+
+        /* || bindEnvironment
+         *
+         * if npm install completed then update
+         * application status READY..
+         */
+        install.stdout.on('end', Meteor.bindEnvironment(() => {
+          Applications.update({ bundleId: file._id }, {
+            $set: {
+              status: STATUS_ALLOWED_VALUES[3] // READY
+            }
+          });
+        }));
       }));
     }
   }));
