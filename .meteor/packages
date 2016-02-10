@@ -34,3 +34,4 @@ cfs:standard-packages
 cfs:filesystem
 cfs:autoform
 freeport
+less

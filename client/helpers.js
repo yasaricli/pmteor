@@ -1,5 +1,5 @@
 Template.applications.helpers({
   applications() {
-    return Applications.find({ });
+    return Applications.find();
   }
 });

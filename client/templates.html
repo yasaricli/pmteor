@@ -1,25 +1,38 @@
 <head>
-  <title>pm</title>
+  <title>Production process manager for Meteor applications</title>
 </head>
 
 <template name="layout">
-  <div id="Surface">
-    {{ > yield }}
-  </div>
+  {{ > yield }}
 </template>
 
 <template name="index">
-  {{ > applications }}
-  {{ > quickForm collection="Applications" id="insertApplicationForm" type="insert" }}
+  <a href="{{ pathFor route='Applications' }}">Applications</a>
 </template>
 
 <template name="applications">
+  <a href="{{ pathFor route='ApplicationCreate' }}">New Application</a>
   <ul>
     {{# each applications }}
       <li>
         {{ name }} - {{ status }} - {{ port }} {{ livestamp createdAt }}
-        <button class="start">Start</button>
+        {{# unless isEqual status 'PROGRESS' }}
+          {{# if isEqual status 'STOPPED' }}
+            <button class="start">Start</button>
+          {{/if}}
+          {{# if isEqual status 'RUNNING' }}
+            <button class="stop">Stop</button>
+          {{/if}}
+        {{/unless}}
       </li>
     {{/each}}
   </ul>
+</template>
+
+<template name="applicationCreate">
+  {{ > quickForm collection="Applications" id="ApplicationsCreateForm" type="insert" }}
+</template>
+
+<template name="loading">
+  Loading...
 </template>
