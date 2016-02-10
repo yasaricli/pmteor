@@ -13,7 +13,7 @@ Applications.attachSchema(new SimpleSchema({
   status: {
     type: String,
     allowedValues: STATUS_ALLOWED_VALUES,
-    defaultValue: STATUS_ALLOWED_VALUES[0], // Created Default Value.
+    defaultValue: STATUS_ALLOWED_VALUES[1], // PROGRESS.
     autoform: {
       type: 'hidden',
       firstOption: false
@@ -56,6 +56,9 @@ Applications.helpers({
 
 isServer(() => {
   Applications.helpers({
+    dir() {
+      return `${BUNDLE_DIR}/${this.bundleId}`;
+    },
     toEnv() {
       let out = {};
       _.forEach(this.env, (env) => {
@@ -75,7 +78,24 @@ isServer(() => {
     }
   });
 
-  Applications.after.remove((userId, doc) => {
+  Applications.before.update((userId, doc, fieldNames, modifier, options) => {
+    if (_.has(modifier.$set, 'status')) {
+
+      // IF STOPPED THEN
+      if (_.isEqual(modifier.$set.status, 'STOPPED')) {
+        pm2.connect((connect_err) => {
+          pm2.stop(doc.bundleId, (delete_err) => {
+
+            // DISCONNECT
+            pm2.disconnect();
+          });
+        });
+      }
+    }
+  });
+
+  Applications.before.remove((userId, doc) => {
+    const application = Applications.findOne(doc._id);
 
     // PROGRESS
     Applications.update(doc._id, {
@@ -83,11 +103,16 @@ isServer(() => {
         status: STATUS_ALLOWED_VALUES[1]
       }
     });
-  });
 
-  Applications.after.remove((userId, doc) => {
-    pm2.connect((err) => {
-      pm2.delete(doc.bundleId, () => pm2.disconnect());
+    pm2.connect((connect_err) => {
+      pm2.delete(doc.bundleId, (delete_err) => {
+
+        // REMOVE DIR
+        shell.rm('-rf', application.dir());
+
+        // DISCONNECT
+        pm2.disconnect();
+      });
     });
   });
 });

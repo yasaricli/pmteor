@@ -17,15 +17,13 @@
       <li>
         {{ name }} - {{ status }} - {{ port }} {{ livestamp createdAt }}
         {{# unless isEqual status 'PROGRESS' }}
-          {{# if isEqual status 'STOPPED' }}
+          {{# unless isEqual status 'RUNNING' }}
             <button class="start">Start</button>
-          {{/if}}
+            <button class="delete">Delete</button>
+          {{/unless}}
           {{# if isEqual status 'RUNNING' }}
             <button class="stop">Stop</button>
           {{/if}}
-        {{/unless}}
-        {{# unless isEqual status 'RUNNING' }}
-          <button class="delete">Delete</button>
         {{/unless}}
       </li>
     {{/each}}
