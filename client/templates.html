@@ -11,17 +11,17 @@
 </template>
 
 <template name="applications">
-  <a href="{{ pathFor route='ApplicationCreate' }}">New Application</a>
+  <a href="{{ pathFor route='Insert' }}">New Application</a>
   <ul>
     {{# each applications }}
       <li>
-        {{ name }} - {{ status }} - {{ port }} {{ livestamp createdAt }}
+        <a href="{{ pathFor route='Application' }}">{{ name }}</a> - <span class="status {{ status }}">{{ status }}</span> - {{ port }} {{ livestamp createdAt }}
         {{# unless isEqual status 'PROGRESS' }}
-          {{# unless isEqual status 'RUNNING' }}
+          {{# unless isEqual status 'ONLINE' }}
             <button class="start">Start</button>
             <button class="delete">Delete</button>
           {{/unless}}
-          {{# if isEqual status 'RUNNING' }}
+          {{# if isEqual status 'ONLINE' }}
             <button class="stop">Stop</button>
           {{/if}}
         {{/unless}}
@@ -30,8 +30,20 @@
   </ul>
 </template>
 
-<template name="applicationCreate">
-  {{ > quickForm collection="Applications" id="ApplicationsCreateForm" type="insert" }}
+<template name="application">
+  {{ name }} - <span class="status {{ status }}">{{ status }}</span>
+  <ul>
+    {{# each logs }}
+      <li>
+        <b>{{ type }} - {{ livestamp createdAt }}</b>
+        <div>{{{ data }}}</div>
+      </li>
+    {{/each}}
+  </ul>
+</template>
+
+<template name="insert">
+  {{ > quickForm collection="Applications" id="ApplicationsInsertForm" type="insert" }}
 </template>
 
 <template name="loading">

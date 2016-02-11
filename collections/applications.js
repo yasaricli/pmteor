@@ -24,22 +24,27 @@ Applications.attachSchema(new SimpleSchema({
   port: {
     type: Number,
     optional: true,
-    autoform: {
-      type: 'hidden'
-    }
+    autoform: { type: 'hidden' }
   },
 
-  // environments
-  env: {
-    type: [Object]
+  // APPLICATION BUS LOGS.
+  logs: {
+    type: [Object],
+    optional: true,
+    autoform: { type: 'hidden' }
   },
+
+  'logs.$.type': { type: String },
+  'logs.$.data': { type: String },
+  'logs.$.createdAt': { type: Date },
+
+  // ENVIRONMENT_VARIABLES LIST
+  env: { type: [Object] },
 
   'env.$.key': {
     type: String,
     allowedValues: ENVIRONMENT_VARIABLES,
-    autoform: {
-      firstOption: false
-    }
+    autoform: { firstOption: false }
   },
 
   'env.$.val': { type: String },
@@ -79,8 +84,8 @@ isServer(() => {
     toPm2(PORT) {
       return {
         name: this.bundleId,
-        cwd: `${BUNDLE_DIR}/${this.bundleId}`,
         script: 'main.js',
+        cwd: `${BUNDLE_DIR}/${this.bundleId}`,
         env: _.extend(this.toEnv(), { PORT })
       }
     }
