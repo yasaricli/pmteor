@@ -83,10 +83,21 @@ isServer(() => {
     },
     toPm2(PORT) {
       return {
+
+        // name your app will have in PM2
         name: this.bundleId,
+
+        // path of your app
         script: 'main.js',
-        cwd: `${BUNDLE_DIR}/${this.bundleId}`,
-        env: _.extend(this.toEnv(), { PORT })
+
+        // the directory from which your app will be launched
+        cwd: this.dir(),
+
+        // env variables which will appear in your app
+        env: _.extend(this.toEnv(), { PORT }),
+
+        // Enabling Harmony ES6
+        "node-arg": ["--harmony"]
       }
     }
   });
