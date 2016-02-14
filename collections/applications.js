@@ -52,6 +52,7 @@ Applications.attachSchema(new SimpleSchema({
   bundleId: {
     type: String,
     label: 'Bundle',
+    denyUpdate: true,
     autoform: {
       afFieldInput: {
         type: "cfs-file",

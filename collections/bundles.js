@@ -46,6 +46,27 @@ isServer(() => {
          * application status READY..
          */
         install.stdout.on('end', Meteor.bindEnvironment(() => {
+
+          // npm-bcrypt
+          if (shell.test('-e', 'npm/npm-bcrypt')) {
+            const bcrypt = shell.exec('npm install bcrypt', EXEC_OPTIONS);
+
+            // bcrypt end then
+            return bcrypt.stdout.on('end', Meteor.bindEnvironment(() => {
+
+              // REMOVE bcrypt DIR
+              shell.rm('-rf', 'npm/npm-bcrypt');
+
+              // UPDATE STATUS
+              Applications.update({ bundleId: file._id }, {
+                $set: {
+                  status: STATUS_ALLOWED_VALUES[3] // READY
+                }
+              });
+            }));
+          }
+
+          // UPDATE STATUS
           Applications.update({ bundleId: file._id }, {
             $set: {
               status: STATUS_ALLOWED_VALUES[3] // READY
