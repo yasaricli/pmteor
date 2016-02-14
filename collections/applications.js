@@ -70,7 +70,7 @@ Applications.helpers({
 isServer(() => {
   Applications.helpers({
     dir() {
-      return `${BUNDLE_DIR}/${this.bundleId}`;
+      return `${process.env.BUNDLE_DIR}/${this.bundleId}`;
     },
     toEnv() {
       let out = {};
@@ -94,7 +94,9 @@ isServer(() => {
         cwd: this.dir(),
 
         // env variables which will appear in your app
-        env: _.extend(this.toEnv(), { PORT }),
+        env: _.extend(this.toEnv(), {
+          PORT: this.port ? this.port : PORT
+        }),
 
         // Enabling Harmony ES6
         "node-arg": ["--harmony"]

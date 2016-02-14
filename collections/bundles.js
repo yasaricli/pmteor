@@ -1,6 +1,8 @@
 Bundles = new FS.Collection("bundles", {
   stores: [
-    new FS.Store.FileSystem("bundles", { path: BUNDLE_DIR })
+    new FS.Store.FileSystem("bundles", {
+      path: Meteor.isServer ? process.env.BUNDLE_DIR : null
+    })
   ],
   filter: {
     allow: {
@@ -15,7 +17,7 @@ isServer(() => {
     const tar = `${file.collectionName}-${file._id}-${file.name()}`;
 
     // CD BUNDLE DIR
-    shell.cd(BUNDLE_DIR);
+    shell.cd(process.env.BUNDLE_DIR);
 
     // IF NOT EXISTS DIR
     if (!shell.test('-e', file._id)) {
@@ -29,8 +31,8 @@ isServer(() => {
       // extract ended callback.
       extract.stdout.on('end', Meteor.bindEnvironment(() => {
 
-        // REMOVE
-        shell.rm('-rf', tar);
+        // REMOVE BUNDLE
+        Bundles.remove(file._id);
 
         // CD SERVER PACKAGES
         shell.cd(`${file._id}/programs/server`);
