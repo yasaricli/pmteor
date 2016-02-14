@@ -1,13 +1,9 @@
 Meteor.methods({
   start(_id) {
-    const app = Applications.findOne(_id);
+    const application = Applications.findOne(_id);
 
     // RUNNING UPDATE
-    Applications.update(_id, {
-      $set: {
-        status: STATUS_ALLOWED_VALUES[1]
-      }
-    });
+    application.setStatus(1);
 
     /*
      * Listening port and connect production process manager. if connected
@@ -16,10 +12,9 @@ Meteor.methods({
      */
     freeport((freeport_err, port) => {
       if (_.isNull(freeport_err)) {
-
         pm2.connect((connect_err) => {
           if (_.isNull(connect_err)) {
-            pm2.start(app.toPm2(port), () => {
+            pm2.start(application.toPm2(port), () => {
 
               // DISCONNECT
               pm2.disconnect();

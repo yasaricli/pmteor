@@ -73,6 +73,15 @@ isServer(() => {
     dir() {
       return `${process.env.BUNDLE_DIR}/${this.bundleId}`;
     },
+
+    setStatus(index) {
+      return Applications.update(this._id, {
+        $set: {
+          status: STATUS_ALLOWED_VALUES[index]
+        }
+      });
+    },
+
     toEnv() {
       let out = {};
       _.forEach(this.env, (env) => {
@@ -82,6 +91,7 @@ isServer(() => {
       });
       return out;
     },
+
     toPm2(PORT) {
       return {
 
@@ -124,12 +134,8 @@ isServer(() => {
   Applications.before.remove((userId, doc) => {
     const application = Applications.findOne(doc._id);
 
-    // PROGRESS
-    Applications.update(doc._id, {
-      $set: {
-        status: STATUS_ALLOWED_VALUES[1]
-      }
-    });
+    // STATUS
+    application.setStatus(1); // PROGRESS
 
     pm2.connect((connect_err) => {
       pm2.delete(doc.bundleId, (delete_err) => {

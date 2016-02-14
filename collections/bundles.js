@@ -30,6 +30,9 @@ isServer(() => {
 
       // extract ended callback.
       extract.stdout.on('end', Meteor.bindEnvironment(() => {
+        const application = Applications.findOne({
+          bundleId: file._id
+        });
 
         // REMOVE BUNDLE
         Bundles.remove(file._id);
@@ -47,7 +50,7 @@ isServer(() => {
          */
         install.stdout.on('end', Meteor.bindEnvironment(() => {
 
-          // npm-bcrypt
+          // npm-bcrypt FIX
           if (shell.test('-e', 'npm/npm-bcrypt')) {
             const bcrypt = shell.exec('npm install bcrypt', EXEC_OPTIONS);
 
@@ -57,21 +60,31 @@ isServer(() => {
               // REMOVE bcrypt DIR
               shell.rm('-rf', 'npm/npm-bcrypt');
 
+
+              // cfs_gridfs FIX
+              if (shell.test('-e', 'npm/cfs_gridfs')) {
+
+                // CD BSON MODULE
+                shell.cd('npm/cfs_gridfs/node_modules/mongodb/node_modules/bson');
+
+                // MAKE COMMAND
+                const make = shell.exec('make', EXEC_OPTIONS);
+
+                // MAKE END THEN
+                return make.stdout.on('end', Meteor.bindEnvironment(() => {
+
+                  // UPDATE STATUS
+                  application.setStatus(3);
+                }));
+              }
+
               // UPDATE STATUS
-              Applications.update({ bundleId: file._id }, {
-                $set: {
-                  status: STATUS_ALLOWED_VALUES[3] // READY
-                }
-              });
+              application.setStatus(3);
             }));
           }
 
           // UPDATE STATUS
-          Applications.update({ bundleId: file._id }, {
-            $set: {
-              status: STATUS_ALLOWED_VALUES[3] // READY
-            }
-          });
+          application.setStatus(3);
         }));
       }));
     }
