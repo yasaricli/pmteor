@@ -17,6 +17,9 @@ Meteor.startup(() => {
             }
           });
         }
+
+        // LOG
+        log(chalk.bold.green, `${name} - ${query.event}`);
       }));
 
       // IF ERROR THEN ON EVENT

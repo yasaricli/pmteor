@@ -83,6 +83,52 @@ isServer(() => {
         // static args
         "node-arg": ["--harmony"]
       }
+    },
+
+    install() {
+      const self = this;
+
+      // UPDATE STATUS PROGRESS
+      self.setStatus(1);
+
+      // CD SERVER PACKAGES
+      shell.cd(`${self.dir()}/programs/server`);
+
+      // NPM PACKAGES INSTALL
+      const install = shell.exec('npm install', EXEC_OPTIONS);
+
+      install.stdout.on('end', Meteor.bindEnvironment(() => {
+
+        // READY
+        self.setStatus(3);
+
+        // FIX BCRYPT
+        if (shell.test('-e', 'npm/npm-bcrypt')) {
+          const bcrypt = shell.exec('npm install bcrypt', EXEC_OPTIONS);
+
+          // bcrypt end then
+          bcrypt.stdout.on('end', Meteor.bindEnvironment(() => {
+
+            // REMOVE bcrypt DIR
+            shell.rm('-rf', 'npm/npm-bcrypt');
+          }));
+        }
+
+        // FIX BSON
+        if (shell.test('-e', 'npm/cfs_gridfs')) {
+          shell.cd('npm/cfs_gridfs/node_modules/mongodb/node_modules/bson');
+
+          // MAKE COMMAND
+          const make = shell.exec('make', EXEC_OPTIONS);
+
+          // MAKE END THEN
+          make.stdout.on('end', Meteor.bindEnvironment(() => {
+
+            // PROGRESS
+            application.setStatus(3);
+          }));
+        }
+      }));
     }
   });
 
