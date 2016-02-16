@@ -14,8 +14,8 @@ Meteor.startup(() => {
             bundleId: name
           }, {
             $set: {
-              port: PORT,
-              status: STATUS_ALLOWED_VALUES[2]
+              status: STATUS_ALLOWED_VALUES[2],
+              'env.PORT': PORT
             }
           });
         }

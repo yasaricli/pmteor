@@ -14,7 +14,7 @@ Meteor.methods({
       if (_.isNull(freeport_err)) {
         pm2.connect((connect_err) => {
           if (_.isNull(connect_err)) {
-            pm2.start(application.toPm2(port), () => {
+            pm2.start(application.options(port), () => {
 
               // DISCONNECT
               pm2.disconnect();

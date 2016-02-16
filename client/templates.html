@@ -15,7 +15,7 @@
   <ul>
     {{# each applications }}
       <li>
-        <a href="{{ pathFor route='Application' }}">{{ name }}</a> - <span class="status {{ status }}">{{ status }}</span> - {{ port }} {{ livestamp createdAt }}
+        <a href="{{ pathFor route='Application' }}">{{ name }}</a> - <span class="status {{ status }}">{{ status }}</span> - {{ env.PORT }} {{ livestamp createdAt }}
         {{# unless isEqual status 'PROGRESS' }}
           {{# unless isEqual status 'ONLINE' }}
             <button class="start">Start</button>

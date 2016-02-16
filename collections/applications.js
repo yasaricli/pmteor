@@ -21,33 +21,22 @@ Applications.attachSchema(new SimpleSchema({
     }
   },
 
-  port: {
-    type: Number,
-    optional: true,
-    autoform: { type: 'hidden' }
-  },
-
   // APPLICATION BUS LOGS.
-  logs: {
-    type: [Object],
-    optional: true,
-    autoform: { type: 'hidden' }
-  },
-
+  logs: { type: [Object], optional: true, autoform: { type: 'hidden' } },
   'logs.$.type': { type: String },
   'logs.$.data': { type: String },
   'logs.$.createdAt': { type: Date },
 
-  // ENVIRONMENT_VARIABLES LIST
-  env: { type: [Object] },
+  // ENVIRONMENT VARIABLES
+  env: { type: Object },
+  'env.ROOT_URL': { type: String },
+  'env.DISABLE_WEBSOCKETS': { type: Number, optional: true},
+  'env.MONGO_OPLOG_URL': { type: String, optional: true },
+  'env.MAIL_URL': { type: String, optional: true },
 
-  'env.$.key': {
-    type: String,
-    allowedValues: ENVIRONMENT_VARIABLES,
-    autoform: { firstOption: false }
-  },
-
-  'env.$.val': { type: String },
+  // HIDDEN ENVIRONMENTS
+  'env.MONGO_URL': { type: String, optional: true, autoform: { type: 'hidden' } },
+  'env.PORT': { type: Number, optional: true, autoform: { type: 'hidden' } },
 
   bundleId: {
     type: String,
@@ -82,37 +71,23 @@ isServer(() => {
       });
     },
 
-    toEnv() {
-      let out = {};
-      _.forEach(this.env, (env) => {
-        Object.assign(out, {
-          [env.key]: env.val
-        })
-      });
-      return out;
-    },
-
-    toPm2(PORT) {
+    options(PORT) {
       return {
-
-        // name your app will have in PM2
         name: this.bundleId,
-
-        // path of your app
         script: 'main.js',
-
-        // the directory from which your app will be launched
         cwd: this.dir(),
-
-        // env variables which will appear in your app
-        env: _.extend(this.toEnv(), {
-          PORT: this.port ? this.port : PORT
+        env: _.extend(this.env, {
+          PORT: this.env.PORT || PORT,
         }),
 
-        // Enabling Harmony ES6
+        // static args
         "node-arg": ["--harmony"]
       }
     }
+  });
+
+  Applications.before.insert((userId, doc) => {
+    doc.env.MONGO_URL = `mongodb://localhost:27017/${doc._id}`;
   });
 
   Applications.before.update((userId, doc, fieldNames, modifier, options) => {
