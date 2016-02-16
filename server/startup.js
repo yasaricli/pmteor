@@ -10,9 +10,7 @@ Meteor.startup(() => {
 
         // IS ONLINE EVENT THEN UPDATE APPLICATION
         if (_.isEqual(query.event, 'online')) {
-          Applications.update({
-            bundleId: name
-          }, {
+          Applications.update(name, {
             $set: {
               status: STATUS_ALLOWED_VALUES[2],
               'env.PORT': PORT
@@ -25,9 +23,7 @@ Meteor.startup(() => {
       bus.on('log:err', Meteor.bindEnvironment((query) => {
 
         // UPDATE APPLICATION
-        Applications.update({
-          bundleId: query.process.name
-        }, {
+        Applications.update(query.process.name, {
           $set: { status: STATUS_ALLOWED_VALUES[4] /* ERRORED */ },
           $push: {
             logs: {

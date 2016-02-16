@@ -60,7 +60,7 @@ Applications.helpers({
 isServer(() => {
   Applications.helpers({
     dir() {
-      return `${process.env.BUNDLE_DIR}/${this.bundleId}`;
+      return `${process.env.BUNDLE_DIR}/${this._id}`;
     },
 
     setStatus(index) {
@@ -73,7 +73,7 @@ isServer(() => {
 
     options(PORT) {
       return {
-        name: this.bundleId,
+        name: this._id,
         script: 'main.js',
         cwd: this.dir(),
         env: _.extend(this.env, {
@@ -96,7 +96,7 @@ isServer(() => {
       // IF STOPPED THEN
       if (_.isEqual(modifier.$set.status, 'STOPPED')) {
         pm2.connect((connect_err) => {
-          pm2.stop(doc.bundleId, (delete_err) => {
+          pm2.stop(doc._id, (delete_err) => {
 
             // DISCONNECT
             pm2.disconnect();
@@ -113,7 +113,7 @@ isServer(() => {
     application.setStatus(1); // PROGRESS
 
     pm2.connect((connect_err) => {
-      pm2.delete(doc.bundleId, (delete_err) => {
+      pm2.delete(doc._id, (delete_err) => {
 
         // EXIST DIR
         if (shell.test('-e', application.dir())) {

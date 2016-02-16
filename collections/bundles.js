@@ -32,10 +32,19 @@ isServer(() => {
       extract.stdout.on('end', Meteor.bindEnvironment(() => {
 
         // REMOVE BUNDLE
-        Bundles.remove(file._id);
+        Bundles.remove(file._id, () => {
+          const application = Applications.findOne({ bundleId: file._id });
 
-        // NPM INSTALL
-        Meteor.call('install', file._id); // file._id == BundleId
+          // MOVE APPLICATION _ID
+          const move = shell.exec(`mv ${file._id} ${application._id}`, EXEC_OPTIONS);
+
+          // COMPLETED MOVE
+          move.stdout.on('end', Meteor.bindEnvironment(() => {
+
+            // NPM INSTALL
+            Meteor.call('install', application._id); // file._id == BundleId
+          }));
+        });
       }));
     }
   }));

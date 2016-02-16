@@ -25,8 +25,8 @@ Meteor.methods({
     });
   },
 
-  install(bundleId) {
-    const application = Applications.findOne({ bundleId });
+  install(_id) {
+    const application = Applications.findOne(_id);
 
     // UPDATE STATUS PROGRESS
     application.setStatus(1);
