@@ -54,7 +54,14 @@ Applications.attachSchema(new SimpleSchema({
 Applications.helpers({
   bundle() {
     return Bundles.findOne(this.bundleId);
-  }
+  },
+  
+  absoluteUrl() {
+    if (isLocal()) {
+      return `http://localhost:${this.env.PORT}`
+    }
+    return this.env.ROOT_URL;
+  },
 });
 
 isServer(() => {
