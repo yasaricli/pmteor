@@ -1,7 +1,5 @@
-const HELPERS = {
-  isEqual(a, b) {
-    return _.isEqual(a, b);
-  }
-};
+_.each({
 
-_.each(HELPERS, (fn, name) => Blaze.Template.registerHelper(name, fn));
+  // GLOBAL BLAZE HELPERS
+
+}, (fn, name) => Blaze.Template.registerHelper(name, fn));
