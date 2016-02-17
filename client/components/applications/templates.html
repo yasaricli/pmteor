@@ -1,22 +1,67 @@
 <template name="applications">
-  <a href="{{ pathFor route='Insert' }}">New Application</a>
-  <ul>
-    {{# each applications }}
-      <li>
-        <a href="{{ pathFor route='Application' }}">{{ name }}</a> - <span class="status no-text {{ status }}">{{ status }}</span> - {{ env.PORT }} {{ livestamp createdAt }}
-        {{# unless isEqual status 'PROGRESS' }}
-          {{# unless isEqual status 'ONLINE' }}
-            <button class="start">Start</button>
-            <button class="delete">Delete</button>
-          {{/unless}}
-          {{# if isEqual status 'ONLINE' }}
-            <button class="stop">Stop</button>
-            <a href="{{ absoluteUrl }}" target="_blank">Go Application</a>
-          {{/if}}
-        {{/unless}}
-      </li>
+  <div class="applications {{#unless Template.subscriptionsReady}}whirl ringed{{/unless}}">
+    <div class="panel-heading applications-heading">
+      <div class="pull-right btn-group">
+        <a href="{{ pathFor route='Insert' }}" class="btn btn-success">
+           <em class="fa fa-hand-o-right"></em>
+           <span>Create Application</span>
+        </a>
+      </div>
+      <div class="panel-title">Applications</div>
+   </div>
+    {{# each apps }}
+      <div class="list-group">
+         <a href="#" class="list-group-item">
+            <table class="wd-wide">
+               <tbody>
+                  <tr>
+                     <td class="wd-xs">
+                        <div class="ph status {{ status }}"></div>
+                     </td>
+                     <td>
+                        <div class="ph">
+                           <h4 class="media-box-heading">{{ name }}</h4>
+                           <small class="text-muted">Vestibulum ante ipsum primis in faucibus orci</small>
+                        </div>
+                     </td>
+                     <td class="wd-sm hidden-xs hidden-sm">
+                        <div class="ph">
+                           <p class="m0">Last change</p>
+                           <small class="text-muted">{{ livestamp updatedAt }}</small>
+                        </div>
+                     </td>
+                     <td class="wd-xs hidden-xs hidden-sm">
+                        <div class="ph">
+                           <p class="m0">Port</p>
+                           <small class="text-muted">
+                             {{# if env.PORT }}
+                               {{ env.PORT }}
+                             {{ else }}
+                               <i class="fa fa-circle"></i>
+                             {{/if}}
+                           </small>
+                        </div>
+                     </td>
+                     <td class="wd-xs hidden-xs hidden-sm">
+                        <div class="ph">
+                          <p class="m0">Status</p>
+                          <small class="text-muted">{{ status }}</small>
+                        </div>
+                     </td>
+                     <td class="wd-sm">
+                        <div class="ph">
+                           <progressbar value="80" type="success" class="m0 progress-xs">80%</progressbar>
+                        </div>
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+         </a>
+      </div>
+    {{ else }}
+      <p class="text-center">Empty Applications</p>
     {{/each}}
-  </ul>
+  </div>
 </template>
 
 <template name="application">

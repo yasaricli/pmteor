@@ -1,5 +1,9 @@
 Template.applications.helpers({
-  applications() {
-    return Applications.find();
+  apps() {
+    return Applications.find({}, {
+      sort: {
+        createdAt: -1
+      }
+    });
   }
 });

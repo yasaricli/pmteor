@@ -15,7 +15,12 @@
 </template>
 
 <template name="index">
-  <div class="row">
+  {{ > dashboard }}
+  {{ > applications }}
+</template>
+
+<template name="dashboard">
+  <div class="row {{#unless Template.subscriptionsReady}}whirl ringed{{/unless}}">
     <div class="col-lg-4 col-sm-6">
       <div class="panel widget bg-primary">
          <div class="row row-table">
@@ -23,7 +28,7 @@
                <em class="fa fa-rocket fa-3x"></em>
             </div>
             <div class="col-xs-8 pv-lg">
-               <div class="h2 mt0 text-bold">{{ applications.count }}</div>
+               <div class="h2 mt0 text-bold">{{ apps.count }}</div>
                <div class="text-uppercase">Applications</div>
             </div>
          </div>

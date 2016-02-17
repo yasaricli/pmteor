@@ -1,5 +1,4 @@
 @import "imports/fonts.less";
-@import "imports/whirl.less";
 @import "imports/core.less";
 
 .navbar {
@@ -20,4 +19,16 @@
       }
     }
   }
+}
+
+.status {
+  width: 64px;
+  height: 64px;
+  border-radius: 5px;
+
+  &.ONLINE:extend(.bg-success) {}
+  &.STOPPED:extend(.bg-gray) {}
+  &.PROGRESS:extend(.bg-warning) {}
+  &.READY:extend(.bg-yellow) {}
+  &.ERRORED:extend(.bg-danger-dark) {}
 }

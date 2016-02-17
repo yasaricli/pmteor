@@ -1,10 +1,3 @@
-Router.route('/applications', {
-  name: 'Applications',
-  waitOn() {
-    return Meteor.subscribe('applications');
-  }
-});
-
 Router.route('/applications/:_id', {
   name: 'Application',
   waitOn() {

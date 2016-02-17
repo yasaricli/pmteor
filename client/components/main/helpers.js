@@ -1,5 +1,5 @@
-Template.index.helpers({
-  applications() {
+Template.dashboard.helpers({
+  apps() {
     return Applications.find();
   },
 

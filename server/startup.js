@@ -8,6 +8,7 @@ Meteor.startup(() => {
       bus.on('process:event', Meteor.bindEnvironment((query) => {
         const { PORT, name } = query.process;
 
+        console.log(PORT);
         // IS ONLINE EVENT THEN UPDATE APPLICATION
         if (_.isEqual(query.event, 'online')) {
           Applications.update(name, {
