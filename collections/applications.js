@@ -21,12 +21,6 @@ Applications.attachSchema(new SimpleSchema({
     }
   },
 
-  // APPLICATION BUS LOGS.
-  logs: { type: [Object], optional: true, autoform: { type: 'hidden' } },
-  'logs.$.type': { type: String },
-  'logs.$.data': { type: String },
-  'logs.$.createdAt': { type: Date },
-
   // ENVIRONMENT VARIABLES
   env: { type: Object },
   'env.ROOT_URL': { type: String },
@@ -52,16 +46,24 @@ Applications.attachSchema(new SimpleSchema({
 }));
 
 Applications.helpers({
+  logs() {
+    return Logs.find({ applicationId: this._id }, {
+      sort: {
+        createdAt: -1
+      }
+    });
+  },
+
   bundle() {
     return Bundles.findOne(this.bundleId);
   },
-  
+
   absoluteUrl() {
     if (isLocal()) {
       return `http://localhost:${this.env.PORT}`
     }
     return this.env.ROOT_URL;
-  },
+  }
 });
 
 isServer(() => {
@@ -178,6 +180,14 @@ isServer(() => {
         // DISCONNECT
         pm2.disconnect();
       });
+    });
+  });
+
+  Applications.after.remove((userId, doc) => {
+
+    // Applications all logs removed.
+    Logs.remove({
+      applicationId: doc._id
     });
   });
 });

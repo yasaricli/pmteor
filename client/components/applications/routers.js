@@ -1,7 +1,3 @@
-Router.route('/', {
-  name: 'Index'
-});
-
 Router.route('/applications', {
   name: 'Applications',
   waitOn() {
@@ -12,8 +8,10 @@ Router.route('/applications', {
 Router.route('/applications/:_id', {
   name: 'Application',
   waitOn() {
-    return Meteor.subscribe('application', this.params._id);
+    return Meteor.subscribe('applications', this.params._id);
   },
+
+  // Current data this application.
   data() {
     return Applications.findOne(this.params._id);
   }

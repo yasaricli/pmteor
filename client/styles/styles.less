@@ -1,27 +1,23 @@
-.status {
-  font-weight: bold;
-  padding: 2px;
-  color: white;
+@import "imports/fonts.less";
+@import "imports/whirl.less";
+@import "imports/core.less";
 
-  &.no-text {
-    display: inline-block;
-    font-size: 0px;
-    width: 10px;
-    height: 10px;
-    border-radius: 10px;
-    position: relative;
-    top: -10px;
-  }
-
-  &.STOPPED {
-    background-color: #91A200;
-  }
-  &.PROGRESS {}
-  &.ONLINE {
-    background-color: #00A780;
-  }
-  &.READY {}
-  &.ERRORED {
-    background-color: #A94242;
+.navbar {
+  background-image: inherit;
+  background-color: transparent;
+  .navbar-nav {
+    margin: 0px;
+    li {
+      a {
+        color: #555;
+      }
+      .dropdown-menu {
+        a {
+          &:hover {
+            background-color: #F9F9F9!important;
+          }
+        }
+      }
+    }
   }
 }

@@ -17,24 +17,25 @@ Meteor.startup(() => {
             }
           });
         }
-
-        // LOG
-        log(chalk.bold.green, `${name} - ${query.event}`);
       }));
 
       // IF ERROR THEN ON EVENT
       bus.on('log:err', Meteor.bindEnvironment((query) => {
+        const { name } = query.process;
 
         // UPDATE APPLICATION
-        Applications.update(query.process.name, {
-          $set: { status: STATUS_ALLOWED_VALUES[4] /* ERRORED */ },
-          $push: {
-            logs: {
-              createdAt: new Date(),
-              type: STATUS_ALLOWED_VALUES[4], /* ERRORED */
-              data: query.data // error data.
-            }
+        Applications.update(name, {
+          $set: {
+            status: STATUS_ALLOWED_VALUES[4]
           }
+        }, () => {
+
+          // INSERT LOG
+          Logs.insert({
+            applicationId: name,
+            type: STATUS_ALLOWED_VALUES[4],
+            data: query.data
+          });
         });
       }));
     }
