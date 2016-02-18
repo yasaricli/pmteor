@@ -40,8 +40,8 @@ zimme:active-route
 momentjs:moment
 lbee:moment-helpers
 check
-yasaricli:underscore-helpers
-yasaricli:pm2
-yasaricli:shell
-yasaricli:freeport
-yasaricli:whirl
+pmteor:freeport
+pmteor:shell
+pmteor:underscore-helpers
+pmteor:whirl
+pmteor:pm2
