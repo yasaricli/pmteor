@@ -35,7 +35,6 @@ less
 adriancbo:chalk
 natestrauser:animate-css
 london:body-class
-twbs:bootstrap
 zimme:active-route
 momentjs:moment
 lbee:moment-helpers
@@ -45,3 +44,7 @@ pmteor:shell
 pmteor:underscore-helpers
 pmteor:whirl
 pmteor:pm2
+flot:flot
+pmteor:styles
+fileer:size
+raix:ui-progress-circle

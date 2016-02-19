@@ -1,66 +1,80 @@
 <template name="applications">
-  <div class="applications {{#unless Template.subscriptionsReady}}whirl ringed{{/unless}}">
+  <div class="applications">
     <div class="panel-heading applications-heading">
       <div class="pull-right btn-group">
         <a href="{{ pathFor route='Insert' }}" class="btn btn-success">
-           <em class="fa fa-hand-o-right"></em>
-           <span>Create Application</span>
+          <em class="fa fa-hand-o-right"></em>
+          <span>Create Application</span>
         </a>
       </div>
       <div class="panel-title">Applications</div>
-   </div>
-    {{# each apps }}
-      <div class="list-group">
-         <a href="#" class="list-group-item">
+    </div>
+    <div class="list {{#unless Template.subscriptionsReady}}whirl ringed{{/unless}}">
+      {{# each apps }}
+        <div class="list-group">
+          <a href="#" class="list-group-item">
             <table class="wd-wide">
-               <tbody>
-                  <tr>
-                     <td class="wd-xs">
-                        <div class="ph status {{ status }}"></div>
-                     </td>
-                     <td>
-                        <div class="ph">
-                           <h4 class="media-box-heading">{{ name }}</h4>
-                           <small class="text-muted">Vestibulum ante ipsum primis in faucibus orci</small>
-                        </div>
-                     </td>
-                     <td class="wd-sm hidden-xs hidden-sm">
-                        <div class="ph">
-                           <p class="m0">Last change</p>
-                           <small class="text-muted">{{ livestamp updatedAt }}</small>
-                        </div>
-                     </td>
-                     <td class="wd-xs hidden-xs hidden-sm">
-                        <div class="ph">
-                           <p class="m0">Port</p>
-                           <small class="text-muted">
-                             {{# if env.PORT }}
-                               {{ env.PORT }}
-                             {{ else }}
-                               <i class="fa fa-circle"></i>
-                             {{/if}}
-                           </small>
-                        </div>
-                     </td>
-                     <td class="wd-xs hidden-xs hidden-sm">
-                        <div class="ph">
-                          <p class="m0">Status</p>
-                          <small class="text-muted">{{ status }}</small>
-                        </div>
-                     </td>
-                     <td class="wd-sm">
-                        <div class="ph">
-                           <progressbar value="80" type="success" class="m0 progress-xs">80%</progressbar>
-                        </div>
-                     </td>
-                  </tr>
-               </tbody>
+              <tbody>
+                <tr>
+                  <td class="wd-xs">
+                    <div class="ph status {{ status }}"></div>
+                  </td>
+                  <td>
+                    <div class="ph">
+                      <h4 class="media-box-heading">{{ name }}</h4>
+                      <small class="text-muted">{{ _id }}</small>
+                    </div>
+                  </td>
+                  <td class="wd-sm hidden-xs hidden-sm">
+                    <div class="ph">
+                      <p class="m0">Created At</p>
+                      <small class="text-muted">{{ livestamp createdAt }}</small>
+                    </div>
+                  </td>
+                  <td class="wd-xs hidden-xs hidden-sm">
+                    <div class="ph">
+                      <p class="m0">Status</p>
+                      <small class="text-muted">{{ status }}</small>
+                    </div>
+                  </td>
+                  <td class="wd-xs hidden-xs hidden-sm">
+                    <div class="ph">
+                      <p class="m0">Port</p>
+                      <small class="text-muted">
+                        {{# if env.PORT }}
+                          {{ env.PORT }}
+                        {{ else }}
+                          <i class="fa fa-circle"></i>
+                        {{/if}}
+                      </small>
+                    </div>
+                  </td>
+                  <td class="wd-xs hidden-xs hidden-sm">
+                    <div class="ph">
+                      <p class="m0">Memory</p>
+                      <small class="text-muted">
+                        {{# if monit.memory }}
+                          {{ filesize monit.memory }}
+                        {{ else }}
+                          <i class="fa fa-circle"></i>
+                        {{/if}}
+                      </small>
+                    </div>
+                  </td>
+                  <td class="wd-xs hidden-xs hidden-sm">
+                    <div class="ph">
+                      {{> progressCircle progress=monit.cpu radius=40 class=status }}
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
             </table>
-         </a>
-      </div>
-    {{ else }}
-      <p class="text-center">Empty Applications</p>
-    {{/each}}
+          </a>
+        </div>
+      {{ else }}
+        <p class="text-center">Empty Applications</p>
+      {{/each}}
+    </div>
   </div>
 </template>
 

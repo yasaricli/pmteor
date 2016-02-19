@@ -21,6 +21,10 @@ Applications.attachSchema(new SimpleSchema({
     }
   },
 
+  monit: { type: Object, optional: true, autoform: { type: 'hidden' } },
+  'monit.memory': { type: Number },
+  'monit.cpu': { type: Number },
+
   // ENVIRONMENT VARIABLES
   env: { type: Object },
   'env.ROOT_URL': { type: String },
