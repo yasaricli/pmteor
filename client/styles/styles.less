@@ -5,11 +5,28 @@
 .navbar {
   background-image: inherit;
   background-color: transparent;
+  height: 75px;
+  line-height: 75px;
+  position: relative;
+
+  .logo {
+    display: block;
+    width: 120px;
+    margin: auto;
+    img {
+      width: 100%;
+    }
+  }
   .navbar-nav {
     margin: 0px;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+
     li {
       a {
         color: #555;
+        font-weight: bold;
       }
       .dropdown-menu {
         a {
@@ -19,6 +36,15 @@
         }
       }
     }
+  }
+}
+
+.wrapper {
+  .topnavbar-wrapper{
+    margin-bottom: 20px;
+  }
+  .content-wrapper {
+    padding-top: 0px;
   }
 }
 
@@ -49,6 +75,53 @@
       &:first-child {
         margin-top: 0px;
       }
+    }
+  }
+}
+
+.at-form {
+  margin: 0px;
+  width: 88%;
+  padding: 0px;
+
+  .at-title {
+    display: none;
+  }
+  .at-error {
+    background-color: transparent;
+    border: 0px;
+    padding: 0px;
+    font-weight: bold;
+    color: #f05050;
+    font-weight: 100;
+  }
+  .at-input {
+    label { display: none; }
+    input {
+      border-width: 3px;
+      margin-bottom: 20px;
+      padding: 30px;
+      font-size: 20px!important;
+      color: #656565;
+      font-weight: 100!important;
+      border-radius: 0px;
+      &:focus {
+        border-color: #28cb75;
+      }
+    }
+  }
+  .at-btn  {
+    margin-top: 0px!important;
+    border-color: transparent;
+    background-color: #28cb75;
+    color: #fff;
+    padding: 15px!important;
+    font-weight: 100;
+    font-size: 20px!important;
+    cursor: pointer;
+    border-radius: 0px;
+    &:hover {
+      background-color: #0cb863;
     }
   }
 }

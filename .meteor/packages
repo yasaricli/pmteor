@@ -52,4 +52,4 @@ idmontie:migrations
 useraccounts:core
 accounts-password
 useraccounts:iron-routing
-pmteor:unstyled
+useraccounts:bootstrap

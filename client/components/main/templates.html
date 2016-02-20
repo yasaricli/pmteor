@@ -11,7 +11,6 @@
         {{ > yield }}
       </div>
     </section>
-    {{ > footer }}
   </div>
 </template>
 
@@ -72,40 +71,13 @@
   <header class="topnavbar-wrapper">
     <nav role="navigation" class="navbar topnavbar">
       <div class="navbar-collapse collapse">
-         <ul class="nav navbar-nav navbar-right">
-            <li class="dropdown dropdown-list">
-               <a href="#" data-toggle="dropdown">yasaricli</a>
-               <ul class="dropdown-menu animated flipInX">
-                  <li>
-                     <div class="list-group">
-                        <a href="#" class="list-group-item">
-                           <div class="media-box">
-                              <div class="media-box-body clearfix">
-                                 <p class="m0">Settings</p>
-                              </div>
-                           </div>
-                        </a>
-                        <a href="#" class="list-group-item">
-                           <div class="media-box">
-                              <div class="media-box-body clearfix">
-                                 <p class="m0">Logout</p>
-                              </div>
-                           </div>
-                        </a>
-                     </div>
-                  </li>
-               </ul>
-            </li>
-         </ul>
+        <a href="{{ pathFor route='Index' }}" class="logo">
+          <img src="/images/logo.png">
+        </a>
+        {{ > currentUserNav }}
       </div>
     </nav>
   </header>
-</template>
-
-<template name="footer">
-  <footer>
-    <span>© 2016 - Pmteor</span>
-  </footer>
 </template>
 
 <template name="loading">

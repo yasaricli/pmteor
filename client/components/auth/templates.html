@@ -1,0 +1,31 @@
+<template name="currentUserNav">
+  {{# unless loggingIn }}
+    {{# if currentUser }}
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown dropdown-list">
+          <a href="#" data-toggle="dropdown">{{ currentUser.profile.first_name }}</a>
+          <ul class="dropdown-menu animated flipInX">
+            <li>
+              <div class="list-group">
+                <a href="#" class="list-group-item">
+                  <div class="media-box">
+                    <div class="media-box-body clearfix">
+                      <p class="m0">Settings</p>
+                    </div>
+                  </div>
+                </a>
+                <a href="/logout" class="list-group-item logout">
+                  <div class="media-box">
+                    <div class="media-box-body clearfix">
+                      <p class="m0">Logout</p>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    {{/if}}
+  {{/unless}}
+</template>
