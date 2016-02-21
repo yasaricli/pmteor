@@ -19,6 +19,11 @@ Pmteor maintains two branches for release builds:
 
 The default branch is `develop`.
 
+## Issues
+
+[Github Issues](https://github.com/pmteor/pmteor/issues) are used to track todos, bugs, feature requests, and more.
+
+
 ## License
 
 Note that Pmteor is distributed under the [MIT License](http://opensource.org/licenses/MIT).
