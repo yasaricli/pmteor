@@ -27,7 +27,7 @@ Applications.attachSchema(new SimpleSchema({
 
   // ENVIRONMENT VARIABLES
   env: { type: Object },
-  'env.ROOT_URL': { type: String },
+  'env.ROOT_URL': { type: String, regEx: SimpleSchema.RegEx.Domain, },
   'env.DISABLE_WEBSOCKETS': { type: Number, optional: true},
   'env.MONGO_OPLOG_URL': { type: String, optional: true },
   'env.MAIL_URL': { type: String, optional: true },

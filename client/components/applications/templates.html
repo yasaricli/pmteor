@@ -2,7 +2,7 @@
   <div class="applications">
     <div class="panel-heading applications-heading">
       <div class="pull-right btn-group">
-        <a href="{{ pathFor route='Insert' }}" class="btn btn-success">
+        <a href="{{ pathFor route='InsertApplication' }}" class="btn btn-success">
           <em class="fa fa-hand-o-right"></em>
           <span>Create Application</span>
         </a>
@@ -66,6 +66,21 @@
                       {{> progressCircle progress=monit.cpu radius=40 class=status }}
                     </div>
                   </td>
+                  <td class="wd-xs hidden-xs hidden-sm">
+                    <div class="ph">
+                      <div class="btn-group">
+                        <button data-toggle="dropdown" class="btn btn-default" aria-expanded="false">
+                          More <i class="fa fa-chevron-down"></i>
+                        </button>
+                        <ul role="menu" class="dropdown-menu animated bounceIn">
+                           <li><a href="#" class="start">Start</a></li>
+                           <li><a href="#" class="stop">Stop</a></li>
+                           <li class="divider"></li>
+                           <li><a href="#" class="delete">Destroy</a></li>
+                        </ul>
+                     </div>
+                    </div>
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -90,6 +105,36 @@
   </ul>
 </template>
 
-<template name="insert">
-  {{ > quickForm collection="Applications" id="ApplicationsInsertForm" type="insert" }}
+<template name="insertApplication">
+  <div class="col-lg-9">
+    <p class="lead">New Application</p>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        {{# autoForm collection="Applications" id="insertApplicationForm" type="insert" }}
+          {{> afQuickField name='name' class='mb-lg form-control input-lg' placeholder='NAME' label=false autofocus='' }}
+          {{> afQuickField name='env.ROOT_URL' class='mb-lg form-control input-lg' placeholder='ROOT URL' label=false }}
+          {{> afQuickField name='env.MAIL_URL' class='mb-lg form-control input-lg' placeholder='MAIL URL' label=false }}
+          {{> afQuickField name="bundleId" type="cfs-file" collection="bundles" label=false }}
+          <button type="submit" class="mb-sm btn btn-purple btn-lg">Create Application</button>
+        {{/ autoForm }}
+      </div>
+    </div>
+  </div>
+</template>
+
+<template name="updateApplication">
+  <div class="col-lg-9">
+    <p class="lead">Update Application</p>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        {{# autoForm collection="Applications" id="updateApplicationForm" type="update" doc=this }}
+          {{> afQuickField name='name' class='mb-lg form-control input-lg' placeholder='NAME' label=false autofocus='' }}
+          {{> afQuickField name='env.ROOT_URL' class='mb-lg form-control input-lg' placeholder='ROOT URL' label=false }}
+          {{> afQuickField name='env.MAIL_URL' class='mb-lg form-control input-lg' placeholder='MAIL URL' label=false }}
+          {{> afQuickField name="bundleId" type="cfs-file" collection="bundles" label=false }}
+          <button type="submit" class="mb-sm btn btn-purple btn-lg">Update Application</button>
+        {{/ autoForm }}
+      </div>
+    </div>
+  </div>
 </template>
