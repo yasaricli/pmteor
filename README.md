@@ -18,3 +18,8 @@ Pmteor maintains two branches for release builds:
 * master
 
 The default branch is `develop`.
+
+## License
+
+Note that Pmteor is distributed under the [MIT License](http://opensource.org/licenses/MIT).
+
