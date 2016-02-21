@@ -7,5 +7,5 @@ Detailed explanations of `pmteor` features can be found in the [Guide](http://pm
 ## Quick Start
 
 ```shell
-curl https://install.pmteor.com | sh
+curl http://install.pmteor.com | sh
 ```
