@@ -34,7 +34,6 @@ cfs:autoform
 less
 adriancbo:chalk
 natestrauser:animate-css
-london:body-class
 zimme:active-route
 momentjs:moment
 lbee:moment-helpers
@@ -53,3 +52,4 @@ useraccounts:core
 accounts-password
 useraccounts:iron-routing
 useraccounts:bootstrap
+lookback:body-class

@@ -5,7 +5,10 @@ Router.configure({
 });
 
 // Add Body class default.
-Blaze.addBodyClass('layout-h');
+BodyClass.add('layout-h')
+
+// Protect all Routes
+Router.plugin('ensureSignedIn');
 
 AccountsTemplates.configure({
   /*
