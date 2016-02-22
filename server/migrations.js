@@ -9,7 +9,7 @@ hasEnv('ADMIN', (ADMIN) => {
     const [user, domain] = ADMIN.split('@');
     const [username, password] = user.split(':');
 
-    Accounts.createUser({
+    const _id = Accounts.createUser({
 
       // Username and Password
       username, password,
@@ -22,5 +22,8 @@ hasEnv('ADMIN', (ADMIN) => {
         first_name: username
       }
     });
+
+    // ADD ROLE
+    Roles.addUsersToRoles(_id, 'admin');
   });
 });

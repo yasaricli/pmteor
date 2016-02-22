@@ -87,10 +87,10 @@
                           {{# if isOnline }}
                             <li><a href="#" class="stop">Stop</a></li>
                           {{/if}}
-                          {{# if isStop }}
+                          {{# unless isOnline }}
                             <li class="divider"></li>
                             <li><a href="#" class="delete">Destroy</a></li>
-                          {{/if}}
+                          {{/unless}}
                         </ul>
                      </div>
                     </div>

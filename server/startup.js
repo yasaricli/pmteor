@@ -5,9 +5,12 @@ Meteor.startup(() => {
     pm2.connect(Meteor.bindEnvironment((connect_err) => {
       if (_.isNull(connect_err)) {
         pm2.list(Meteor.bindEnvironment((list_err, procs) => {
+          const onlines = _.filter(procs, (proc) => {
+            return !_.isEqual(proc.pid, 0);
+          });
 
-          if (_.isNull(list_err)) {
-            procs.forEach(Meteor.bindEnvironment((proc) => {
+          if (!_.isEmpty(onlines)) {
+            onlines.forEach(Meteor.bindEnvironment((proc) => {
               const { name, monit } = proc;
 
               // UPDATE MONITORING
