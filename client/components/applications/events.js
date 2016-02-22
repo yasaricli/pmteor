@@ -11,5 +11,9 @@ Template.applications.events({
   },
   'click .delete'() {
     Applications.remove(this._id);
+  },
+  'click .absoluteUrl'(event) {
+    event.preventDefault();
+    window.open(this.absoluteUrl());
   }
 });

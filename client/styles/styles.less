@@ -69,11 +69,24 @@
     line-height: 30px;
   }
   .list {
+    .empty {
+      padding: 50px;
+    }
     .list-group {
       margin-top: 20px;
       margin-bottom: 0px;
       &:first-child {
         margin-top: 0px;
+      }
+      .name {
+        color: #555;
+        font-size: 18px;
+        font-weight: 700;
+      }
+      .url-container {
+        .text-muted {
+          display: block;
+        }
       }
       .btn-group {
         .btn-default {
@@ -84,6 +97,26 @@
         .dropdown-menu {
           right: 0px;
           left: inherit;
+          padding-top: 0px;
+          padding-bottom: 0px;
+
+          li {
+            &.divider {
+              margin: 0px;
+            }
+            a {
+              padding: 10px 0px;
+              font-weight: bold;
+              text-align: center;
+              &.delete {
+                color: #f05050;
+                &:hover {
+                  background-color: #f05050;
+                  color: white;
+                }
+              }
+            }
+          }
         }
       }
     }

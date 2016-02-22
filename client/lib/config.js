@@ -28,3 +28,12 @@ AccountsTemplates.configure({
 
 AccountsTemplates.configureRoute('signIn');
 AccountsTemplates.configureRoute('changePwd');
+
+// HOOK FORMS
+AutoForm.addHooks(['InsertApplicationForm', 'UpdateApplicationForm'], {
+  onSuccess() {
+
+    // GO TO INDEX PAGE
+    Router.go('Index');
+  }
+});

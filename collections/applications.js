@@ -27,14 +27,12 @@ Applications.attachSchema(new SimpleSchema({
 
   // ENVIRONMENT VARIABLES
   env: { type: Object },
-  'env.ROOT_URL': { type: String, regEx: SimpleSchema.RegEx.Domain, },
+  'env.ROOT_URL': { type: String, regEx: SimpleSchema.RegEx.Url },
+  'env.MONGO_URL': { type: String, optional: true },
+  'env.MAIL_URL': { type: String, optional: true },
+  'env.PORT': { type: Number, optional: true },
   'env.DISABLE_WEBSOCKETS': { type: Number, optional: true},
   'env.MONGO_OPLOG_URL': { type: String, optional: true },
-  'env.MAIL_URL': { type: String, optional: true },
-
-  // HIDDEN ENVIRONMENTS
-  'env.MONGO_URL': { type: String, optional: true, autoform: { type: 'hidden' } },
-  'env.PORT': { type: Number, optional: true, autoform: { type: 'hidden' } },
 
   bundleId: {
     type: String,
