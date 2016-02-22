@@ -53,3 +53,4 @@ accounts-password
 useraccounts:iron-routing
 useraccounts:bootstrap
 lookback:body-class
+jparker:gravatar
