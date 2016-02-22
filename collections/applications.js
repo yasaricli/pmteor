@@ -65,6 +65,18 @@ Applications.helpers({
       return `http://localhost:${this.env.PORT}`
     }
     return this.env.ROOT_URL;
+  },
+
+  isOnline() {
+    return _.isEqual(this.status, STATUS_ALLOWED_VALUES[2]);
+  },
+
+  isStop() {
+    return _.isEqual(this.status, STATUS_ALLOWED_VALUES[0]);
+  },
+
+  isProgress() {
+    return _.isEqual(this.status, STATUS_ALLOWED_VALUES[1]);
   }
 });
 
