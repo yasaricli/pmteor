@@ -115,6 +115,10 @@ isServer(() => {
 
         // FIX BCRYPT
         if (shell.test('-e', 'npm/npm-bcrypt')) {
+
+          // PROGRESS
+          self.setStatus(1);
+
           const bcrypt = shell.exec('npm install bcrypt', EXEC_OPTIONS);
 
           // bcrypt end then
@@ -122,11 +126,18 @@ isServer(() => {
 
             // REMOVE bcrypt DIR
             shell.rm('-rf', 'npm/npm-bcrypt');
+
+            // READY
+            self.setStatus(3);
           }));
         }
 
         // FIX BSON
         if (shell.test('-e', 'npm/cfs_gridfs')) {
+
+          // PROGRESS
+          self.setStatus(1);
+
           shell.cd('npm/cfs_gridfs/node_modules/mongodb/node_modules/bson');
 
           // MAKE COMMAND
@@ -135,7 +146,7 @@ isServer(() => {
           // MAKE END THEN
           make.stdout.on('end', Meteor.bindEnvironment(() => {
 
-            // PROGRESS
+            // READY
             application.setStatus(3);
           }));
         }
