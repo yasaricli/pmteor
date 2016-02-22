@@ -1,0 +1,14 @@
+{
+  "applications": "Applications",
+  "create-application": "Create Application",
+  "created-at": "Created At",
+  "destroy": "Destroy",
+  "memory": "Memory",
+  "more": "More",
+  "no-application": "No Application",
+  "port": "Port",
+  "restart": "Restart",
+  "start": "Start",
+  "status": "Status",
+  "stop": "Stop"
+}

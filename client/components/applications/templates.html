@@ -4,10 +4,10 @@
       <div class="pull-right btn-group">
         <a href="{{ pathFor route='InsertApplication' }}" class="btn btn-success">
           <em class="fa fa-hand-o-right"></em>
-          <span>Create Application</span>
+          <span>{{ _ "create-application" }}</span>
         </a>
       </div>
-      <div class="panel-title">Applications</div>
+      <div class="panel-title">{{ _ "applications" }}</div>
     </div>
     <div class="list {{#unless Template.subscriptionsReady}}whirl ringed{{/unless}}">
       {{# each apps }}
@@ -33,19 +33,19 @@
                   </td>
                   <td class="wd-sm hidden-xs hidden-sm">
                     <div class="ph">
-                      <p class="m0">Created At</p>
+                      <p class="m0">{{ _ "created-at" }}</p>
                       <small class="text-muted">{{ livestamp createdAt }}</small>
                     </div>
                   </td>
                   <td class="wd-xs hidden-xs hidden-sm">
                     <div class="ph">
-                      <p class="m0">Status</p>
+                      <p class="m0">{{ _ "status" }}</p>
                       <small class="text-muted">{{ status }}</small>
                     </div>
                   </td>
                   <td class="wd-xs hidden-xs hidden-sm">
                     <div class="ph">
-                      <p class="m0">Port</p>
+                      <p class="m0">{{ _ "port" }}</p>
                       <small class="text-muted">
                         {{# if env.PORT }}
                           {{ env.PORT }}
@@ -57,7 +57,7 @@
                   </td>
                   <td class="wd-xs hidden-xs hidden-sm">
                     <div class="ph">
-                      <p class="m0">Memory</p>
+                      <p class="m0">{{ _ "memory" }}</p>
                       <small class="text-muted">
                         {{# if monit.memory }}
                           {{ filesize monit.memory }}
@@ -76,20 +76,20 @@
                     <div class="ph">
                       <div class="btn-group">
                         <button data-toggle="dropdown" class="btn btn-default" aria-expanded="false">
-                          More <i class="fa fa-chevron-down"></i>
+                          {{ _ "more" }} <i class="fa fa-chevron-down"></i>
                         </button>
                         <ul role="menu" class="dropdown-menu animated bounceIn">
                           <li>
                             <a href="#" class="start">
-                              {{# if isOnline }}Restart{{ else }}Start{{/if}}
+                              {{# if isOnline }}{{ _ "restart" }}{{ else }}{{ _ "start" }}{{/if}}
                             </a>
                           </li>
                           {{# if isOnline }}
-                            <li><a href="#" class="stop">Stop</a></li>
+                            <li><a href="#" class="stop">{{ _ "stop" }}</a></li>
                           {{/if}}
                           {{# unless isOnline }}
                             <li class="divider"></li>
-                            <li><a href="#" class="delete">Destroy</a></li>
+                            <li><a href="#" class="delete">{{ _ "destroy" }}</a></li>
                           {{/unless}}
                         </ul>
                      </div>
@@ -101,7 +101,7 @@
           </a>
         </div>
       {{ else }}
-        <p class="text-center empty">Empty Applications</p>
+        <p class="text-center empty">{{ _ "no-applications" }}</p>
       {{/each}}
     </div>
   </div>

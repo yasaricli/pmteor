@@ -1,0 +1,14 @@
+{
+  "applications": "Uygulamalar",
+  "create-application": "Uygulama Oluştur",
+  "created-at": "Oluşturulma Saati",
+  "destroy": "İmha Et",
+  "memory": "Bellek",
+  "more": "Daha Fazla",
+  "no-application": "Uygulama Yok",
+  "port": "Port",
+  "restart": "Yeniden Başlat",
+  "start": "Başlat",
+  "status": "Durum",
+  "stop": "Durdur"
+}
