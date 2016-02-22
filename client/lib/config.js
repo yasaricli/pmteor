@@ -37,3 +37,8 @@ AutoForm.addHooks(['InsertApplicationForm', 'UpdateApplicationForm'], {
     Router.go('Index');
   }
 });
+
+sAlert.config({
+    effect: 'jelly',
+    position: 'bottom-right'
+});

@@ -19,33 +19,34 @@ isServer(() => {
     // CD BUNDLE DIR
     shell.cd(process.env.BUNDLE_DIR);
 
-    // IF NOT EXISTS DIR
-    if (!shell.test('-e', file._id)) {
+    // GENERATE BUNDLE DIR
+    shell.mkdir(file._id);
 
-      // GENERATE BUNDLE DIR
-      shell.mkdir(file._id);
+    // EXTRACT APPLICATION
+    const extract = shell.exec(`tar -xf ${tar} -C ${file._id} --strip 1`, EXEC_OPTIONS);
 
-      // EXTRACT APPLICATION
-      const extract = shell.exec(`tar -xf ${tar} -C ${file._id} --strip 1`, EXEC_OPTIONS);
+    // extract ended callback.
+    extract.stdout.on('end', Meteor.bindEnvironment(() => {
+      const application = Applications.findOne({ bundleId: file._id });
 
-      // extract ended callback.
-      extract.stdout.on('end', Meteor.bindEnvironment(() => {
-        const application = Applications.findOne({ bundleId: file._id });
+      // BEFORE UPDATE NEW BUNDLE APPLICATION
+      if (shell.test('-e', application._id)) {
+        shell.rm('-rf', application._id);
+      }
 
-        // MOVE APPLICATION _ID
-        const move = shell.exec(`mv ${file._id} ${application._id}`, EXEC_OPTIONS);
+      // MOVE APPLICATION _ID
+      const move = shell.exec(`mv ${file._id} ${application._id}`, EXEC_OPTIONS);
 
-        // COMPLETED MOVE
-        move.stdout.on('end', Meteor.bindEnvironment(() => {
+      // COMPLETED MOVE
+      move.stdout.on('end', Meteor.bindEnvironment(() => {
 
-          // REMOVE BUNDLE
-          Bundles.remove(file._id, () => {
+        // REMOVE BUNDLE
+        Bundles.remove(file._id, () => {
 
-            // NPM INSTALL
-            application.install();
-          });
-        }));
+          // NPM INSTALL
+          application.install();
+        });
       }));
-    }
+    }));
   }));
 });
