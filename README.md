@@ -1,5 +1,6 @@
 # Pmteor 
-Meteor manager for meteor applications.
+
+It is a Process Manager that is constructed with Meteor framework and can deploy any application that is done with  Pmteor Meteorjs web framework  to production stage.
 
 ## The Pmteor Guide
 Detailed explanations of `Pmteor` features can be found in the [Guide](http://pmteor.com).
