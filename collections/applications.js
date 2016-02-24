@@ -116,39 +116,23 @@ isServer(() => {
       // CD SERVER PACKAGES
       shell.cd(`${self.dir()}/programs/server`);
 
-      // NPM PACKAGES INSTALL
-      const install = shell.exec('npm install', EXEC_OPTIONS);
+      // CORE NPMM INSTALL
+      shell.exec('npm install', EXEC_OPTIONS);
 
-      install.stdout.on('end', Meteor.bindEnvironment(() => {
+      // FIX BCRYPT
+      if (shell.test('-e', 'npm/npm-bcrypt')) {
+        shell.exec('npm install bcrypt', EXEC_OPTIONS);
+        shell.rm('-rf', 'npm/npm-bcrypt');
+      }
 
-        // READY
-        self.setStatus(3);
+      // FIX BSON
+      if (shell.test('-e', 'npm/cfs_gridfs')) {
+        shell.cd('npm/cfs_gridfs/node_modules/mongodb/node_modules/bson');
+        shell.exec('make', EXEC_OPTIONS);
+      }
 
-        // FIX BCRYPT
-        if (shell.test('-e', 'npm/npm-bcrypt')) {
-          const bcrypt = shell.exec('npm install bcrypt', EXEC_OPTIONS);
-
-          // bcrypt end then
-          bcrypt.stdout.on('end', Meteor.bindEnvironment(() => {
-
-            // REMOVE bcrypt DIR
-            shell.rm('-rf', 'npm/npm-bcrypt');
-          }));
-        }
-
-        // FIX BSON
-        if (shell.test('-e', 'npm/cfs_gridfs')) {
-          shell.cd('npm/cfs_gridfs/node_modules/mongodb/node_modules/bson');
-
-          // MAKE COMMAND
-          const make = shell.exec('make', EXEC_OPTIONS);
-
-          // MAKE END THEN
-          make.stdout.on('end', Meteor.bindEnvironment(() => {
-
-          }));
-        }
-      }));
+      // READY
+      self.setStatus(3);
     }
   });
 

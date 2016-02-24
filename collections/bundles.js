@@ -1,7 +1,12 @@
 Bundles = new FS.Collection("bundles", {
   stores: [
     new FS.Store.FileSystem("bundles", {
-      path: Meteor.isServer ? process.env.BUNDLE_DIR : null
+      path: Meteor.isServer ? process.env.BUNDLE_DIR : null,
+
+      // New Name file _id.
+      fileKeyMaker(fileObj) {
+        return fileObj._id;
+      }
     })
   ],
   filter: {
@@ -12,41 +17,26 @@ Bundles = new FS.Collection("bundles", {
   }
 });
 
+
 isServer(() => {
   Bundles.on('stored', Meteor.bindEnvironment((file, storeName) => {
-    const tar = `${file.collectionName}-${file._id}-${file.name()}`;
+    const application = Applications.findOne({
+      bundleId: file._id
+    });
 
     // CD BUNDLE DIR
     shell.cd(process.env.BUNDLE_DIR);
 
-    // GENERATE BUNDLE DIR
-    shell.mkdir(file._id);
+    // REMOVE OLD APPLICATION
+    shell.rm('-rf', application._id);
 
-    // EXTRACT APPLICATION
-    const extract = shell.exec(`tar -xf ${tar} -C ${file._id} --strip 1`, EXEC_OPTIONS);
+    // CREATE NEW APPLICATION DIR
+    shell.mkdir(application._id);
 
-    // extract ended callback.
-    extract.stdout.on('end', Meteor.bindEnvironment(() => {
-      const application = Applications.findOne({ bundleId: file._id });
+    // EXTRACT
+    shell.exec(`tar -xf ${file._id} -C ${application._id} --strip 1`, EXEC_OPTIONS);
 
-      // BEFORE UPDATE NEW BUNDLE APPLICATION
-      if (shell.test('-e', application._id)) {
-        shell.rm('-rf', application._id);
-      }
-
-      // MOVE APPLICATION _ID
-      const move = shell.exec(`mv ${file._id} ${application._id}`, EXEC_OPTIONS);
-
-      // COMPLETED MOVE
-      move.stdout.on('end', Meteor.bindEnvironment(() => {
-
-        // REMOVE BUNDLE
-        Bundles.remove(file._id, () => {
-
-          // NPM INSTALL
-          application.install();
-        });
-      }));
-    }));
+    // APPLICATION INSTALL STARTED
+    application.install();
   }));
 });
