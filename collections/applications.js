@@ -126,8 +126,7 @@ isServer(() => {
   });
 
   Applications.after.remove((userId, doc) => {
-    const dir = `${process.env.BUNDLE_DIR}/${doc._id}`;
-
+    
     // CONNECT AND DELETE
     pm2.connect((connect_err) => {
       pm2.delete(doc._id, (delete_err) => {
