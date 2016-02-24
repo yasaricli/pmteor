@@ -2,7 +2,7 @@
 Meteor manager for meteor applications.
 
 ## The Pmteor Guide
-Detailed explanations of `pmteor` features can be found in the [Guide](http://pmteor.com).
+Detailed explanations of `Pmteor` features can be found in the [Guide](http://pmteor.com).
 
 ## Quick Start
 
