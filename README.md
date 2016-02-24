@@ -12,7 +12,7 @@ Install `Current Version`
 curl install.pmteor.com | sh
 ```
 
-Other `versions`
+or other `versions`
 ```shell
 curl install.pmteor.com/release/0.0.1-rc | sh
 ```
