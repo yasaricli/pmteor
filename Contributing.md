@@ -23,3 +23,14 @@ $ meteor
 
 As for any Meteor application, Pmteor is automatically refreshed when you change
 any file of the source code, just play with it to see how it behaves!
+
+## Style guide
+
+We follow the
+[meteor style guide](https://github.com/meteor/meteor/wiki/Meteor-Style-Guide).
+
+Please read the meteor style guide before making any significant contribution.
+
+## Code organisation
+
+TODO
