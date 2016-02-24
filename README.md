@@ -6,8 +6,15 @@ Detailed explanations of `pmteor` features can be found in the [Guide](http://pm
 
 ## Quick Start
 
+Install `Current Version`
+
 ```shell
 curl http://install.pmteor.com | sh
+```
+
+Other `versions`
+```shell
+curl http://install.pmteor.com/release/0.0.1-rc | sh
 ```
 
 ## Branching Model
