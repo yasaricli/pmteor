@@ -100,39 +100,8 @@ isServer(() => {
         cwd: this.dir(),
         env: _.extend(this.env, {
           PORT: this.env.PORT || PORT,
-        }),
-
-        // static args
-        "node-arg": ["--harmony"]
+        })
       }
-    },
-
-    install() {
-      const self = this;
-
-      // UPDATE STATUS PROGRESS
-      self.setStatus(1);
-
-      // CD SERVER PACKAGES
-      shell.cd(`${self.dir()}/programs/server`);
-
-      // CORE NPMM INSTALL
-      shell.exec('npm install', EXEC_OPTIONS);
-
-      // FIX BCRYPT
-      if (shell.test('-e', 'npm/npm-bcrypt')) {
-        shell.exec('npm install bcrypt', EXEC_OPTIONS);
-        shell.rm('-rf', 'npm/npm-bcrypt');
-      }
-
-      // FIX BSON
-      if (shell.test('-e', 'npm/cfs_gridfs')) {
-        shell.cd('npm/cfs_gridfs/node_modules/mongodb/node_modules/bson');
-        shell.exec('make', EXEC_OPTIONS);
-      }
-
-      // READY
-      self.setStatus(3);
     }
   });
 
@@ -156,29 +125,22 @@ isServer(() => {
     }
   });
 
-  Applications.before.remove((userId, doc) => {
-    const application = Applications.findOne(doc._id);
+  Applications.after.remove((userId, doc) => {
+    const dir = `${process.env.BUNDLE_DIR}/${doc._id}`;
 
-    // STATUS
-    application.setStatus(1); // PROGRESS
-
+    // CONNECT AND DELETE
     pm2.connect((connect_err) => {
       pm2.delete(doc._id, (delete_err) => {
 
-        // EXIST DIR
-        if (shell.test('-e', application.dir())) {
+        shell.cd(`${process.env.BUNDLE_DIR}`);
 
-          // REMOVE DIR
-          shell.rm('-rf', application.dir());
-        }
+        // REMOVE APPLICATON DIR AND BUNDLE FILE
+        shell.rm('-rf', [ doc._id, doc.bundleId ]);
 
         // DISCONNECT
         pm2.disconnect();
       });
     });
-  });
-
-  Applications.after.remove((userId, doc) => {
 
     // Applications all logs removed.
     Logs.remove({

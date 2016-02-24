@@ -17,26 +17,60 @@ Bundles = new FS.Collection("bundles", {
   }
 });
 
-
 isServer(() => {
-  Bundles.on('stored', Meteor.bindEnvironment((file, storeName) => {
-    const application = Applications.findOne({
-      bundleId: file._id
-    });
+  Bundles.on('uploaded', Meteor.bindEnvironment((file, storeName) => {
+    Meteor.setTimeout(() => {
+      const application = Applications.findOne({
+        bundleId: file._id
+      });
 
-    // CD BUNDLE DIR
-    shell.cd(process.env.BUNDLE_DIR);
+      // IF APPLICATION NOT FOUND THEN NOT RETURN!
+      if (_.isUndefined(application)) {
+        // AUTOFORM UPLOAD FIELD UNIQ BUG!
+        return;
+      }
 
-    // REMOVE OLD APPLICATION
-    shell.rm('-rf', application._id);
+      // UPDATE STATUS PROGRESS
+      application.setStatus(1);
 
-    // CREATE NEW APPLICATION DIR
-    shell.mkdir(application._id);
+      // CD BUNDLE DIR
+      shell.cd(process.env.BUNDLE_DIR);
 
-    // EXTRACT
-    shell.exec(`tar -xf ${file._id} -C ${application._id} --strip 1`, EXEC_OPTIONS);
+      // REMOVE OLD APPLICATION
+      shell.rm('-rf', application._id);
 
-    // APPLICATION INSTALL STARTED
-    application.install();
+      // CREATE NEW APPLICATION DIR
+      shell.mkdir(application._id);
+
+      // EXTRACT
+      const extract = shell.exec(`tar -xf ${file._id} -C ${application._id} --strip 1`, ASYNC_EXEC_OPTIONS);
+
+      extract.stdout.on('end', Meteor.bindEnvironment(() => {
+
+        // CD SERVER PACKAGES
+        shell.cd(`${application.dir()}/programs/server`);
+
+        // NPM CORE PACKAGES INSTALL
+        const npm = shell.exec('npm install', ASYNC_EXEC_OPTIONS);
+
+        npm.stdout.on('end', Meteor.bindEnvironment(() => {
+
+          // FIX BCRYPT
+          if (shell.test('-e', 'npm/npm-bcrypt')) {
+            shell.exec('npm install bcrypt', SYNC_EXEC_OPTIONS);
+            shell.rm('-rf', 'npm/npm-bcrypt');
+          }
+
+          // FIX BSON
+          if (shell.test('-e', 'npm/cfs_gridfs')) {
+            shell.cd('npm/cfs_gridfs/node_modules/mongodb/node_modules/bson');
+            shell.exec('make', SYNC_EXEC_OPTIONS);
+          }
+
+          // READY
+          application.setStatus(3);
+        }));
+      }));
+    }, 1000);
   }));
 });
