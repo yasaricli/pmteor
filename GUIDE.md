@@ -1,6 +1,6 @@
 ## The Pmteor Guide
 
-* [Installing Basic](#install-basic)
+* [Installing Basic](#installing-basic)
 * [Installing from Source](#install-manually-from-source)
 
 ## Installing Basic
