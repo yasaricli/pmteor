@@ -3,7 +3,7 @@
 It is a Process Manager that is constructed with Meteor framework and can deploy any application that is done with  Pmteor Meteorjs web framework  to production stage.
 
 ## The Pmteor Guide
-Detailed explanations of `Pmteor` features can be found in the [Guide](http://pmteor.com).
+Detailed explanations of `Pmteor` features can be found in the [Guide][guide].
 
 ## Quick Start
 
@@ -36,3 +36,5 @@ The default branch is `develop`.
 
 Note that Pmteor is distributed under the [MIT License](http://opensource.org/licenses/MIT).
 
+
+[guide]: https://github.com/pmteor/pmteor/blob/develop/GUIDE.md
