@@ -2,6 +2,7 @@
 
 * [Installing Basic](#installing-basic)
 * [Installing from Source](#install-manually-from-source)
+* [Pmteor Env] (#pmteor-env)
 
 ## Installing Basic
 
@@ -108,6 +109,17 @@ node main.js
 ```
 
 Done!
+
+## Pmteor Env
+
+Export variables must be set before one runs Meteor and after Pmteor can be started.
+
+##### `BUNDLE_DIR`
+Location of the folder where user applications will be uploaded and stored.
+
+##### `ADMIN`
+When Pmteor is run for the first time,  information  belonging to the user that will use the system.
+ 
 
 [node-packages]: https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager
 [node-web]: https://nodejs.org/download
