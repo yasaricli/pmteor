@@ -1,7 +1,14 @@
 Tracker.autorun(() => {
-  let language = navigator.language.split('-')[0];
+  const currentUser = Meteor.user();
+  let language = 'en';
 
-  if (language) {
-    TAPi18n.setLanguage(language);
+  if (currentUser) {
+    language = currentUser.profile.language;
   }
+
+  // LANGUAGE
+  TAPi18n.setLanguage(language);
+
+  // ACCOUNTS PACKAGE LANGUAGE
+  T9n.setLanguage(language);
 });

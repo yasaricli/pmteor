@@ -19,7 +19,8 @@ hasEnv('ADMIN', (ADMIN) => {
 
       // Profile
       profile: {
-        first_name: username
+        first_name: username,
+        language: process.env.ADMIN_LANGUAGE || 'en'
       }
     });
 
