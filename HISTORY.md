@@ -6,6 +6,8 @@
 * ENOENT, no such file or directory BUGFIX [#41](https://github.com/pmteor/pmteor/issues/41)
 * bundles '_id' of undefined BUGFIX [#39](https://github.com/pmteor/pmteor/issues/39)
 * Edit application required stopped. [#42](https://github.com/pmteor/pmteor/issues/42)
+* package.json Pmteor [#38](https://github.com/pmteor/pmteor/issues/38)
+* Internationalization i18n (TR, EN, DE) [#31](https://github.com/pmteor/pmteor/issues/31)
 
 #### v0.0.1, 2016-Feb-22
 
