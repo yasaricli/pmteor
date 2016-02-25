@@ -3,17 +3,19 @@ Template.applications.events({
     Meteor.call('start', this._id);
   },
   'click .stop'() {
-    Applications.update(this._id, {
-      $set: {
-        status: STATUS_ALLOWED_VALUES[0]
-      }
-    });
+    Meteor.call('stop', this._id);
   },
   'click .delete'() {
-    Applications.remove(this._id);
+    Meteor.call('delete', this._id);
   },
   'click .absoluteUrl'(event) {
     event.preventDefault();
     window.open(this.absoluteUrl());
+  }
+});
+
+Template.updateApplication.events({
+  'click .stop'() {
+    Meteor.call('stop', this._id);
   }
 });

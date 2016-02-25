@@ -25,10 +25,35 @@ Meteor.methods({
     });
   },
 
-  install(_id) {
+  delete(_id) {
     const application = Applications.findOne(_id);
     if (application) {
-      return application.install();
+      Applications.remove(application._id, () => {
+        pm2.connect((connect_err) => {
+          pm2.delete(application._id, (delete_err) => {
+
+            shell.cd(`${process.env.BUNDLE_DIR}`);
+
+            // REMOVE APPLICATON DIR AND BUNDLE FILE
+            shell.rm('-rf', [ application._id, application.bundleId ]);
+
+            // DISCONNECT
+            pm2.disconnect();
+          });
+        });
+      });
     }
+  },
+
+  stop(_id) {
+    const application = Applications.findOne(_id);
+
+    pm2.connect((connect_err) => {
+      pm2.stop(application._id, (delete_err) => {
+
+        // DISCONNECT
+        pm2.disconnect();
+      });
+    });
   }
 });

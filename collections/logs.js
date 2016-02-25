@@ -6,7 +6,7 @@ Logs.attachBehaviour('timestampable');
 Logs.attachSchema(new SimpleSchema({
   applicationId: { type: String },
   type: { type: String },
-  data: { type: String }
+  data: { type: String, optional: true }
 }));
 
 Logs.helpers({

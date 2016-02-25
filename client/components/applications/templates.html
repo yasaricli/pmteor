@@ -11,7 +11,7 @@
     </div>
     <div class="list {{#unless Template.subscriptionsReady}}whirl ringed{{/unless}}">
       {{# each apps }}
-        <div class="list-group {{# if isProgress }}whirl traditional{{/if}}">
+        <div class="list-group {{# if isExit }}whirl traditional{{/if}}">
           <a href="{{ pathFor route='Application' }}" class="list-group-item">
             <table class="wd-wide">
               <tbody>
@@ -137,7 +137,7 @@
 </template>
 
 <template name="updateApplication">
-  <div class="col-lg-9">
+  <div class="col-lg-9 {{# if isExit }}whirl traditional{{/if}}">
     <p class="lead">Update Application</p>
     <div class="panel panel-default">
       <div class="panel-body">
@@ -148,7 +148,11 @@
           {{> afQuickField name='env.MAIL_URL' class='mb-lg form-control input-lg' placeholder='MAIL URL' label=false }}
           {{> afQuickField name='env.PORT' class='mb-lg form-control input-lg' placeholder='PORT' label=false }}
           {{> afQuickField name="bundleId" label=false }}
-          <button type="submit" class="mb-sm btn btn-purple btn-lg">Update Application</button>
+          {{# if isStop }}
+            <button type="submit" class="mb-sm btn btn-purple btn-lg">Update Application</button>
+          {{ else }}
+            <a class="mb-sm btn btn-warning btn-lg stop">Stop Application And Update</a>
+          {{/if}}
         {{/ autoForm }}
       </div>
     </div>

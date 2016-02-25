@@ -14,7 +14,7 @@ Applications.attachSchema(new SimpleSchema({
   status: {
     type: String,
     allowedValues: STATUS_ALLOWED_VALUES,
-    defaultValue: STATUS_ALLOWED_VALUES[1], // PROGRESS.
+    defaultValue: STATUS_ALLOWED_VALUES[1], // EXIT.
     autoform: {
       type: 'hidden',
       firstOption: false
@@ -47,11 +47,21 @@ Applications.attachSchema(new SimpleSchema({
 }));
 
 Applications.helpers({
-  logs() {
-    return Logs.find({ applicationId: this._id }, {
+  logs(f = {}) {
+    const filter = Object.assign(f, {
+      applicationId: this._id
+    });
+
+    return Logs.find(filter, {
       sort: {
         createdAt: -1
       }
+    });
+  },
+
+  errors() {
+    return this.logs({
+      type: STATUS_ALLOWED_VALUES[4] // ERRORED STATUS CODE
     });
   },
 
@@ -66,6 +76,14 @@ Applications.helpers({
     return this.env.ROOT_URL;
   },
 
+  setStatus(statusCode) {
+    return Applications.update(this._id, {
+      $set: {
+        status: STATUS_ALLOWED_VALUES[statusCode]
+      }
+    });
+  },
+
   isOnline() {
     return _.isEqual(this.status, STATUS_ALLOWED_VALUES[2]);
   },
@@ -74,7 +92,7 @@ Applications.helpers({
     return _.isEqual(this.status, STATUS_ALLOWED_VALUES[0]);
   },
 
-  isProgress() {
+  isExit() {
     return _.isEqual(this.status, STATUS_ALLOWED_VALUES[1]);
   }
 });
@@ -83,14 +101,6 @@ isServer(() => {
   Applications.helpers({
     dir() {
       return `${process.env.BUNDLE_DIR}/${this._id}`;
-    },
-
-    setStatus(index) {
-      return Applications.update(this._id, {
-        $set: {
-          status: STATUS_ALLOWED_VALUES[index]
-        }
-      });
     },
 
     options(PORT) {
@@ -109,41 +119,22 @@ isServer(() => {
     doc.env.MONGO_URL = `mongodb://localhost:27017/${doc._id}`;
   });
 
-  Applications.before.update((userId, doc, fieldNames, modifier, options) => {
-    if (_.has(modifier.$set, 'status')) {
-
-      // IF STOPPED THEN
-      if (_.isEqual(modifier.$set.status, 'STOPPED')) {
-        pm2.connect((connect_err) => {
-          pm2.stop(doc._id, (delete_err) => {
-
-            // DISCONNECT
-            pm2.disconnect();
-          });
-        });
-      }
-    }
-  });
-
   Applications.after.remove((userId, doc) => {
-    
-    // CONNECT AND DELETE
-    pm2.connect((connect_err) => {
-      pm2.delete(doc._id, (delete_err) => {
-
-        shell.cd(`${process.env.BUNDLE_DIR}`);
-
-        // REMOVE APPLICATON DIR AND BUNDLE FILE
-        shell.rm('-rf', [ doc._id, doc.bundleId ]);
-
-        // DISCONNECT
-        pm2.disconnect();
-      });
-    });
 
     // Applications all logs removed.
     Logs.remove({
       applicationId: doc._id
     });
+  });
+
+  Applications.before.update((userId, doc, fieldNames, modifier, options) => {
+    if (_.has(modifier.$set, 'status')) {
+
+      // INSERT ERROR LOG
+      Logs.insert({
+        applicationId: doc._id,
+        type: modifier.$set.status
+      });
+    }
   });
 });

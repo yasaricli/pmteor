@@ -67,7 +67,12 @@ isServer(() => {
             shell.exec('make', SYNC_EXEC_OPTIONS);
           }
 
-          // READY
+
+         /*
+          * IMPORTANT!!!!
+          * After installation is completed it will be updated before
+          * the start if the application fix begin.
+          */
           application.setStatus(3);
         }));
       }));

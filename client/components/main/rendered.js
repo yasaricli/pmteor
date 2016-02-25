@@ -1,3 +1,3 @@
 Template.dashboard.onCreated(function() {
-  this.subscribe('applications');
+  this.subscribe('dashboard');
 });
