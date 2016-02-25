@@ -8,6 +8,7 @@
 * Edit application required stopped. [#42](https://github.com/pmteor/pmteor/issues/42)
 * package.json Pmteor [#38](https://github.com/pmteor/pmteor/issues/38)
 * Internationalization i18n (TR, EN, DE) [#31](https://github.com/pmteor/pmteor/issues/31)
+* Admin Migration profile language and Env [#43](https://github.com/pmteor/pmteor/issues/43)
 
 #### v0.0.1, 2016-Feb-22
 
