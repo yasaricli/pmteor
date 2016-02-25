@@ -73,10 +73,25 @@
   .panel-heading {
     overflow: hidden;
     line-height: 30px;
+    .panel-title,
+    .btn-purple {
+      text-transform: uppercase;
+    }
   }
   .list {
     .empty {
       padding: 50px;
+      span {
+        display: block;
+        &:first-child {
+          text-transform: uppercase;
+          font-size: 20px;
+          margin-bottom: 10px;
+        }
+        &.yet {
+          color: #AFAFAF;
+        }
+      }
     }
     .list-group {
       margin-top: 20px;
@@ -178,6 +193,21 @@
 
 .not-found {
   position: relative;
+  .mb-xl {
+    margin-bottom: 10px!important;
+    a {
+      font-weight: bold;
+      text-decoration: underline;
+    }
+    .lead {
+      font-size: 25px;
+      text-transform: uppercase;
+      margin-bottom: 15px;
+    }
+  }
+  ul {
+    margin-bottom: 0px!important;
+  }
 }
 
 .col-lg-9 {
@@ -189,4 +219,11 @@
   width: 100%;
   font-size: 20px;
   font-weight: 100;
+}
+
+#InsertApplicationForm,
+#UpdateApplicationForm {
+  .btn {
+    text-transform: uppercase;
+  }
 }

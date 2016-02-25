@@ -89,7 +89,7 @@
                           {{/if}}
                           {{# unless isOnline }}
                             <li class="divider"></li>
-                            <li><a href="#" class="delete">{{ _ "destroy" }}</a></li>
+                            <li><a href="#" class="delete">{{ _ "delete" }}</a></li>
                           {{/unless}}
                         </ul>
                      </div>
@@ -101,7 +101,10 @@
           </a>
         </div>
       {{ else }}
-        <p class="text-center empty">{{ _ "no-applications" }}</p>
+        <div class="text-center empty">
+          <span>{{ _ "no-applications" }}</span>
+          <span class="yet">{{ _ "yet-applications-yet" }}</span>
+        </div>
       {{/each}}
     </div>
   </div>
@@ -121,7 +124,7 @@
 
 <template name="insertApplication">
   <div class="col-lg-9">
-    <p class="lead">New Application</p>
+    <p class="lead">{{ _ "create-application" }}</p>
     <div class="panel panel-default">
       <div class="panel-body">
         {{# autoForm collection="Applications" id="InsertApplicationForm" type="insert" }}
@@ -129,7 +132,7 @@
           {{> afQuickField name='env.ROOT_URL' class='mb-lg form-control input-lg' placeholder='ROOT URL' label=false }}
           {{> afQuickField name='env.MAIL_URL' class='mb-lg form-control input-lg' placeholder='MAIL URL' label=false }}
           {{> afQuickField name="bundleId" type="cfs-file" collection="bundles" label=false }}
-          <button type="submit" class="mb-sm btn btn-purple btn-lg">Create Application</button>
+          <button type="submit" class="mb-sm btn btn-purple btn-lg">{{ _ "create" }}</button>
         {{/ autoForm }}
       </div>
     </div>
@@ -138,7 +141,7 @@
 
 <template name="updateApplication">
   <div class="col-lg-9 {{# if isExit }}whirl traditional{{/if}}">
-    <p class="lead">Update Application</p>
+    <p class="lead">{{ _ "update-application" }}</p>
     <div class="panel panel-default">
       <div class="panel-body">
         {{# autoForm collection="Applications" id="UpdateApplicationForm" type="update" doc=this }}
@@ -149,9 +152,9 @@
           {{> afQuickField name='env.PORT' class='mb-lg form-control input-lg' placeholder='PORT' label=false }}
           {{> afQuickField name="bundleId" label=false }}
           {{# if isStop }}
-            <button type="submit" class="mb-sm btn btn-purple btn-lg">Update Application</button>
+            <button type="submit" class="mb-sm btn btn-purple btn-lg">{{ _ "update" }}</button>
           {{ else }}
-            <a class="mb-sm btn btn-warning btn-lg stop">Stop Application And Update</a>
+            <a class="mb-sm btn btn-warning btn-lg stop">{{ _ "stop-and-update" }}</a>
           {{/if}}
         {{/ autoForm }}
       </div>

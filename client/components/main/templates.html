@@ -30,7 +30,7 @@
             </div>
             <div class="col-xs-8 pv-lg">
                <div class="h2 mt0 text-bold">{{ apps.count }}</div>
-               <div class="text-uppercase">Applications</div>
+               <div class="text-uppercase">{{ _ "applications" }}</div>
             </div>
          </div>
       </div>
@@ -43,7 +43,7 @@
             </div>
             <div class="col-xs-8 pv-lg">
                <div class="h2 mt0 text-bold">{{ getPublishedCount 'applications-errors' }}</div>
-               <div class="text-uppercase">Errors</div>
+               <div class="text-uppercase">{{ _ "errors" }}</div>
             </div>
          </div>
       </div>
@@ -84,12 +84,12 @@
 <template name="notFound">
   <div class="abs-center wd-xl not-found">
     <div class="text-center mb-xl">
-      <p class="lead m0">We couldn't find this page.</p>
-      <p>The page you are looking for does not exists.</p>
+      <p class="lead">{{ _ "page-not-found" }}</p>
+      <p class="desc">{{ _ "page-not-found-desc" }}</p>
     </div>
     <ul class="list-inline text-center text-sm mb-xl">
       <li>
-        <a href="{{ pathFor route='Index' }}" class="text-muted">Go to App</a>
+        <a href="{{ pathFor route='Index' }}" class="text-muted">{{ _ "go-home-page" }}</a>
       </li>
     </ul>
   </div>
