@@ -30,12 +30,20 @@ Meteor.methods({
     if (application) {
       Applications.remove(application._id, () => {
         pm2.connect((connect_err) => {
-          pm2.delete(application._id, (delete_err) => {
+          pm2.delete(application.bundleId, (delete_err) => {
 
+            // CD BUNDLES DIR
             shell.cd(`${process.env.BUNDLE_DIR}`);
 
             // REMOVE APPLICATON DIR AND BUNDLE FILE
-            shell.rm('-rf', [ application._id, application.bundleId ]);
+            shell.rm('-rf', [
+
+              // DIR
+              application.bundleId,
+
+              // TAR.GZ
+              `${application.bundleId}.tar.gz`
+            ]);
 
             // DISCONNECT
             pm2.disconnect();
@@ -49,7 +57,7 @@ Meteor.methods({
     const application = Applications.findOne(_id);
 
     pm2.connect((connect_err) => {
-      pm2.stop(application._id, (delete_err) => {
+      pm2.stop(application.bundleId, (delete_err) => {
 
         // DISCONNECT
         pm2.disconnect();

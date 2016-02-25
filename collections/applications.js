@@ -27,11 +27,11 @@ Applications.attachSchema(new SimpleSchema({
 
   // ENVIRONMENT VARIABLES
   env: { type: Object },
-  'env.ROOT_URL': { type: String, regEx: SimpleSchema.RegEx.Url },
+  'env.ROOT_URL': { type: String, regEx: SimpleSchema.RegEx.Url, unique: true },
   'env.MONGO_URL': { type: String, optional: true },
   'env.MAIL_URL': { type: String, optional: true },
   'env.PORT': { type: Number, optional: true },
-  'env.DISABLE_WEBSOCKETS': { type: Number, optional: true},
+  'env.DISABLE_WEBSOCKETS': { type: Number, optional: true },
   'env.MONGO_OPLOG_URL': { type: String, optional: true },
 
   bundleId: {
@@ -100,12 +100,12 @@ Applications.helpers({
 isServer(() => {
   Applications.helpers({
     dir() {
-      return `${process.env.BUNDLE_DIR}/${this._id}`;
+      return `${process.env.BUNDLE_DIR}/${this.bundleId}`;
     },
 
     options(PORT) {
       return {
-        name: this._id,
+        name: this.bundleId,
         script: 'main.js',
         cwd: this.dir(),
         env: _.extend(this.env, {
@@ -116,7 +116,7 @@ isServer(() => {
   });
 
   Applications.before.insert((userId, doc) => {
-    doc.env.MONGO_URL = `mongodb://localhost:27017/${doc._id}`;
+    doc.env.MONGO_URL = `mongodb://localhost:27017/${doc.bundleId}`;
   });
 
   Applications.after.remove((userId, doc) => {

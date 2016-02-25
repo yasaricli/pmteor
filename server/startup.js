@@ -14,7 +14,7 @@ Meteor.startup(() => {
               const { name, monit } = proc;
 
               // UPDATE MONITORING
-              Applications.update(name, {
+              Applications.update({ bundleId: name }, {
                 $set: {
                   monit
                 }
@@ -35,7 +35,7 @@ Meteor.startup(() => {
         const { PORT, name } = query.process;
 
         // SET STATUS QUERY EVENT
-        Applications.update(name, {
+        Applications.update({ bundleId: name }, {
           $set: {
             status: STATUS_MAPPER[query.event.toUpperCase()],
             'env.PORT': PORT
@@ -46,10 +46,11 @@ Meteor.startup(() => {
       // IF ERROR THEN ON EVENT
       bus.on('log:err', Meteor.bindEnvironment((query) => {
         const { name } = query.process;
+        const application = Applications.findOne({ bundleId: name });
 
         // INSERT ERROR LOG
         Logs.insert({
-          applicationId: name,
+          applicationId: application._id,
           type: STATUS_ALLOWED_VALUES[4],
           data: query.data
         });
