@@ -1,0 +1,14 @@
+{
+  "name": "Pmteor",
+  "version": "0.0.1",
+  "description": "Meteor manager for meteor applications.",
+  "homepage": "http://pmteor.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pmteor/pmteor.git"
+  },
+  "bugs": {
+    "url": "https://github.com/pmteor/pmteor/issues"
+  },
+  "license": "MIT"
+}
