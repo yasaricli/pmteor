@@ -111,7 +111,7 @@ observe-sequence@1.0.7
 ongoworks:security@1.3.0
 ordered-dict@1.0.4
 pmteor:freeport@0.0.1
-pmteor:pm2@0.0.2
+pmteor:pm2@0.0.3
 pmteor:shell@0.0.1
 pmteor:styles@0.0.1
 pmteor:underscore-helpers@0.0.1

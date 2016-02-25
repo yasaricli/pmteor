@@ -42,7 +42,6 @@ pmteor:freeport
 pmteor:shell
 pmteor:underscore-helpers
 pmteor:whirl
-pmteor:pm2
 flot:flot
 pmteor:styles
 fileer:size
@@ -58,3 +57,4 @@ alanning:roles
 juliancwirko:s-alert
 juliancwirko:s-alert-jelly
 tap:i18n
+pmteor:pm2
