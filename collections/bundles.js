@@ -30,7 +30,7 @@ isServer(() => {
     shell.mkdir(file._id);
 
     // EXTRACT
-    shell.exec(`tar -xvzf ${file._id}.tar.gz -C ${file._id} --strip 1`);
+    shell.exec(`tar -xvzf ${file._id}.tar.gz -C ${file._id} --strip 1`, SYNC_EXEC_OPTIONS);
 
     // CD SERVER PACKAGES
     shell.cd(`${file._id}/programs/server`);
