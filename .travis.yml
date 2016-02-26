@@ -26,6 +26,12 @@ before_install:
   - curl https://install.meteor.com | /bin/sh
   - export PATH=$HOME/.meteor:$PATH
 
+
+before_script:
+  # give Meteor some time to init data, and to start
+  - sleep 15
+  - cat ~/.pm2/logs/*
+
 script:
   - meteor build --directory ../build
   - cd ../build
