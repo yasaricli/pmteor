@@ -31,7 +31,7 @@ script:
   - (cd bundle/programs/server && npm install)
     # install bcrypt globally (trying to circumvent a bug in bundled version)
   - rm -rf bundle/programs/server/npm/npm-bcrypt
-  - (cd bundle/programs/server/npm && npm install bcrypt)
+  - (cd bundle/programs/server && npm install bcrypt)
   - pm2 start bundle/main.js
   # give Meteor some time to init data, and to start
   - sleep 15
