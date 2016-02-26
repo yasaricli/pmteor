@@ -30,4 +30,4 @@ script:
   - meteor build --directory ../build
   - cd ../build
   - (cd bundle/programs/server && npm install)
-  - pm2 start main.js pmteor
+  - pm2 start bundle/main.js
