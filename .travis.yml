@@ -21,7 +21,9 @@ notifications:
 
 before_install:
   - curl https://install.meteor.com | /bin/sh
-  - meteor build --directory ../build-prod
-  - cd ../build-prod
+
+script:
+  - meteor build --directory ../build
+  - cd ../build
   - cd bundle/programs/server
   - npm install
