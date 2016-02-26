@@ -31,6 +31,7 @@ script:
   - meteor build --directory ../build
   - cd ../build
   - (cd bundle/programs/server && npm install)
+  - (cd bundle/programs/server/npm && rm -rf bcrypt)
   - pm2 start bundle/main.js
   # give Meteor some time to init data, and to start
   - sleep 15
