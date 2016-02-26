@@ -14,6 +14,7 @@ services:
 
 env:
   global:
+    - export MONGO_URL='mongodb://127.0.0.1:27017/pmteor'
     - export ROOT_URL='https://example.com'
     - export ADMIN='user:pass@domain.com'
     - export BUNDLE_DIR='/home/travis/bundles'
