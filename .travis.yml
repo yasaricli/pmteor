@@ -3,6 +3,12 @@ language: node_js
 node_js:
   - "0.12"
 
+install:
+  - npm -g install pm2
+
+services:
+  - mongodb
+
 notifications:
   slack: pmteorteam:2CrW3i59qe4FeHfN7rjBl9dj
 
