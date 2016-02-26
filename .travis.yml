@@ -4,7 +4,7 @@ node_js:
   - "0.12"
 
 install:
-  # install pm2
+  # install all npm packages
   - npm -g install pm2
 
 services:
@@ -29,9 +29,9 @@ script:
   - meteor build --directory ../build
   - cd ../build
   - (cd bundle/programs/server && npm install)
-  - (cd bundle/programs/server/npm && rm -rf bcrypt)
-  # install bcrypt globally (trying to circumvent a bug in bundled version)
-  - (cd bundle/programs/server && npm install bcrypt)
+    # install bcrypt globally (trying to circumvent a bug in bundled version)
+  - rm -rf bundle/programs/server/npm/npm-bcrypt
+  - (cd bundle/programs/server/npm && npm install bcrypt)
   - pm2 start bundle/main.js
   # give Meteor some time to init data, and to start
   - sleep 15
