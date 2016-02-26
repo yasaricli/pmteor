@@ -8,6 +8,7 @@ notifications:
 
 before_install:
   - curl https://install.meteor.com | /bin/sh
+  - export PATH=$HOME/.meteor:$PATH
 
 before_script:
   - export ADMIN='user:pass@test.com'
