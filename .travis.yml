@@ -1,0 +1,12 @@
+language: node_js
+node_js:
+  - "0.12"
+before_install:
+  - curl https://install.meteor.com | sh
+
+before_script:
+  - export ADMIN='user:pass@test.com'
+  - export BUNDLE_DIR='.'
+
+script:
+  - meteor run
