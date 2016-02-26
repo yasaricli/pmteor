@@ -33,6 +33,10 @@ The default branch is `develop`.
 
 [Github Issues](https://github.com/pmteor/pmteor/issues) are used to track todos, bugs, feature requests, and more.
 
+## Community
+
+Join the conversation at [Twitter](https://twitter.com/pmteor) or [Facebook](https://www.facebook.com/pmteor).
+
 
 ## License
 
