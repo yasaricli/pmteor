@@ -1,6 +1,11 @@
 language: node_js
+
 node_js:
   - "0.12"
+
+notifications:
+  slack: pmteorteam:2CrW3i59qe4FeHfN7rjBl9dj
+
 before_install:
   - curl https://install.meteor.com | sh
 
