@@ -7,7 +7,7 @@ notifications:
   slack: pmteorteam:2CrW3i59qe4FeHfN7rjBl9dj
 
 before_install:
-  - curl https://install.meteor.com | sh
+  - curl https://install.meteor.com | /bin/sh
 
 before_script:
   - export ADMIN='user:pass@test.com'
