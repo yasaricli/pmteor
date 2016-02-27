@@ -15,6 +15,4 @@ Logs.helpers({
   }
 });
 
-isServer(() => {
-
-});
+Dev.isServer(() => { });

@@ -4,7 +4,7 @@
  *   Example:
  *   export ADMIN="user:password@domain.com"
  */
-hasEnv('ADMIN', (ADMIN) => {
+Dev.hasEnv('ADMIN', (ADMIN) => {
   Migrations.add('users', () => {
     const [user, domain] = ADMIN.split('@');
     const [username, password] = user.split(':');

@@ -70,10 +70,7 @@ Applications.helpers({
   },
 
   absoluteUrl() {
-    if (isLocal()) {
-      return `http://localhost:${this.env.PORT}`
-    }
-    return this.env.ROOT_URL;
+    return Dev.isDevelopmentReturned(`http://localhost:${this.env.PORT}`, this.env.ROOT_URL);
   },
 
   setStatus(statusCode) {
@@ -97,10 +94,10 @@ Applications.helpers({
   }
 });
 
-isServer(() => {
+Dev.isServer(() => {
   Applications.helpers({
     dir() {
-      return `${process.env.BUNDLE_DIR}/${this.bundleId}`;
+      return `${BUNDLE_DIR}/${this.bundleId}`;
     },
 
     options(PORT) {

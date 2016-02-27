@@ -33,7 +33,7 @@ Meteor.methods({
           pm2.delete(application.bundleId, (delete_err) => {
 
             // CD BUNDLES DIR
-            shell.cd(`${process.env.BUNDLE_DIR}`);
+            shell.cd(BUNDLE_DIR);
 
             // REMOVE APPLICATON DIR AND BUNDLE FILE
             shell.rm('-rf', [

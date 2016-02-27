@@ -1,33 +1,24 @@
 Bundles = new FS.Collection("bundles", {
-  stores: [
-    new FS.Store.FileSystem("bundles", {
-      path: Meteor.isServer ? process.env.BUNDLE_DIR : null,
 
-      // New Name file _id.
-      fileKeyMaker(fileObj) {
-        return `${fileObj._id}.tar.gz`;
-      }
-    })
-  ],
-  filter: {
-    allow: {
-      contentTypes: ['application/x-gzip'],
-      extensions: ['gz']
-    }
-  }
+  // BUNDLES STORES LIST see libs/utils.js
+  stores: [ ...BUNDLES_STORES ],
+
+  // MERGE BUNDLES FILTER OBJECT libs/utils.js
+  ...BUNDLES_STORE_FILTER
 });
 
-isServer(() => {
+Dev.isServer(() => {
   Bundles.on('stored', Meteor.bindEnvironment((file, storeName) => {
-
-    // CD BUNDLES DIR
-    shell.cd(`${process.env.BUNDLE_DIR}`);
+    const APPLICATION_DIR  = `${BUNDLE_DIR}/${file._id}`;
 
     // REMOVE OLD APPLICATION
-    shell.rm('-rf', file._id);
+    shell.rm('-rf', APPLICATION_DIR);
 
     // CREATE NEW APPLICATION DIR
-    shell.mkdir(file._id);
+    shell.mkdir(APPLICATION_DIR);
+
+    // GO TO BUNDLE DIR
+    shell.cd(BUNDLE_DIR);
 
     // EXTRACT
     shell.exec(`tar -xvzf ${file._id}.tar.gz -C ${file._id} --strip 1`, SYNC_EXEC_OPTIONS);
@@ -39,9 +30,6 @@ isServer(() => {
     const npm = shell.exec('npm install', ASYNC_EXEC_OPTIONS);
 
     npm.stdout.on('end', Meteor.bindEnvironment(() => {
-      const application = Applications.findOne({
-        bundleId: file._id
-      });
 
       // FIX BCRYPT
       if (shell.test('-e', 'npm/npm-bcrypt')) {
@@ -54,6 +42,10 @@ isServer(() => {
         shell.cd('npm/cfs_gridfs/node_modules/mongodb/node_modules/bson');
         shell.exec('make', SYNC_EXEC_OPTIONS);
       }
+
+      const application = Applications.findOne({
+        bundleId: file._id
+      });
 
      /*
       * IMPORTANT!!!!
