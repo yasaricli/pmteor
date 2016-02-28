@@ -114,11 +114,11 @@ Done!
 
 Export variables must be set before one runs Meteor and after Pmteor can be started.
 
-##### `BUNDLE_DIR`
-Location of the folder where user applications will be uploaded and stored.
+##### `BUNDLE_DIR` 
+Location of the folder where user applications will be uploaded and stored. **Default(/tmp/bundles)**
 
-##### `ADMIN`
-When Pmteor is run for the first time,  information  belonging to the user that will use the system.
+##### `ADMIN` - Required
+When Pmteor is run for the first time,  information  belonging to the user that will use the system. **Default(Not Defined.)**.
  
 
 [node-packages]: https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager
