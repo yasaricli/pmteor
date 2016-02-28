@@ -117,6 +117,9 @@ Export variables must be set before one runs Meteor and after Pmteor can be star
 ##### `BUNDLE_DIR` 
 Location of the folder where user applications will be uploaded and stored. **Default(/tmp/bundles)**
 
+##### `MAX_BUNDLE_SIZE`
+It sets the file upload limit. **Default(15 * 1024 * 1024) "15 MB"**
+
 ##### `ADMIN` - Required
 When Pmteor is run for the first time,  information  belonging to the user that will use the system. **Default(Not Defined.)**.
  
