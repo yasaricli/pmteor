@@ -42,7 +42,7 @@ Now we just need to make some settings through env variables:
 export MONGO_URL='mongodb://127.0.0.1:27017/pmteor'
 export ROOT_URL='https://example.com'
 export ADMIN='user:pass@domain.com'
-export BUNDLE_DIR='~/bundles'
+export BUNDLE_DIR='/tmp/bundles'
 export PORT=8080
 ```
 
@@ -97,7 +97,7 @@ Now we need to set some environment variables:
 export MONGO_URL='mongodb://127.0.0.1:27017/pmteor'
 export ROOT_URL='https://example.com'
 export ADMIN='user:pass@domain.com'
-export BUNDLE_DIR='~/bundles'
+export BUNDLE_DIR='/tmp/bundles'
 export PORT=8080
 ```
 
@@ -116,12 +116,19 @@ Export variables must be set before one runs Meteor and after Pmteor can be star
 
 ##### `BUNDLE_DIR` 
 Location of the folder where user applications will be uploaded and stored. **Default(/tmp/bundles)**
+    
+    export BUNDLE_DIR='/tmp/bundles'
 
 ##### `MAX_BUNDLE_SIZE`
 It sets the file upload limit. **Default(15 * 1024 * 1024) "15 MB"**
 
+    export MAX_BUNDLE_SIZE = 15728640
+
 ##### `ADMIN` - Required
 When Pmteor is run for the first time,  information  belonging to the user that will use the system. **Default(Not Defined.)**.
+
+    export ADMIN='user:pass@domain.com'
+
  
 
 [node-packages]: https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager
