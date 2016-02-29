@@ -5,8 +5,7 @@ Router.configure({
 });
 
 Avatar.setOptions({
-  fallbackType: "default image",
-  defaultImageUrl: '/images/default-avatar.png'
+  gravatarDefault: "identicon"
 });
 
 // Add Body class default.
