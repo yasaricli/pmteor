@@ -1,0 +1,109 @@
+/* ========================================================================
+   Component: masonry-grid.less
+ ========================================================================== */
+
+@masonry-grid-gap: 15px;
+@masonry-grid-columns: 12;
+
+.row-masonry {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  //.column-fill(auto); // removed: not necessary and breaks ff layout
+  
+  > .col-masonry {
+    display: inline-block;
+    width: 100%;
+    min-height: 1em;
+    margin-bottom: @masonry-grid-gap;
+  }
+}
+
+/* Columns definition by devices */
+
+@media @mobile     { .loop-masonry-row( sm );  }
+@media @tablet     { .loop-masonry-row( md );  }
+@media @desktop    { .loop-masonry-row( lg );  }
+@media @desktop-lg { .loop-masonry-row( xl ); }
+
+// Loop to generate each row with the right number of columns
+.loop-masonry-row(@type, @maxcols: @masonry-grid-columns) {
+  // row loop
+  .make-masonry-row(@index) when (@index <= @maxcols) {
+    .row-masonry-@{type}-@{index} {
+      .masonry-column(@index);
+
+      // Build a simple grid system for browser that don't support columns layout
+      // Requires Modernizr to identify the feature support
+      .no-csscolumns & {
+        .make-inline-column(@index);
+      }
+
+    }
+    // do recursive
+    .make-masonry-row(@index + 1);
+  }
+  // kickstart
+  .make-masonry-row(1);
+}
+
+// Declares the column specification for the row
+.masonry-column(@numcols, @gap: @masonry-grid-gap) {
+  .column-count(@numcols);
+  .column-gap(@gap);
+  .columns(@numcols);
+  // forces the right column width (not necessary, use it as per your needs)
+  // @col-width: floor((100% - (@gap * (@numcols - 1) )) / @numcols);
+  // .column-width(@col-width);
+}
+
+// Generates a single grid to fallback masonry on old browsers
+// with no css columns support
+.make-inline-column(@num) {
+  text-align: justify;
+  //font-size: 0; // this requires that your components restore the font size
+  &:after {
+    content: '';
+    display: inline-block;
+    width: 100%;
+  }
+  > .col-masonry {
+    vertical-align: top;
+    display: inline-block;
+    width: floor((100% / @index) - 1);
+  }
+}
+
+// CSS3 Columns Layout mixin
+// for crossbrowser support
+
+.column-gap(@value) {
+  -moz-column-gap: @value;
+  -webkit-column-gap: @value;
+  column-gap: @value;
+}
+
+.column-count(@value) {
+  -moz-column-count: @value;
+  -webkit-column-count: @value;
+  column-count: @value;
+}
+
+.column-width(@value) {
+  -moz-column-width: @value;
+  -webkit-column-width: @value;
+  column-width: @value;
+}
+
+.column-fill(@value) {
+  -moz-column-fill: @value;
+  -webkit-column-fill: @value;
+  column-fill: @value;
+}
+
+.columns(@value) {
+  -moz-columns: @value;
+  -webkit-columns: @value;
+  columns: @value;
+}

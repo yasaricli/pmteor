@@ -1,0 +1,230 @@
+.navbar {
+  background-image: inherit;
+  background-color: transparent;
+  height: 75px;
+  line-height: 75px;
+  position: relative;
+
+  .logo {
+    display: block;
+    width: 120px;
+    margin: auto;
+    img {
+      width: 100%;
+    }
+  }
+  .navbar-nav {
+    margin: 0px;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+
+    li {
+      a {
+        color: #555;
+        font-weight: bold;
+        &.user {
+          img {
+            border-radius: 5px;
+            margin-right: 5px;
+          }
+        }
+      }
+      .dropdown-menu {
+        a {
+          &:hover {
+            background-color: #F9F9F9!important;
+          }
+        }
+      }
+    }
+  }
+}
+
+.wrapper {
+  .topnavbar-wrapper{
+    margin-bottom: 20px;
+  }
+  .content-wrapper {
+    border-top: 0px;
+    padding-top: 0px;
+  }
+}
+
+.status {
+  width: 64px;
+  height: 64px;
+  border-radius: 5px;
+
+  &.ONLINE {
+    &:extend(.bg-success);
+  }
+  &.STOP:extend(.bg-gray) {}
+  &.EXIT:extend(.bg-warning) {}
+  &.READY:extend(.bg-yellow) {}
+  &.ERRORED:extend(.bg-danger-dark) {}
+}
+
+.applications {
+  margin-top: 50px;
+  .panel-heading {
+    overflow: hidden;
+    line-height: 30px;
+    .panel-title,
+    .btn-purple {
+      text-transform: uppercase;
+    }
+  }
+  .list {
+    .empty {
+      padding: 50px;
+      span {
+        display: block;
+        &:first-child {
+          text-transform: uppercase;
+          font-size: 20px;
+          margin-bottom: 10px;
+        }
+        &.yet {
+          color: #AFAFAF;
+        }
+      }
+    }
+    .list-group {
+      margin-top: 20px;
+      margin-bottom: 0px;
+      &:first-child {
+        margin-top: 0px;
+      }
+      .name {
+        color: #555;
+        font-size: 18px;
+        font-weight: 700;
+      }
+      .url-container {
+        .text-muted {
+          display: block;
+        }
+      }
+      .btn-group {
+        .btn-default {
+          border: 0px;
+          font-size: 16px;
+          color: #298eea;
+        }
+        .dropdown-menu {
+          right: 0px;
+          left: inherit;
+          padding-top: 0px;
+          padding-bottom: 0px;
+
+          li {
+            &.divider {
+              margin: 0px;
+            }
+            a {
+              padding: 10px 0px;
+              font-weight: bold;
+              text-align: center;
+              &.delete {
+                color: #f05050;
+                &:hover {
+                  background-color: #f05050;
+                  color: white;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.at-form {
+  margin: 0px;
+  width: 88%;
+  padding: 0px;
+
+  .at-title {
+    display: none;
+  }
+  .at-error {
+    background-color: transparent;
+    border: 0px;
+    padding: 0px;
+    font-weight: bold;
+    color: #f05050;
+    font-weight: 100;
+  }
+  .at-input {
+    label { display: none; }
+    input {
+      border-width: 3px;
+      margin-bottom: 20px;
+      padding: 30px;
+      font-size: 20px!important;
+      color: #656565;
+      font-weight: 100!important;
+      border-radius: 0px;
+      &:focus {
+        border-color: #28cb75;
+      }
+    }
+  }
+  .at-btn  {
+    margin-top: 0px!important;
+    border-color: transparent;
+    background-color: #28cb75;
+    color: #fff;
+    padding: 15px!important;
+    font-weight: 100;
+    font-size: 20px!important;
+    cursor: pointer;
+    border-radius: 0px;
+    &:hover {
+      background-color: #0cb863;
+    }
+  }
+}
+
+.not-found {
+  position: relative;
+  .mb-xl {
+    margin-bottom: 10px!important;
+    a {
+      font-weight: bold;
+      text-decoration: underline;
+    }
+    .lead {
+      font-size: 25px;
+      text-transform: uppercase;
+      margin-bottom: 15px;
+    }
+  }
+  ul {
+    margin-bottom: 0px!important;
+  }
+}
+
+.col-lg-9 {
+  float: none;
+  margin: auto;
+}
+
+.btn-lg {
+  width: 100%;
+  font-size: 20px;
+  font-weight: 100;
+}
+
+.fa-hand-o-right { margin-right: 10px; }
+.applications-heading { margin-bottom: 20px; }
+.fa-circle { margin-left: 8px; }
+
+#InsertApplicationForm,
+#UpdateApplicationForm {
+  .btn {
+    text-transform: uppercase;
+  }
+}

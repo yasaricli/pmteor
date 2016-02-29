@@ -1,0 +1,116 @@
+/* ========================================================================
+   Component: datatable.less
+ ========================================================================== */
+
+// Search filter
+.dataTables_filter {
+  input {
+    margin-left: 10px
+  }
+}
+
+
+// Select length filter
+.dataTables_length {
+  select {
+    margin-right: 10px
+  }
+}
+
+table.dataTable {
+  tfoot > tr > th {
+    color: #a1a2a3;
+    background: #f1f2f3;    
+  }
+}
+
+// datatable inside panels
+.panel {
+  .dataTables_wrapper .row {
+    margin: 10px 0;
+  }
+  .dataTable {
+    width: 100% !important;
+  }
+}
+
+
+// 
+// Custom ColVis extensions styles
+// 
+
+// The main button
+.ColVis {
+  .ColVis_Button {
+    background-image: none;
+    border: 1px solid #e1e2e3;
+    box-shadow: 0 0 0 #000;
+    > span {
+      color: #656565;
+    }
+  }
+
+}
+
+// Backdrop
+.ColVis_collectionBackground {
+  display: none;
+}
+
+// Labels dropdown
+ul.ColVis_collection {
+  background-color: #fff;
+  > li {
+    border: 0 !important;
+    background-image: none !important;
+    box-shadow: 0 0 0 #000 !important;
+    margin: 0;
+    > label {
+        margin: 0;
+        > span {
+          color: #888;
+          vertical-align: top;
+          font-weight: normal;
+          &:hover {
+            color: #555;
+          }
+        }
+        input[type=checkbox]:checked + span, 
+        input[type=radio]:checked + span {
+          background-color: transparent;
+        }
+    }
+  }
+}
+
+.ColVis_catcher {
+  cursor: pointer;
+}
+
+// fix scrollbar
+.table-responsive {
+  .dataTables_wrapper {
+    .row {
+      margin: 0;
+    }
+  }
+}
+
+// place controls correctly
+@media @upto-tablet {
+  div.dataTables_filter label,
+  div.dataTables_length label,
+  div.dataTables_paginate {
+    float: none;
+    select {
+      display: inline-block;
+    }
+  }
+  .dataTables_wrapper {
+    > .row > div {
+      float: none;
+      text-align: center;
+      width: 100%;
+    }
+  }
+}

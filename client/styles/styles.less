@@ -1,229 +1,85 @@
-@import '{pmteor:styles}/imports/fonts.less';
-@import '{pmteor:styles}/imports/core.less';
-@import 'imports/circle.less';
+@import "bootstrap/bootstrap.import.less";
 
-.navbar {
-  background-image: inherit;
-  background-color: transparent;
-  height: 75px;
-  line-height: 75px;
-  position: relative;
+// Bootstrap reset
+@import "bootstrap/mixins.import.less";
+@import "bootstrap/variables.import.less";
+@import "app/bootstrap-reset.import.less";
 
-  .logo {
-    display: block;
-    width: 120px;
-    margin: auto;
-    img {
-      width: 100%;
-    }
-  }
-  .navbar-nav {
-    margin: 0px;
-    position: absolute;
-    top: 10px;
-    right: 15px;
+// Global definition of media queries
+@import "app/media-queries.import.less";
 
-    li {
-      a {
-        color: #555;
-        font-weight: bold;
-        &.user {
-          img {
-            border-radius: 5px;
-            margin-right: 5px;
-          }
-        }
-      }
-      .dropdown-menu {
-        a {
-          &:hover {
-            background-color: #F9F9F9!important;
-          }
-        }
-      }
-    }
-  }
-}
+// Typography
+@import "app/typo.import.less";
 
-.wrapper {
-  .topnavbar-wrapper{
-    margin-bottom: 20px;
-  }
-  .content-wrapper {
-    padding-top: 0px;
-  }
-}
+// Layout
+@import "app/layout.import.less";
+@import "app/layout-extra.import.less";
+@import "app/layout-animation.import.less";
+@import "app/top-navbar.import.less";
+@import "app/sidebar.import.less";
+@import "app/offsidebar.import.less";
 
-.status {
-  width: 64px;
-  height: 64px;
-  border-radius: 5px;
+// Components
+@import "app/breadcrumbs.import.less";
+@import "app/button-extra.import.less";
+@import "app/placeholder.import.less";
+@import "app/panels.import.less";
+@import "app/progress-extra.import.less";
+@import "app/radial-bar.import.less";
+@import "app/user-block.import.less";
+@import "app/circles.import.less";
+@import "app/timeline.import.less";
+@import "app/dropdown-extra.import.less";
+@import "app/row-extra.import.less";
+@import "app/half-float.import.less";
+@import "app/masonry-grid.import.less";
+@import "app/widget.import.less";
+@import "app/animate.import.less";
+@import "app/table-grid.import.less";
+@import "app/todo.import.less";
+@import "app/nestable.import.less";
 
-  &.ONLINE {
-    &:extend(.bg-success);
-  }
-  &.STOP:extend(.bg-gray) {}
-  &.EXIT:extend(.bg-warning) {}
-  &.READY:extend(.bg-yellow) {}
-  &.ERRORED:extend(.bg-danger-dark) {}
-}
+// Charts
+@import "app/chart-flot.import.less";
+@import "app/chart-easypie.import.less";
 
-.applications {
-  margin-top: 50px;
-  .panel-heading {
-    overflow: hidden;
-    line-height: 30px;
-    .panel-title,
-    .btn-purple {
-      text-transform: uppercase;
-    }
-  }
-  .list {
-    .empty {
-      padding: 50px;
-      span {
-        display: block;
-        &:first-child {
-          text-transform: uppercase;
-          font-size: 20px;
-          margin-bottom: 10px;
-        }
-        &.yet {
-          color: #AFAFAF;
-        }
-      }
-    }
-    .list-group {
-      margin-top: 20px;
-      margin-bottom: 0px;
-      &:first-child {
-        margin-top: 0px;
-      }
-      .name {
-        color: #555;
-        font-size: 18px;
-        font-weight: 700;
-      }
-      .url-container {
-        .text-muted {
-          display: block;
-        }
-      }
-      .btn-group {
-        .btn-default {
-          border: 0px;
-          font-size: 16px;
-          color: #298eea;
-        }
-        .dropdown-menu {
-          right: 0px;
-          left: inherit;
-          padding-top: 0px;
-          padding-bottom: 0px;
+// Form elements
+@import "app/form-elements.import.less";
+@import "app/form-validation.import.less";
+@import "app/form-tags.import.less";
+@import "app/form-wizard.import.less";
+@import "app/form-imgcrop.import.less";
 
-          li {
-            &.divider {
-              margin: 0px;
-            }
-            a {
-              padding: 10px 0px;
-              font-weight: bold;
-              text-align: center;
-              &.delete {
-                color: #f05050;
-                &:hover {
-                  background-color: #f05050;
-                  color: white;
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}
+// Tables
+@import "app/datatable.import.less";
+@import "app/table-extras.import.less";
+@import "app/jqgrid.import.less";
 
-.at-form {
-  margin: 0px;
-  width: 88%;
-  padding: 0px;
+// Plugins
+@import "app/plugins.import.less";
+@import "app/slim-scroll.import.less";
+@import "app/alerts.import.less";
+@import "app/notify.import.less";
+@import "app/calendar.import.less";
+@import "app/spinner.import.less";
+@import "app/gmap.import.less";
+@import "app/vector-map.import.less";
+@import "app/portlets.import.less";
 
-  .at-title {
-    display: none;
-  }
-  .at-error {
-    background-color: transparent;
-    border: 0px;
-    padding: 0px;
-    font-weight: bold;
-    color: #f05050;
-    font-weight: 100;
-  }
-  .at-input {
-    label { display: none; }
-    input {
-      border-width: 3px;
-      margin-bottom: 20px;
-      padding: 30px;
-      font-size: 20px!important;
-      color: #656565;
-      font-weight: 100!important;
-      border-radius: 0px;
-      &:focus {
-        border-color: #28cb75;
-      }
-    }
-  }
-  .at-btn  {
-    margin-top: 0px!important;
-    border-color: transparent;
-    background-color: #28cb75;
-    color: #fff;
-    padding: 15px!important;
-    font-weight: 100;
-    font-size: 20px!important;
-    cursor: pointer;
-    border-radius: 0px;
-    &:hover {
-      background-color: #0cb863;
-    }
-  }
-}
+// Mailbox
+@import "app/mailbox.import.less";
 
-.not-found {
-  position: relative;
-  .mb-xl {
-    margin-bottom: 10px!important;
-    a {
-      font-weight: bold;
-      text-decoration: underline;
-    }
-    .lead {
-      font-size: 25px;
-      text-transform: uppercase;
-      margin-bottom: 15px;
-    }
-  }
-  ul {
-    margin-bottom: 0px!important;
-  }
-}
+// Utilities
+@import "app/utils.import.less";
 
-.col-lg-9 {
-  float: none;
-  margin: auto;
-}
+// Print CSS
+@import "app/print.import.less";
 
-.btn-lg {
-  width: 100%;
-  font-size: 20px;
-  font-weight: 100;
-}
+// Settings
+@import "app/settings.import.less";
 
-#InsertApplicationForm,
-#UpdateApplicationForm {
-  .btn {
-    text-transform: uppercase;
-  }
-}
+// Documentation
+@import "app/docs.import.less";
+
+@import "imports/circle.less";
+@import "imports/pmteor.less";

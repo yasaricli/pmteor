@@ -33,7 +33,6 @@ cfs:filesystem
 cfs:autoform
 less
 adriancbo:chalk
-natestrauser:animate-css
 zimme:active-route
 momentjs:moment
 lbee:moment-helpers
@@ -43,14 +42,12 @@ pmteor:shell
 pmteor:underscore-helpers
 pmteor:whirl
 flot:flot
-pmteor:styles
 fileer:size
 raix:ui-progress-circle
 idmontie:migrations
 useraccounts:core
 accounts-password
 useraccounts:iron-routing
-useraccounts:bootstrap
 lookback:body-class
 jparker:gravatar
 alanning:roles
@@ -59,3 +56,6 @@ juliancwirko:s-alert-jelly
 tap:i18n
 pmteor:pm2
 pmteor:dev
+useraccounts:bootstrap
+pmteor:dropdown
+pmteor:sparkline

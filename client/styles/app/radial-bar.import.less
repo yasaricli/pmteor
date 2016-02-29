@@ -1,0 +1,154 @@
+/* ========================================================================
+   Component: radial-bar.less
+ ========================================================================== */
+ 
+//
+// Pure CSS Radial Progress Bar
+
+// Colors
+@bar-color:             @brand-primary;
+
+@radial-primary:         @brand-primary;
+@radial-success:         @brand-success;
+@radial-info:            @brand-info;
+@radial-warning:         @brand-warning;
+@radial-danger:          @brand-danger;
+
+@overlay-bg:            #fff;
+@back-color:            #fafafa;
+@radial-size-base:      5;
+
+@radial-font-size-lg:   20px;
+@radial-font-size:      16px;
+@radial-font-size-sm:   10px;
+@radial-font-size-xs:   6px;
+
+// step of % for created classes
+@progress-step: 5; 
+
+/* -------------------------------------
+ * Bar container
+ * ------------------------------------- */
+.radial-bar {
+  position: relative;
+  display: inline-block;
+  font-size: @radial-font-size;
+  //width: @radial-size;
+  //height: @radial-size;
+  border-radius: 50%;
+  border: 2px solid @back-color; // remove gradient color
+  background-color: transparent; // default 100%
+  margin-bottom: 20px;
+  // margin-right: 20px;
+  .box-sizing(content-box);
+
+  // Optional centered circle w/text
+  &:after,
+  > img {
+    display: inline-block;
+    position: absolute;
+    top: 0; left: 0;
+    // width: @radial-size - @radial-bar-size;
+    // height: @radial-size - @radial-bar-size;
+    border-radius: 50%;
+    // margin-left: @radial-bar-size / 2;
+    // margin-top: @radial-bar-size / 2;
+    text-align: center;
+    // line-height: @radial-size - @radial-bar-size;
+    font-weight: bold;
+    color: #a1a2a3;
+  }
+  &:after {
+    content: attr(data-label);
+    background-color: @overlay-bg;
+    z-index: 101;
+  }
+  > img {
+    z-index: 102;
+  }
+
+  .radial-progress-size(@radial-font-size);
+  .radial-progress-variant(@progress-step, @radial-primary);
+}
+
+// Variant
+// -----------------------
+.radial-bar-primary {
+  .radial-progress-variant(@progress-step, @brand-primary);
+}
+.radial-bar-success {
+  .radial-progress-variant(@progress-step, @brand-success);
+}
+.radial-bar-info {
+  .radial-progress-variant(@progress-step, @brand-info);
+}
+.radial-bar-warning {
+  .radial-progress-variant(@progress-step, @brand-warning);
+}
+.radial-bar-danger {
+  .radial-progress-variant(@progress-step, @brand-danger);
+}
+
+
+// Sizes
+// -----------------------
+
+.radial-bar-lg {
+  .radial-progress-size(@radial-font-size-lg);
+}
+
+.radial-bar-sm {
+  .radial-progress-size(@radial-font-size-sm);
+}
+
+.radial-bar-xs {
+  .radial-progress-size(@radial-font-size-xs);
+}
+
+// Mixins
+// -----------------------
+
+.radial-progress-size(@font-size) {
+  @size: @font-size * @radial-size-base;
+  @bar-size: @size * .3;
+  width: @size;
+  height: @size;
+  font-size: @font-size + 2;
+  &:after,
+  > img {
+    width: @size - @bar-size;
+    height: @size - @bar-size;
+    margin-left: @bar-size / 2;
+    margin-top: @bar-size / 2;
+    line-height: @size - @bar-size;
+  }
+}
+
+.radial-progress-variant(@step, @color) {
+    
+  @loops: round(100 / @step);
+  @increment: round(360 / @loops);
+  @half: round(100 / 2);
+  
+  .progressX(@index, @nextdeg) when (@index < @half){
+      &.radial-bar-@{index} {
+        background-image: linear-gradient(90deg, @back-color 50%, transparent 50%, transparent), linear-gradient(~"@{nextdeg}deg", @color 50%, @back-color 50%, @back-color);
+      }
+      .progressX(@index + 5, @nextdeg + @increment);
+  }
+
+  .progressX(@index, @nextdeg) when (@index >= @half) and (@index <= 100) {
+      &.radial-bar-@{index} {
+        background-image: linear-gradient(~"@{nextdeg}deg", @color 50%, transparent 50%, transparent), linear-gradient(270deg, @color 50%, @back-color 50%, @back-color);
+      }
+      .progressX(@index + 5, @nextdeg + @increment);
+  }
+  .progressX(100, @_) {};
+  .progressX(0, 90);  
+}
+
+
+// hide excess of gradient in opera
+x:-o-prefocus, .radial-bar {
+  background-clip: content-box;
+}
