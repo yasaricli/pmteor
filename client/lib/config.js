@@ -4,6 +4,11 @@ Router.configure({
   notFoundTemplate: 'notFound'
 });
 
+Avatar.setOptions({
+  fallbackType: "default image",
+  defaultImageUrl: '/images/default-avatar.png'
+});
+
 // Add Body class default.
 BodyClass.add('layout-h')
 

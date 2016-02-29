@@ -4,7 +4,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown dropdown-list">
           <a href="#" data-toggle="dropdown" class="user">
-            <img src="{{ currentUser.gravatar }}">
+            {{ > avatar user=currentUser size='small' }}
             {{ currentUser.profile.first_name }}
           </a>
           <ul class="dropdown-menu animated flipInX">
