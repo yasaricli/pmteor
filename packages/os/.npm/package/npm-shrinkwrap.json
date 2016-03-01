@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "os-utils": {
+      "version": "0.0.14"
+    }
+  }
+}
