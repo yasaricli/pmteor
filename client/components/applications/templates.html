@@ -112,9 +112,32 @@
 
 <template name="application">
   <div class="application">
-    <div class="monitoring">
-      {{> progressCircle progress=monit.cpu radius=80 class=status }}
-      <div class="sparkline"></div>
+    <div class="text-center name">
+      {{ name }}
+      {{# if isOnline }}
+        <a href="{{ absoluteUrl }}" class="absoluteUrl" target="_blank">{{ env.ROOT_URL }}</a>
+      {{ else }}
+        <span>{{ env.ROOT_URL }}</span>
+      {{/if}}
+    </div>
+    <div class="ph status {{ status }} {{# if isOnline }}onlineInOut{{/if}}"></div>
+    <div class="row">
+      <div class="col-md-6">
+        <p class="lead">Memory</p>
+         <div class="panel panel-default">
+            <div class="panel-body">
+               <div id="morris-memory" class="whirl ringed"></div>
+            </div>
+         </div>
+      </div>
+      <div class="col-md-6">
+        <p class="lead">Cpu</p>
+         <div class="panel panel-default">
+            <div class="panel-body">
+               <div id="morris-cpu" class="whirl ringed"></div>
+            </div>
+         </div>
+      </div>
     </div>
   </div>
 </template>

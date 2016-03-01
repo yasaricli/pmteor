@@ -3,39 +3,47 @@ Template.applications.onCreated(function() {
 });
 
 Template.application.onRendered(function() {
-  const MemorySpark = new Sparkline({
-    width: 'auto',
-    height: 100,
-    lineColor: '#878c9a',
-    highlightLineColor: '#878c9a',
-    fillColor: '#bbbec6',
-    spotColor: '#878c9a',
-    highlightSpotColor: '#878c9a',
-    spotRadius: 4,
-    lineWidth: 3,
-    drawNormalOnTop: true,
-
-    highlightColor: '#878c9a',
-
-    // TOOLTIP CALLBACO RETURN STRING.
-    tooltipCallback() {
-      return filesize(this.y);
+  const memory = new MorrisChart('Line', {
+    element: this.$('#morris-memory'),
+    ykeys: ['value'],
+    labels: ["Memory"],
+    lineColors: ["#31C0BE"],
+    hoverCallback(index, options, content, row) {
+      return `<b>${row.value} ${row.suffix}</b>`;
     }
   });
 
-  this.processIntervalId = Meteor.setInterval(() => {
-    const application = Applications.findOne(this.data._id);
+  const cpu = new MorrisChart('Area', {
+    element: this.$('#morris-cpu'),
+    ykeys: ['cpu'],
+    labels: ["Cpu"],
+    lineColors: ["#7266ba"],
+    hoverCallback(index, options, content, row) {
+      return `<b>${row.cpu} %</b>`;
+    }
+  });
 
-    // ADD APPLICATION
-    MemorySpark.add(application.monit.memory);
+  this.cursor = Applications.find(this.data._id).observe({
+    changed(doc) {
 
-    // reload SPARKLINE
-    MemorySpark.reload();
-  }, 1000);
+      // IS ONLINE THEN
+      if (_.isEqual(doc.status, STATUS_ALLOWED_VALUES[2])) {
+
+        // PUSH NEW MEMORY AND CPU
+        memory.add(filesize(doc.monit.memory, { output: 'object' }));
+
+        cpu.add({ cpu: doc.monit.cpu });
+
+        // AND RELOAD
+        memory.reload();
+        cpu.reload();
+      }
+    }
+  });
 });
 
 Template.application.onDestroyed(function() {
 
-  // CLEAR INTERVAL
-  Meteor.clearInterval(this.processIntervalId);
+  // CURSOR OBSERVE SROP
+  this.cursor.stop();
 });

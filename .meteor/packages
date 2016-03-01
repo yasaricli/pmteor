@@ -55,10 +55,12 @@ juliancwirko:s-alert
 juliancwirko:s-alert-jelly
 tap:i18n
 pmteor:pm2
-pmteor:dev
 useraccounts:bootstrap
 pmteor:dropdown
 utilities:avatar
 pmteor:os
 manuel:reactivearray
 pmteor:sparkline
+bshamblen:morrisjs
+random
+pmteor:dev
