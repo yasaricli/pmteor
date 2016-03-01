@@ -111,16 +111,12 @@
 </template>
 
 <template name="application">
-  <div class="sparkline"></div>
-  {{ name }} - <span class="status {{ status }}">{{ status }}</span>
-  <ul>
-    {{# each logs }}
-      <li>
-        <b>{{ type }} - {{ livestamp createdAt }}</b>
-        <div>{{{ data }}}</div>
-      </li>
-    {{/each}}
-  </ul>
+  <div class="application">
+    <div class="monitoring">
+      {{> progressCircle progress=monit.cpu radius=80 class=status }}
+      <div class="sparkline"></div>
+    </div>
+  </div>
 </template>
 
 <template name="insertApplication">
