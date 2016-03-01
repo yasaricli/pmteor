@@ -1,5 +1,6 @@
 Meteor.methods({
   start(_id) {
+    check(_id, String);
     const application = Applications.findOne(_id);
 
     // RUNNING UPDATE
@@ -26,7 +27,9 @@ Meteor.methods({
   },
 
   delete(_id) {
+    check(_id, String);
     const application = Applications.findOne(_id);
+
     if (application) {
       Applications.remove(application._id, () => {
         pm2.connect((connect_err) => {
@@ -54,6 +57,7 @@ Meteor.methods({
   },
 
   stop(_id) {
+    check(_id, String);
     const application = Applications.findOne(_id);
 
     pm2.connect((connect_err) => {

@@ -60,3 +60,5 @@ useraccounts:bootstrap
 pmteor:dropdown
 pmteor:sparkline
 utilities:avatar
+pmteor:os
+manuel:reactivearray
