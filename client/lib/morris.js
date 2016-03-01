@@ -5,7 +5,8 @@ class MorrisDev {
       data: this._list,
       xkey: 'hours',
       resize: true,
-      parseTime: false
+      parseTime: false,
+      hideHover: 'auto'
     }, options));
   }
 
