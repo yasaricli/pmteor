@@ -4,7 +4,20 @@ Template.applications.onCreated(function() {
 
 Template.application.onRendered(function() {
   const MemorySpark = new Sparkline({
+    width: 'auto',
     height: 100,
+    lineColor: '#878c9a',
+    highlightLineColor: '#878c9a',
+    fillColor: '#bbbec6',
+    spotColor: '#878c9a',
+    highlightSpotColor: '#878c9a',
+    spotRadius: 4,
+    lineWidth: 3,
+    drawNormalOnTop: true,
+
+    highlightColor: '#878c9a',
+
+    // TOOLTIP CALLBACO RETURN STRING.
     tooltipCallback() {
       return filesize(this.y);
     }
@@ -18,7 +31,7 @@ Template.application.onRendered(function() {
 
     // reload SPARKLINE
     MemorySpark.reload();
-  }, 10000);
+  }, 1000);
 });
 
 Template.application.onDestroyed(function() {
