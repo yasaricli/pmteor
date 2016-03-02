@@ -68,12 +68,23 @@ Meteor.startup(() => {
    */
    pm2.connect(() => {
 
-     // RESTART ALL
-     pm2.stop('all', () => {
+     // LIST
+     pm2.list((err, procs) => {
 
-       // AND DISCONNECT
-       pm2.disconnect();
+       // FOR EACH ALL APPLICATIONS
+       procs.forEach((proc) => {
+         const { name } = proc;
 
+         // if process name not pmteor then stop application
+         if (!_.isEqual(name, 'pmteor')) {
+
+           // STOP APPLICATION
+           pm2.stop(name, () => {
+
+             // SUCCESS
+           });
+         }
+       });
      });
    });
 });
