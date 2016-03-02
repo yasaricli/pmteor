@@ -49,12 +49,31 @@ Meteor.startup(() => {
         const application = Applications.findOne({ bundleId: name });
 
         // INSERT ERROR LOG
-        Logs.insert({
-          applicationId: application._id,
-          type: STATUS_ALLOWED_VALUES[4],
-          data: query.data
-        });
+        if (application) {
+          Logs.insert({
+            applicationId: application._id,
+            type: STATUS_ALLOWED_VALUES[4],
+            data: query.data
+          });
+        }
       }));
     }
   }));
+
+  /*
+   * IMPORTANT!!!!!
+   *
+   * if the system update is done, and also not in the developer
+   * options, then stop all applications.
+   */
+   pm2.connect(() => {
+
+     // RESTART ALL
+     pm2.stop('all', () => {
+
+       // AND DISCONNECT
+       pm2.disconnect();
+
+     });
+   });
 });
