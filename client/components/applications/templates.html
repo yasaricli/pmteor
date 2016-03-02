@@ -11,13 +11,13 @@
     </div>
     <div class="list {{#unless Template.subscriptionsReady}}whirl ringed{{/unless}}">
       {{# each apps }}
-        <div class="list-group {{# if isExit }}whirl traditional{{/if}}">
+        <div class="list-group">
           <a href="{{ pathFor route='Application' }}" class="list-group-item">
             <table class="wd-wide">
               <tbody>
                 <tr>
                   <td class="wd-xs">
-                    <div class="ph status {{ status }} {{# if isOnline }}onlineInOut{{/if}}"></div>
+                    <div class="ph status {{ status }} {{# if isExit }}whirl traditional{{/if}} {{# if isOnline }}onlineInOut{{/if}}"></div>
                   </td>
                   <td>
                     <div class="ph url-container">

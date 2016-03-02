@@ -9,7 +9,8 @@ Template.application.onRendered(function() {
     labels: ["Memory"],
     lineColors: ["#31C0BE"],
     hoverCallback(index, options, content, row) {
-      return `<b>${row.value} ${row.suffix}</b>`;
+      const from = moment(row.createdAt).fromNow();
+      return `${from}<br/><b>${row.value} ${row.suffix}</b>`;
     }
   });
 
@@ -19,7 +20,8 @@ Template.application.onRendered(function() {
     labels: ["Cpu"],
     lineColors: ["#7266ba"],
     hoverCallback(index, options, content, row) {
-      return `<b>${row.cpu} %</b>`;
+      const from = moment(row.createdAt).fromNow();
+      return `${from}<br/><b>${row.cpu} %</b>`;
     }
   });
 

@@ -17,7 +17,8 @@ class MorrisDev {
 
     // AND PUSH
     this._list.push(_.extend({
-      hours: moment().format('HH:mm:ss')
+      createdAt: new Date(),
+      hours: moment().format('HH:mm')
     }, doc));
   }
 
