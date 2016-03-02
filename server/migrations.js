@@ -9,6 +9,7 @@ Dev.hasEnv('ADMIN', (ADMIN) => {
     const [user, domain] = ADMIN.split('@');
     const [username, password] = user.split(':');
 
+    // CREATED USER ID
     const _id = Accounts.createUser({
 
       // Username and Password
@@ -20,7 +21,7 @@ Dev.hasEnv('ADMIN', (ADMIN) => {
       // Profile
       profile: {
         first_name: username,
-        language: process.env.ADMIN_LANGUAGE || 'en'
+        language: 'en' // Default language.
       }
     });
 

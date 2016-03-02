@@ -11,6 +11,7 @@
   "delete": "Sil",
   "status": "Durum",
   "memory": "Bellek",
+  "cpu": "İşlemci",
   "more": "İşlemler",
   "port": "Port",
   "errors": "Hatalar",
@@ -20,6 +21,6 @@
   "change-password": "Parola Değiştir",
   "log-out": "Çıkış yap",
   "go-home-page": "ana sayfa ya git",
-  "page-not-found": "Aradığınız sayfa bulunamadı",
-  "page-not-found-desc": "Sayfa yok veya erişiminiz bulunmamaktadır"
+  "not-found": "We couldn't find this %s.",
+  "not-found-desc": "The page you are looking for does not exists."
 }

@@ -112,33 +112,50 @@
 
 <template name="application">
   <div class="application">
-    <div class="text-center name">
-      {{ name }}
-      {{# if isOnline }}
-        <a href="{{ absoluteUrl }}" class="absoluteUrl" target="_blank">{{ env.ROOT_URL }}</a>
-      {{ else }}
-        <span>{{ env.ROOT_URL }}</span>
-      {{/if}}
-    </div>
-    <div class="ph status {{ status }} {{# if isOnline }}onlineInOut{{/if}}"></div>
-    <div class="row">
-      <div class="col-md-6">
-        <p class="lead text-center">Memory</p>
-         <div class="panel panel-default">
-            <div class="panel-body">
-               <div id="morris-memory" class="whirl ringed"></div>
-            </div>
-         </div>
+    {{# if this }}
+      <div class="text-center name">
+        {{ name }}
+        {{# if isOnline }}
+          <a href="{{ absoluteUrl }}" class="absoluteUrl" target="_blank">{{ env.ROOT_URL }}</a>
+        {{ else }}
+          <span>{{ env.ROOT_URL }}</span>
+        {{/if}}
       </div>
-      <div class="col-md-6">
-        <p class="lead text-center">Cpu</p>
-         <div class="panel panel-default">
-            <div class="panel-body">
-               <div id="morris-cpu" class="whirl ringed"></div>
-            </div>
-         </div>
+      <div class="ph status {{ status }} {{# if isOnline }}onlineInOut{{/if}}"></div>
+      <div class="row">
+        <div class="col-md-6">
+          <p class="lead text-center">{{ _ 'memory' }}</p>
+           <div class="panel panel-default">
+              <div class="panel-body">
+                 <div id="morris-memory" class="whirl ringed"></div>
+              </div>
+           </div>
+        </div>
+        <div class="col-md-6">
+          <p class="lead text-center">{{ _ 'cpu' }}</p>
+           <div class="panel panel-default">
+              <div class="panel-body">
+                 <div id="morris-cpu" class="whirl ringed"></div>
+              </div>
+           </div>
+        </div>
       </div>
-    </div>
+    {{ else }}
+      <div class="abs-center not-found">
+        <div class="text-center mb-xl">
+          <p class="lead">{{ _ "not-found" "Application" }}</p>
+          <p class="desc">{{ _ "not-found-desc" }}</p>
+        </div>
+        <ul class="list-inline text-center text-sm mb-xl">
+          <li>
+            <a href="{{ pathFor route='InsertApplication' }}" class="btn btn-purple btn-lg">
+              <em class="fa fa-hand-o-right"></em>
+              <span>{{ _ "create-application" }}</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    {{/if}}
   </div>
 </template>
 

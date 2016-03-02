@@ -11,6 +11,7 @@
   "delete": "Delete",
   "status": "Status",
   "memory": "Memory",
+  "cpu": "Cpu",
   "more": "More",
   "port": "Port",
   "errors": "Errors",
@@ -20,6 +21,6 @@
   "change-password": "Change Password",
   "log-out": "Log Out",
   "go-home-page": "go to home page",
-  "page-not-found": "We couldn't find this page.",
-  "page-not-found-desc": "The page you are looking for does not exists."
+  "not-found": "We couldn't find this %s.",
+  "not-found-desc": "The page you are looking for does not exists."
 }

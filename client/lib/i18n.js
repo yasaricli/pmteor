@@ -1,6 +1,6 @@
 Tracker.autorun(() => {
-  const currentUser = Meteor.user();
   let language = 'en';
+  const currentUser = Meteor.user();
 
   if (currentUser) {
     language = currentUser.profile.language;
