@@ -122,12 +122,12 @@
         {{/if}}
       </div>
       <div class="ph status {{ status }} {{# if isOnline }}onlineInOut{{/if}}"></div>
-      <div class="row">
+      <div class="row morris-container">
         <div class="col-md-6">
           <p class="lead text-center">{{ _ 'memory' }}</p>
            <div class="panel panel-default">
               <div class="panel-body">
-                 <div id="morris-memory" class="whirl ringed"></div>
+                 <div id="morris-memory" class="whirl ringed no-overlay"></div>
               </div>
            </div>
         </div>
@@ -135,7 +135,7 @@
           <p class="lead text-center">{{ _ 'cpu' }}</p>
            <div class="panel panel-default">
               <div class="panel-body">
-                 <div id="morris-cpu" class="whirl ringed"></div>
+                 <div id="morris-cpu" class="whirl ringed no-overlay"></div>
               </div>
            </div>
         </div>

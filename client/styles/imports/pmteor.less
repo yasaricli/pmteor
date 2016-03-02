@@ -54,7 +54,7 @@
 .status {
   width: 64px;
   height: 64px;
-  border-radius: 5px;
+  border-radius: 3px;
 
   &.ONLINE {
     &:extend(.bg-success);
@@ -148,8 +148,10 @@
   .name {
     font-size: 20px;
     font-weight: bold;
-    a,
-    span{
+    position: relative;
+    z-index: 2;
+
+    a, span{
       display: block;
       font-size: 11px;
     }
@@ -157,6 +159,7 @@
   .panel-default {
     border: 0px;
     background-color: initial;
+    box-shadow: initial!important;
   }
   .lead {
     text-transform: uppercase;
@@ -166,6 +169,12 @@
     a {
       text-decoration: none!important;
     }
+  }
+
+  .morris-container {
+    position: relative;
+    top: -150px;
+    z-index: 1;
   }
 }
 

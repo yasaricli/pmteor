@@ -13,7 +13,7 @@ class MorrisChart {
   add(doc) {
 
     // REMOVE LOADER CLASSES
-    this._morris.el.removeClass('whirl ringed');
+    this._morris.el.removeClass('whirl ringed no-overlay');
 
     // AND PUSH
     this._list.push(_.extend({
