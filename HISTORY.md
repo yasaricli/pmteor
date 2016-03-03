@@ -1,5 +1,7 @@
 ### v.NEXT
 
+#### v0.1.0, 2016-March-03
+
 * Application Detail Page [#23](https://github.com/pmteor/pmteor/issues/23)
 * Refactoring shell install script and bundle script lines - [#36](https://github.com/pmteor/pmteor/issues/36)
 * Bundle stored then not remove bundle BUGFIX - [#37](https://github.com/pmteor/pmteor/issues/37)
