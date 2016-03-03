@@ -130,6 +130,7 @@ It sets the file upload limit. **Default Development(50 * 1024 * 1024) "50 MB"**
 When Pmteor is run for the first time,  information  belonging to the user that will use the system. **Default(Not Defined.)**.
 
     export ADMIN='user:pass@domain.com'
+    
 
 [node-packages]: https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager
 [node-web]: https://nodejs.org/download
