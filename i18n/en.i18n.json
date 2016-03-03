@@ -22,5 +22,10 @@
   "log-out": "Log Out",
   "go-home-page": "go to home page",
   "not-found": "We couldn't find this %s.",
-  "not-found-desc": "The page you are looking for does not exists."
+  "not-found-desc": "The page you are looking for does not exists.",
+  "are-you-sure-title": "Are you sure?",
+  "are-you-sure-text": "You will not be able to recover this application!",
+  "delete-confirm": "Yes, delete it!",
+  "deleted-application-title": "Application Deleted!",
+  "deleted-application-text": "Your application has been deleted."
 }

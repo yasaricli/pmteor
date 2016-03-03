@@ -22,5 +22,10 @@
   "log-out": "Çıkış yap",
   "go-home-page": "ana sayfa ya git",
   "not-found": "We couldn't find this %s.",
-  "not-found-desc": "The page you are looking for does not exists."
+  "not-found-desc": "The page you are looking for does not exists.",
+  "are-you-sure-title": "Emin misiniz",
+  "are-you-sure-text": "Bu uygulamayı silerseniz birdaha geri dönüşümü olmayacaktır!",
+  "delete-confirm": "Evet, silmek istiyorum!",
+  "deleted-application-title": "Uygulama silindi.",
+  "deleted-application-text": "Uygulamanız kalıcı olarak silinmiştir!"
 }

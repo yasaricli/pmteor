@@ -21,6 +21,11 @@
   "change-password": "Passwort ändern",
   "log-out": "Ausloggen",
   "go-home-page": "Zurück zur Startseite",
-  "not-found": "We couldn't find this %s.",
-  "not-found-desc": "The page you are looking for does not exists."
+  "not-found": "Wir konnten nicht finden, diese %s.",
+  "not-found-desc": "Die Seite, die Sie suchen existiert nicht.",
+  "are-you-sure-title": "Bist du sicher?",
+  "are-you-sure-text": "Sie finden diese Anwendung nicht wiederhergestellt werden können!",
+  "delete-confirm": "Ja, löschen!",
+  "deleted-application-title": "Anwendung gelöscht!",
+  "deleted-application-text": "Ihre Bewerbung wurde gelöscht."
 }
