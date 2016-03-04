@@ -1,5 +1,8 @@
 ### v.NEXT
 
+#### v0.1.1, 2016-March-04
+* Methods and publish functions auth secure. [#23](https://github.com/pmteor/pmteor/issues/59)
+
 #### v0.1.0, 2016-March-03
 
 * Application Detail Page [#23](https://github.com/pmteor/pmteor/issues/23)
