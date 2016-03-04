@@ -4,7 +4,7 @@ Meteor.methods({
     const application = Applications.findOne({ _id, createdBy: this.userId  });
 
     if (_.isUndefined(application)) {
-      throw new Meteor.Error("not-authorized");
+      throw new Meteor.Error("not-application");
     }
 
     // RUNNING UPDATE
@@ -35,7 +35,7 @@ Meteor.methods({
     const application = Applications.findOne({ _id, createdBy: this.userId  });
 
     if (_.isUndefined(application)) {
-      throw new Meteor.Error("not-authorized");
+      throw new Meteor.Error("not-application");
     }
 
     Applications.remove(application._id, () => {
@@ -67,7 +67,7 @@ Meteor.methods({
     const application = Applications.findOne({ _id, createdBy: this.userId  });
 
     if (_.isUndefined(application)) {
-      throw new Meteor.Error("not-authorized");
+      throw new Meteor.Error("not-application");
     }
 
     pm2.connect((connect_err) => {
