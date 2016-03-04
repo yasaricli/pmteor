@@ -9,19 +9,18 @@
     {{ > sAlert }}
     <section>
       <div class="content-wrapper">
-        {{ > yield }}
+        {{# if loggingIn }}
+          {{ > loading }}
+        {{ else }}
+          {{ > yield }}
+        {{/if}}
       </div>
     </section>
   </div>
 </template>
 
 <template name="index">
-  {{ > dashboard }}
-  {{ > applications }}
-</template>
-
-<template name="dashboard">
-  <div class="row {{#unless Template.subscriptionsReady}}whirl ringed{{/unless}}">
+  <div class="row">
     <div class="col-lg-4 col-sm-6">
       <div class="panel widget bg-primary">
          <div class="row row-table">
@@ -42,7 +41,7 @@
                <em class="fa fa-exclamation-triangle fa-3x"></em>
             </div>
             <div class="col-xs-8 pv-lg">
-               <div class="h2 mt0 text-bold">{{ getPublishedCount 'applications-errors' }}</div>
+               <div class="h2 mt0 text-bold">{{ getPublishedCount 'errors-counter' }}</div>
                <div class="text-uppercase">{{ _ "errors" }}</div>
             </div>
          </div>
@@ -66,6 +65,7 @@
       </div>
     </div>
   </div>
+  {{ > applications }}
 </template>
 
 <template name="header">
@@ -96,5 +96,5 @@
 </template>
 
 <template name="loading">
-  Loading...
+  <div class="loading whirl traditional no-overlay"></div>
 </template>

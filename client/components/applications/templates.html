@@ -9,7 +9,7 @@
       </div>
       <div class="panel-title">{{ _ "applications" }}</div>
     </div>
-    <div class="list {{#unless Template.subscriptionsReady}}whirl ringed{{/unless}}">
+    <div class="list">
       {{# each apps }}
         <div class="list-group">
           <a href="{{ pathFor route='Application' }}" class="list-group-item">
@@ -177,7 +177,7 @@
 </template>
 
 <template name="updateApplication">
-  <div class="col-lg-9 {{# if isExit }}whirl traditional{{/if}}">
+  <div class="col-lg-9">
     <p class="lead">{{ _ "update-application" }}</p>
     <div class="panel panel-default">
       <div class="panel-body">

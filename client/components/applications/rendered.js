@@ -1,7 +1,3 @@
-Template.applications.onCreated(function() {
-  this.subscribe('applications');
-});
-
 Template.application.onRendered(function() {
   if (!_.isNull(this.data)) {
     const morrisApplications = new MorrisApplications();
