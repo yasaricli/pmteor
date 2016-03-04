@@ -1,7 +1,7 @@
 Router.route('/applications/:_id', {
   name: 'Application',
   waitOn() {
-    return Meteor.subscribe('applications', this.params._id);
+    return Meteor.subscribe('application', this.params._id);
   },
 
   // Current data this application.
@@ -17,7 +17,7 @@ Router.route('/insert', {
 Router.route('/update/:_id', {
   name: 'UpdateApplication',
   waitOn() {
-    return Meteor.subscribe('applications', this.params._id);
+    return Meteor.subscribe('application', this.params._id);
   },
 
   // Current data this application.

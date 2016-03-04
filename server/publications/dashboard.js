@@ -1,27 +1,3 @@
-Meteor.publishComposite('applications', function(_id) {
-  return {
-    find() {
-
-      // Detail application
-      if (_id) {
-        return Applications.find({ _id });
-      }
-
-      // All applications.
-      return Applications.find();
-    },
-    children: [
-      {
-        find(application) {
-          return Logs.find({
-            applicationId: application._id
-          });
-        }
-      }
-    ]
-  }
-});
-
 Meteor.publishComposite('dashboard', function() {
   return {
     find() {
@@ -32,7 +8,7 @@ Meteor.publishComposite('dashboard', function() {
       }));
 
       // All applications.
-      return Applications.find();
+      return Applications.find({ createdBy: this.userId });
     },
     children: [
       {

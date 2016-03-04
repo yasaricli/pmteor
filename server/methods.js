@@ -1,7 +1,11 @@
 Meteor.methods({
   start(_id) {
     check(_id, String);
-    const application = Applications.findOne(_id);
+    const application = Applications.findOne({ _id, createdBy: this.userId  });
+
+    if (_.isUndefined(application)) {
+      throw new Meteor.Error("not-authorized");
+    }
 
     // RUNNING UPDATE
     application.setStatus(1);
@@ -28,37 +32,43 @@ Meteor.methods({
 
   delete(_id) {
     check(_id, String);
-    const application = Applications.findOne(_id);
+    const application = Applications.findOne({ _id, createdBy: this.userId  });
 
-    if (application) {
-      Applications.remove(application._id, () => {
-        pm2.connect((connect_err) => {
-          pm2.delete(application.bundleId, (delete_err) => {
+    if (_.isUndefined(application)) {
+      throw new Meteor.Error("not-authorized");
+    }
 
-            // CD BUNDLES DIR
-            shell.cd(BUNDLE_DIR);
+    Applications.remove(application._id, () => {
+      pm2.connect((connect_err) => {
+        pm2.delete(application.bundleId, (delete_err) => {
 
-            // REMOVE APPLICATON DIR AND BUNDLE FILE
-            shell.rm('-rf', [
+          // CD BUNDLES DIR
+          shell.cd(BUNDLE_DIR);
 
-              // DIR
-              application.bundleId,
+          // REMOVE APPLICATON DIR AND BUNDLE FILE
+          shell.rm('-rf', [
 
-              // TAR.GZ
-              `${application.bundleId}.tar.gz`
-            ]);
+            // DIR
+            application.bundleId,
 
-            // DISCONNECT
-            pm2.disconnect();
-          });
+            // TAR.GZ
+            `${application.bundleId}.tar.gz`
+          ]);
+
+          // DISCONNECT
+          pm2.disconnect();
         });
       });
-    }
+    });
   },
 
   stop(_id) {
     check(_id, String);
-    const application = Applications.findOne(_id);
+    const application = Applications.findOne({ _id, createdBy: this.userId  });
+
+    if (_.isUndefined(application)) {
+      throw new Meteor.Error("not-authorized");
+    }
 
     pm2.connect((connect_err) => {
       pm2.stop(application.bundleId, (delete_err) => {
