@@ -1,5 +1,10 @@
 ### v.NEXT
 
+* Application detail page Logs.[#52](https://github.com/pmteor/pmteor/issues/52)
+* Application dump (Mongodb, Bundle) [#40](https://github.com/pmteor/pmteor/issues/40)
+* Members add pmteor projects. [#58](https://github.com/pmteor/pmteor/issues/58)
+* Morris Chart design top. [#56](https://github.com/pmteor/pmteor/issues/56)
+
 #### v0.1.1, 2016-March-04
 * Methods and publish functions auth secure. [#23](https://github.com/pmteor/pmteor/issues/59)
 
