@@ -1,11 +1,6 @@
 Meteor.methods({
   start(_id) {
-    check(_id, String);
     const application = Applications.findOne({ _id, createdBy: this.userId  });
-
-    if (_.isUndefined(application)) {
-      throw new Meteor.Error("not-application");
-    }
 
     // RUNNING UPDATE
     application.setStatus(1);
@@ -30,13 +25,20 @@ Meteor.methods({
     });
   },
 
-  delete(_id) {
-    check(_id, String);
+  stop(_id) {
     const application = Applications.findOne({ _id, createdBy: this.userId  });
 
-    if (_.isUndefined(application)) {
-      throw new Meteor.Error("not-application");
-    }
+    pm2.connect((connect_err) => {
+      pm2.stop(application.bundleId, (delete_err) => {
+
+        // DISCONNECT
+        pm2.disconnect();
+      });
+    });
+  },
+
+  delete(_id) {
+    const application = Applications.findOne({ _id, createdBy: this.userId  });
 
     Applications.remove(application._id, () => {
       pm2.connect((connect_err) => {
@@ -58,23 +60,6 @@ Meteor.methods({
           // DISCONNECT
           pm2.disconnect();
         });
-      });
-    });
-  },
-
-  stop(_id) {
-    check(_id, String);
-    const application = Applications.findOne({ _id, createdBy: this.userId  });
-
-    if (_.isUndefined(application)) {
-      throw new Meteor.Error("not-application");
-    }
-
-    pm2.connect((connect_err) => {
-      pm2.stop(application.bundleId, (delete_err) => {
-
-        // DISCONNECT
-        pm2.disconnect();
       });
     });
   }
