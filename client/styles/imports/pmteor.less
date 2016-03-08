@@ -173,8 +173,16 @@
 
   .morris-container {
     position: relative;
-    top: -150px;
     z-index: 1;
+    @media @mobile {
+      top: 0px;
+    }
+    @media @desktop-lg {
+      top: -150px;
+    }
+    @media @desktop {
+      top: -150px;
+    }
   }
 }
 
