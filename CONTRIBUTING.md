@@ -20,6 +20,8 @@ $ export ADMIN="username:password@pmteor.com"
 $ meteor
 ```
 
+Open `http://localhost:3000` and please login.
+
 As for any Meteor application, Pmteor is automatically refreshed when you change
 any file of the source code, just play with it to see how it behaves!
 
