@@ -16,7 +16,6 @@ launching the application:
 $ curl https://install.meteor.com/ | sh # On Mac or Linux
 $ git clone https://github.com/pmteor/pmteor.git
 $ cd pmteor
-$ export BUNDLE_DIR="~/Desktop/bundles"
 $ export ADMIN="username:password@pmteor.com"
 $ meteor
 ```
