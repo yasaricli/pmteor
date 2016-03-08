@@ -7,7 +7,7 @@ Meteor.publishComposite('applications', function() {
         type: STATUS_ALLOWED_VALUES[4] // ERRORED STATUS CODE
       }));
 
-      return Applications.find({ createdBy: this.userId });
+      return Applications.find({ 'members.userId': this.userId });
     },
 
     children: [
@@ -27,7 +27,7 @@ Meteor.publishComposite('application', function(_id) {
 
   return {
     find() {
-      return Applications.find({ _id, createdBy: this.userId });
+      return Applications.find({ _id, 'members.userId': this.userId });
     },
 
     children: [

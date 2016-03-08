@@ -29,3 +29,18 @@ Dev.hasEnv('ADMIN', (ADMIN) => {
     Roles.addUsersToRoles(_id, 'admin');
   });
 });
+
+// Admin users to add to all applications.
+Migrations.add('members', () => {
+  Applications.find({ }).forEach((doc) => {
+    const { _id, createdBy } = doc;
+
+    Applications.update(_id, {
+      $addToSet: {
+        members: {
+          userId: createdBy
+        }
+      }
+    });
+  });
+});

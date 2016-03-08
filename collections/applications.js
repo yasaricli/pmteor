@@ -21,6 +21,10 @@ Applications.attachSchema(new SimpleSchema({
     }
   },
 
+  // The application allows users to access.
+  members: { type: [Object], optional: true },
+  'members.$.userId': { type: String, },
+
   monit: { type: Object, optional: true, autoform: { type: 'hidden' } },
   'monit.memory': { type: Number },
   'monit.cpu': { type: Number },
@@ -113,7 +117,15 @@ Dev.isServer(() => {
   });
 
   Applications.before.insert((userId, doc) => {
+
+    // MONGO URL DEFAULT
     doc.env.MONGO_URL = `mongodb://localhost:27017/${doc.bundleId}`;
+
+    // MEMBER ADMIN USER
+    doc.members = [{
+      userId: userId,
+      isAdmin: true
+    }];
   });
 
   Applications.after.remove((userId, doc) => {

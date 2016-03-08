@@ -2,10 +2,12 @@
   <div class="applications">
     <div class="panel-heading applications-heading">
       <div class="pull-right btn-group">
-        <a href="{{ pathFor route='InsertApplication' }}" class="btn btn-purple">
-          <em class="fa fa-hand-o-right"></em>
-          <span>{{ _ "create-application" }}</span>
-        </a>
+        {{# if isInRole 'admin' }}
+          <a href="{{ pathFor route='InsertApplication' }}" class="btn btn-purple">
+            <em class="fa fa-hand-o-right"></em>
+            <span>{{ _ "create-application" }}</span>
+          </a>
+        {{/if}}
       </div>
       <div class="panel-title">{{ _ "applications" }}</div>
     </div>
@@ -88,8 +90,10 @@
                             <li><a href="#" class="stop">{{ _ "stop" }}</a></li>
                           {{/if}}
                           {{# unless isOnline }}
-                            <li class="divider"></li>
-                            <li><a href="#" class="delete">{{ _ "delete" }}</a></li>
+                            {{# if isInRole 'admin' }}
+                              <li class="divider"></li>
+                              <li><a href="#" class="delete">{{ _ "delete" }}</a></li>
+                            {{/if}}
                           {{/unless}}
                         </ul>
                      </div>

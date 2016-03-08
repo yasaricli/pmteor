@@ -1,6 +1,6 @@
 Meteor.methods({
   start(_id) {
-    const application = Applications.findOne({ _id, createdBy: this.userId  });
+    const application = Applications.findOne(_id);
 
     // RUNNING UPDATE
     application.setStatus(1);
@@ -26,7 +26,7 @@ Meteor.methods({
   },
 
   stop(_id) {
-    const application = Applications.findOne({ _id, createdBy: this.userId  });
+    const application = Applications.findOne(_id);
 
     pm2.connect((connect_err) => {
       pm2.stop(application.bundleId, (delete_err) => {
@@ -38,29 +38,34 @@ Meteor.methods({
   },
 
   delete(_id) {
-    const application = Applications.findOne({ _id, createdBy: this.userId  });
+    const application = Applications.findOne(_id);
 
-    Applications.remove(application._id, () => {
-      pm2.connect((connect_err) => {
-        pm2.delete(application.bundleId, (delete_err) => {
+    if (Roles.userIsInRole(this.userId, 'admin')) {
+      return Applications.remove(application._id, () => {
+        pm2.connect((connect_err) => {
+          pm2.delete(application.bundleId, (delete_err) => {
 
-          // CD BUNDLES DIR
-          shell.cd(BUNDLE_DIR);
+            // CD BUNDLES DIR
+            shell.cd(BUNDLE_DIR);
 
-          // REMOVE APPLICATON DIR AND BUNDLE FILE
-          shell.rm('-rf', [
+            // REMOVE APPLICATON DIR AND BUNDLE FILE
+            shell.rm('-rf', [
 
-            // DIR
-            application.bundleId,
+              // DIR
+              application.bundleId,
 
-            // TAR.GZ
-            `${application.bundleId}.tar.gz`
-          ]);
+              // TAR.GZ
+              `${application.bundleId}.tar.gz`
+            ]);
 
-          // DISCONNECT
-          pm2.disconnect();
+            // DISCONNECT
+            pm2.disconnect();
+          });
         });
       });
-    });
+    }
+
+    // if user not in role then 
+    throw new Meteor.Error(403, "Not user administrator. That's why you can not delete.");
   }
 });
