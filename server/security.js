@@ -1,25 +1,8 @@
-// if application member list search found then return.
-Security.defineMethod("isMember", {
-  fetch: [],
-  transform: null,
-  deny: function (type, arg, userId, doc) {
-    const userMemberApplication = Applications.findOne({
-      _id: doc._id,
-      'members.userId': userId
-    });
-
-    // if is undefined return true deny.
-    if (_.isUndefined(userMemberApplication)) {
-      return true;
-    }
-  }
-});
-
 // INSERT AND REMOVE HAS ROLE ADMIN THEN
 Applications.permit(['insert', 'remove']).ifHasRole('admin').apply();
 
 // UPDATE IS MEMBER LIST THEN.
-Applications.permit('update').isMember().apply();
+Applications.permit('update').ifMemberAdmin().apply();
 
 // INSERT, UPDATE, REMOVE HAS ADMIN ROLE THEN
 Bundles.files.permit(PERMIT_LIST_ALL).ifHasRole('admin').apply();
