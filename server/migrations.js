@@ -36,8 +36,8 @@ Migrations.add('memberIds', () => {
     const { _id, createdBy } = doc;
 
     Applications.update(_id, {
-      $push: {
-        memberIds: createdBy
+      $set: {
+        memberIds: [createdBy]
       }
     });
   });
