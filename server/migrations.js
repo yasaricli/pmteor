@@ -31,15 +31,13 @@ Dev.hasEnv('ADMIN', (ADMIN) => {
 });
 
 // Admin users to add to all applications.
-Migrations.add('members', () => {
+Migrations.add('memberIds', () => {
   Applications.find({ }).forEach((doc) => {
     const { _id, createdBy } = doc;
 
     Applications.update(_id, {
       $push: {
-        members: {
-          userId: createdBy
-        }
+        memberIds: createdBy
       }
     });
   });

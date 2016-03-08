@@ -11,7 +11,7 @@ Security.defineMethod("ifMemberAdmin", {
   deny: function (type, arg, userId, doc, fields, modifier) {
 
     // IF UPDATED FIELD MEMBER THEN
-    if (_.contains(fields, 'members')) {
+    if (_.contains(fields, 'memberIds')) {
 
       // NOT ADMIN THEN DENY.
       if (!Roles.userIsInRole(userId, 'admin')) {
@@ -20,20 +20,16 @@ Security.defineMethod("ifMemberAdmin", {
 
       // IF MODIFIER $push THEN
       if (_.has(modifier, '$push')) {
-        const _id = modifier.$push.members.userId;
-
-        const member = _.findWhere(doc.members, {
-          userId: _id
-        });
+        const $userId = modifier.$push.memberIds;
 
         // IF MEMBERS THEN DENY
-        if (member) {
+        if (_.contains(doc.memberIds, $userId)) {
           return true;
         }
 
         // IF REAL USER?
-        if (_.isUndefined(Users.findOne(_id))) {
-          return true
+        if (_.isUndefined(Users.findOne($userId))) {
+          return true;
         }
       }
     }

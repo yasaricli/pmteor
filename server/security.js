@@ -17,10 +17,7 @@ Meteor.beforeMethods(METHODS, function(_id) {
   check(_id, String);
 
   // GET APPLICATION
-  const application = Applications.findOne({
-    _id,
-    'members.userId': this.userId
-  });
+  const application = Applications.findOne({ _id, memberIds: this.userId });
 
   // if application undefined then throw error 404.
   if (_.isUndefined(application)) {

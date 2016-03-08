@@ -22,8 +22,7 @@ Applications.attachSchema(new SimpleSchema({
   },
 
   // The application allows users to access.
-  members: { type: [Object], optional: true },
-  'members.$.userId': { type: String },
+  memberIds: { type: [String], optional: true },
 
   monit: { type: Object, optional: true, autoform: { type: 'hidden' } },
   'monit.memory': { type: Number },
@@ -51,21 +50,19 @@ Applications.attachSchema(new SimpleSchema({
 }));
 
 Applications.helpers({
-  logs(f = {}) {
-    const filter = Object.assign(f, {
-      applicationId: this._id
-    });
-
-    return Logs.find(filter, {
+  logs() {
+    return Logs.find({}, {
       sort: {
         createdAt: -1
       }
     });
   },
 
-  errors() {
-    return this.logs({
-      type: STATUS_ALLOWED_VALUES[4] // ERRORED STATUS CODE
+  members() {
+    return Users.find({
+      _id: {
+        $in: this.memberIds
+      }
     });
   },
 
@@ -122,7 +119,7 @@ Dev.isServer(() => {
     doc.env.MONGO_URL = `mongodb://localhost:27017/${doc.bundleId}`;
 
     // DEFAULT MEMBER ADMIN USER
-    doc.members = [{ userId }];
+    doc.memberIds = [userId];
   });
 
   Applications.after.remove((userId, doc) => {
