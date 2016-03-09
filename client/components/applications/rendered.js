@@ -1,19 +1,16 @@
 Template.application.onRendered(function() {
-  if (!_.isNull(this.data)) {
+  if (this.data.isOnline()) {
     const morrisApplications = new MorrisApplications();
 
+    // OBSERVE
     this.cursor = Applications.find(this.data._id).observe({
       changed(doc) {
 
-        // IS ONLINE THEN
-        if (_.isEqual(doc.status, STATUS_ALLOWED_VALUES[2])) {
+        // PUSH NEW MEMORY AND CPU
+        morrisApplications.add(doc.monit);
 
-          // PUSH NEW MEMORY AND CPU
-          morrisApplications.add(doc.monit);
-
-          // RELOAD
-          morrisApplications.reload();
-        }
+        // RELOAD
+        morrisApplications.reload();
       }
     });
   }

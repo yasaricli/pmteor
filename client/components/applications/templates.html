@@ -126,24 +126,26 @@
         {{/if}}
       </div>
       <div class="ph status {{ status }} {{# if isOnline }}onlineInOut{{/if}}"></div>
-      <div class="row morris-container">
-        <div class="col-md-6">
-          <p class="lead text-center">{{ _ 'memory' }}</p>
-           <div class="panel panel-default">
-              <div class="panel-body">
-                 <div id="morris-memory" class="whirl ringed no-overlay"></div>
-              </div>
-           </div>
+      {{# if isOnline }}
+        <div class="row morris-container">
+          <div class="col-md-6">
+            <p class="lead text-center">{{ _ 'memory' }}</p>
+             <div class="panel panel-default">
+                <div class="panel-body">
+                   <div id="morris-memory" class="whirl ringed no-overlay"></div>
+                </div>
+             </div>
+          </div>
+          <div class="col-md-6">
+            <p class="lead text-center">{{ _ 'cpu' }}</p>
+             <div class="panel panel-default">
+                <div class="panel-body">
+                   <div id="morris-cpu" class="whirl ringed no-overlay"></div>
+                </div>
+             </div>
+          </div>
         </div>
-        <div class="col-md-6">
-          <p class="lead text-center">{{ _ 'cpu' }}</p>
-           <div class="panel panel-default">
-              <div class="panel-body">
-                 <div id="morris-cpu" class="whirl ringed no-overlay"></div>
-              </div>
-           </div>
-        </div>
-      </div>
+      {{/if}}
     {{ else }}
       <div class="abs-center not-found">
         <div class="text-center mb-xl">

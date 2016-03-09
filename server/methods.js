@@ -65,7 +65,7 @@ Meteor.methods({
       });
     }
 
-    // if user not in role then 
+    // if user not in role then
     throw new Meteor.Error(403, "Not user administrator. That's why you can not delete.");
   }
 });
