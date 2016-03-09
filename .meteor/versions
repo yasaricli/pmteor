@@ -106,7 +106,7 @@ minifiers@1.1.7
 minimongo@1.0.10
 mobile-experience@1.0.1
 mobile-status-bar@1.0.6
-momentjs:moment@2.11.2
+momentjs:moment@2.12.0
 mongo@1.1.3
 mongo-id@1.0.1
 mongo-livedata@1.0.9
@@ -121,7 +121,7 @@ pmteor:dropdown@0.0.1
 pmteor:freeport@0.0.1
 pmteor:modal@0.0.1
 pmteor:os@0.0.1
-pmteor:pm2@0.0.3
+pmteor:pm2@0.0.4
 pmteor:shell@0.0.1
 pmteor:sparkline@0.0.3
 pmteor:underscore-helpers@0.0.1
