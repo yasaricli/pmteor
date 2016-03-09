@@ -1,4 +1,6 @@
 Template.applications.events({
+  'click .insert': Modal.open('insertApplication'),
+  'click .name': Modal.open('updateApplication'),
   'click .start'() {
     Meteor.call('start', this._id);
   },
@@ -35,7 +37,7 @@ Template.applications.events({
   }
 });
 
-Template.updateApplication.events({
+Template.updateApplicationModal.events({
   'click .stop'() {
     Meteor.call('stop', this._id);
   }

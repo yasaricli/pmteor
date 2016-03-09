@@ -25,3 +25,7 @@ Template.application.onDestroyed(function() {
     this.cursor.stop();
   }
 });
+
+Template.updateApplicationModal.onCreated(function() {
+  this.subscribe('application', this.data._id);
+});

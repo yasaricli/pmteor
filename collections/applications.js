@@ -82,16 +82,20 @@ Applications.helpers({
     });
   },
 
-  isOnline() {
-    return _.isEqual(this.status, STATUS_ALLOWED_VALUES[2]);
-  },
-
   isStop() {
     return _.isEqual(this.status, STATUS_ALLOWED_VALUES[0]);
   },
 
   isExit() {
     return _.isEqual(this.status, STATUS_ALLOWED_VALUES[1]);
+  },
+
+  isOnline() {
+    return _.isEqual(this.status, STATUS_ALLOWED_VALUES[2]);
+  },
+
+  isReady() {
+    return _.isEqual(this.status, STATUS_ALLOWED_VALUES[3]);
   }
 });
 

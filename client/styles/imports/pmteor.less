@@ -292,3 +292,34 @@
 .loading {
   min-height: 300px;
 }
+
+.modal {
+  .lead {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 30px;
+  }
+  .modal-dialog {
+    .close {
+      position: absolute;
+      z-index: 10;
+      right: 15px;
+      top: 30px;
+      font-size: 30px;
+      color: #7266ba;
+      opacity: 9;
+      &:hover {
+        color: #6152BB;
+      }
+    }
+    .panel {
+      &.panel-default {
+        border-top-width: 20px;
+        border-color: #7266ba;
+        border-left: 0px;
+        border-right: 0px;
+        border-bottom: 0px;
+      }
+    }
+  }
+}

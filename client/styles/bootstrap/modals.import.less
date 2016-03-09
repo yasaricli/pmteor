@@ -14,14 +14,13 @@
 
 // Container that the modal scrolls within
 .modal {
-  display: none;
+  background-color: rgba(114, 102, 186, 0.44);
   overflow: hidden;
   position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: @zindex-modal;
   -webkit-overflow-scrolling: touch;
 
   // Prevent Chrome on Windows from adding a focus outline. For details, see
@@ -50,14 +49,6 @@
 // Actual modal
 .modal-content {
   position: relative;
-  background-color: @modal-content-bg;
-  border: 1px solid @modal-content-fallback-border-color; //old browsers fallback (ie8 etc)
-  border: 1px solid @modal-content-border-color;
-  border-radius: @border-radius-large;
-  .box-shadow(0 3px 9px rgba(0,0,0,.5));
-  background-clip: padding-box;
-  // Remove focus outline from opened modal
-  outline: 0;
 }
 
 // Modal background

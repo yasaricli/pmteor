@@ -9,7 +9,7 @@ Avatar.setOptions({
 });
 
 // Add Body class default.
-BodyClass.add('layout-h')
+BodyClass.add('layout-h');
 
 // Protect all Routes
 Router.plugin('ensureSignedIn');
@@ -37,8 +37,8 @@ AccountsTemplates.configureRoute('changePwd');
 AutoForm.addHooks(['InsertApplicationForm', 'UpdateApplicationForm'], {
   onSuccess() {
 
-    // GO TO INDEX PAGE
-    Router.go('Index');
+    // LAST CLOSE MODALS
+    Modal.close();
   }
 });
 

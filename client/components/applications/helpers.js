@@ -7,3 +7,9 @@ Template.applications.helpers({
     });
   }
 });
+
+Template.updateApplicationModal.helpers({
+  application() {
+    return Applications.findOne(this._id);
+  }
+});

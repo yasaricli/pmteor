@@ -3,7 +3,7 @@
     <div class="panel-heading applications-heading">
       <div class="pull-right btn-group">
         {{# if isInRole 'admin' }}
-          <a href="{{ pathFor route='InsertApplication' }}" class="btn btn-purple">
+          <a href="#" class="btn btn-purple insert">
             <em class="fa fa-hand-o-right"></em>
             <span>{{ _ "create-application" }}</span>
           </a>
@@ -23,7 +23,7 @@
                   </td>
                   <td>
                     <div class="ph url-container">
-                      <a href="{{ pathFor route='UpdateApplication' }}" class="name">{{ name }}</a>
+                      <a href="#" class="name">{{ name }}</a>
                         <small class="text-muted">
                           {{# if isOnline }}
                             <a href="{{ absoluteUrl }}" class="absoluteUrl">{{ env.ROOT_URL }}</a>
@@ -163,42 +163,38 @@
   </div>
 </template>
 
-<template name="insertApplication">
-  <div class="col-lg-9">
+<template name="insertApplicationModal">
+  <div class="panel panel-default">
     <p class="lead">{{ _ "create-application" }}</p>
-    <div class="panel panel-default">
-      <div class="panel-body">
-        {{# autoForm collection="Applications" id="InsertApplicationForm" type="insert" }}
-          {{> afQuickField name='name' class='mb-lg form-control input-lg' placeholder='NAME' label=false autofocus='' }}
-          {{> afQuickField name='env.ROOT_URL' class='mb-lg form-control input-lg' placeholder='ROOT URL' label=false }}
-          {{> afQuickField name='env.MAIL_URL' class='mb-lg form-control input-lg' placeholder='MAIL URL' label=false }}
-          {{> afQuickField name="bundleId" type="cfs-file" collection="bundles" label=false }}
-          <button type="submit" class="mb-sm btn btn-purple btn-lg">{{ _ "create" }}</button>
-        {{/ autoForm }}
-      </div>
+    <div class="panel-body">
+      {{# autoForm collection="Applications" id="InsertApplicationForm" type="insert" }}
+        {{> afQuickField name='name' class='mb-lg form-control input-lg' placeholder='NAME' label=false autofocus='' }}
+        {{> afQuickField name='env.ROOT_URL' class='mb-lg form-control input-lg' placeholder='ROOT URL' label=false }}
+        {{> afQuickField name='env.MAIL_URL' class='mb-lg form-control input-lg' placeholder='MAIL URL' label=false }}
+        {{> afQuickField name="bundleId" type="cfs-file" collection="bundles" label=false }}
+        <button type="submit" class="mb-sm btn btn-purple btn-lg">{{ _ "create" }}</button>
+      {{/ autoForm }}
     </div>
   </div>
 </template>
 
-<template name="updateApplication">
-  <div class="col-lg-9">
+<template name="updateApplicationModal">
+  <div class="panel panel-default {{# unless Template.subscriptionsReady }}whirl traditional{{/unless}}">
     <p class="lead">{{ _ "update-application" }}</p>
-    <div class="panel panel-default">
-      <div class="panel-body">
-        {{# autoForm collection="Applications" id="UpdateApplicationForm" type="update" doc=this }}
-          {{> afQuickField name='name' class='mb-lg form-control input-lg' placeholder='NAME' label=false autofocus='' }}
-          {{> afQuickField name='env.ROOT_URL' class='mb-lg form-control input-lg' placeholder='ROOT URL' label=false }}
-          {{> afQuickField name='env.MONGO_URL' class='mb-lg form-control input-lg' placeholder='MONGO URL' label=false }}
-          {{> afQuickField name='env.MAIL_URL' class='mb-lg form-control input-lg' placeholder='MAIL URL' label=false }}
-          {{> afQuickField name='env.PORT' class='mb-lg form-control input-lg' placeholder='PORT' label=false }}
-          {{> afQuickField name="bundleId" label=false }}
-          {{# if isStop }}
-            <button type="submit" class="mb-sm btn btn-purple btn-lg">{{ _ "update" }}</button>
-          {{ else }}
-            <a class="mb-sm btn btn-warning btn-lg stop">{{ _ "stop-and-update" }}</a>
-          {{/if}}
-        {{/ autoForm }}
-      </div>
+    <div class="panel-body">
+      {{# autoForm collection="Applications" id="UpdateApplicationForm" type="update" doc=application }}
+        {{> afQuickField name='name' class='mb-lg form-control input-lg' placeholder='NAME' label=false autofocus='' }}
+        {{> afQuickField name='env.ROOT_URL' class='mb-lg form-control input-lg' placeholder='ROOT URL' label=false }}
+        {{> afQuickField name='env.MONGO_URL' class='mb-lg form-control input-lg' placeholder='MONGO URL' label=false }}
+        {{> afQuickField name='env.MAIL_URL' class='mb-lg form-control input-lg' placeholder='MAIL URL' label=false }}
+        {{> afQuickField name='env.PORT' class='mb-lg form-control input-lg' placeholder='PORT' label=false }}
+        {{> afQuickField name="bundleId" label=false }}
+        {{# if application.isOnline }}
+          <a class="mb-sm btn btn-warning btn-lg stop">{{ _ "stop-and-update" }}</a>
+        {{ else }}
+          <button type="submit" class="mb-sm btn btn-purple btn-lg">{{ _ "update" }}</button>
+        {{/if}}
+      {{/ autoForm }}
     </div>
   </div>
 </template>
