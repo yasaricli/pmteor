@@ -4,11 +4,11 @@ Applications.permit(['insert', 'remove']).ifHasRole('admin').apply();
 // UPDATE IS MEMBER LIST THEN.
 Applications.permit('update').ifMemberAdmin().apply();
 
-// INSERT, UPDATE, REMOVE HAS ADMIN ROLE THEN
-Bundles.files.permit(PERMIT_LIST_ALL).ifHasRole('admin').apply();
-
-// INSERT, UPDATE, REMOVE HAS ADMIN ROLE THEN
 Logs.permit(PERMIT_LIST_ALL).ifLoggedIn().apply();
+
+// COLLECTIONFS BUNDLES PERMIT.
+Security.permit(PERMIT_LIST_ALL).collections([Bundles]).ifHasRole('admin').apply();
+Security.permit(['download']).collections([Bundles]).never().apply();
 
 // METHODS BEFORE HOOKS
 Meteor.beforeMethods(METHODS, function(_id) {
