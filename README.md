@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/pmteor/pmteor.png)](https://travis-ci.org/pmteor/pmteor)
 
-# Pmteor
+![Pmteor Logo](https://raw.githubusercontent.com/pmteor/pmteor/develop/public/images/logo.png)
 
 It is a Process Manager that is constructed with Meteor framework and can deploy any application that is done with  Pmteor Meteorjs web framework  to production stage.
 
