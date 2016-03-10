@@ -67,23 +67,16 @@ Meteor.startup(() => {
    * options, then stop all applications.
    */
    pm2.connect(() => {
-
-     // LIST
      pm2.list((err, procs) => {
+       const _ids = _.without(procs.map((proc) => proc.name), 'pmteor');
 
-       // FOR EACH ALL APPLICATIONS
-       procs.forEach((proc) => {
-         const { name } = proc;
+       _.forEach(_ids, (_id) => {
 
-         // if process name not pmteor then stop application
-         if (!_.isEqual(name, 'pmteor')) {
+         // STOP APPLICATION
+         pm2.stop(_id, () => {
 
-           // STOP APPLICATION
-           pm2.stop(name, () => {
-
-             // SUCCESS
-           });
-         }
+           // SUCCESS
+         });
        });
      });
    });
