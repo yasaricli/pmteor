@@ -7,6 +7,7 @@
 * Security Collectionfs Bundles. [#64](https://github.com/pmteor/pmteor/issues/64)
 * Application Create and Update modals. [#65](https://github.com/pmteor/pmteor/issues/65)
 * Provides before/after hooks for Meteor methods. [#62](https://github.com/pmteor/pmteor/issues/62)
+* Publications Users collection find fields. [#66](https://github.com/pmteor/pmteor/issues/66)
 
 #### v0.1.1, 2016-March-04
 * Methods and publish functions auth secure. [#23](https://github.com/pmteor/pmteor/issues/59)
