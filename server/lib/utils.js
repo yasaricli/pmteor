@@ -2,7 +2,7 @@
 PERMIT_LIST_ALL = [ 'insert', 'update', 'remove' ];
 
 // SECUR METHODS FUNCTION NAMES
-METHODS = ['start', 'stop', 'delete'];
+METHODS = ['start', 'stop', 'destroy'];
 
 // if application member list search found then return.
 Security.defineMethod("ifMemberAdmin", {

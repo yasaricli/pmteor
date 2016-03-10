@@ -19,7 +19,7 @@ Template.applications.events({
       showLoaderOnConfirm: true,
       html: false
     }, () => {
-      Meteor.call('delete', this._id, () => {
+      Meteor.call('destroy', this._id, () => {
         swal({
           title: TAPi18n.__('deleted-application-title'),
           text: TAPi18n.__('deleted-application-text'),
