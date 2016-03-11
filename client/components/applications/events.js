@@ -37,8 +37,4 @@ Template.applications.events({
   }
 });
 
-Template.updateApplicationModal.events({
-  'click .stop'() {
-    Meteor.call('stop', this._id);
-  }
-});
+Template.updateApplicationModal.inheritsEventsFrom('applications');
