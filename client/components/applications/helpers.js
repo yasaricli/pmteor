@@ -1,6 +1,6 @@
 Template.applications.helpers({
   apps() {
-    return Applications.find({}, { ...SORT_FILTER });
+    return Applications.find({}, { ...SORT_FILTERS });
   }
 });
 
