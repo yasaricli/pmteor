@@ -4,6 +4,7 @@ PERMIT_LIST_ALL = [ 'insert', 'update', 'remove' ];
 // SECUR METHODS FUNCTION NAMES
 METHODS = ['start', 'stop', 'destroy'];
 
+// USERS FIELDS PUBLISH
 USERS_FIELDS = {
   fields: {
     'username': 1,
@@ -41,6 +42,11 @@ Security.defineMethod("ifMemberAdmin", {
           return true;
         }
       }
+    }
+
+    // ELSE MEMBERIDS NOT ADMIN THEN DENY.
+    if (!Roles.userIsInRole(userId, 'admin')) {
+      return true;
     }
   }
 });
