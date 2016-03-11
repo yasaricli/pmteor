@@ -51,11 +51,7 @@ Applications.attachSchema(new SimpleSchema({
 
 Applications.helpers({
   logs() {
-    return Logs.find({}, {
-      sort: {
-        createdAt: -1
-      }
-    });
+    return Logs.find({}, { ...SORT_FILTERS });
   },
 
   members() {

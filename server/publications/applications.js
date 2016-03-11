@@ -7,7 +7,9 @@ Meteor.publishComposite('applications', function() {
         type: STATUS_ALLOWED_VALUES[4] // ERRORED STATUS CODE
       }));
 
-      return Applications.find({ memberIds: this.userId });
+      return Applications.find({ memberIds: this.userId }, {
+        ...SORT_FILTERS
+      });
     },
 
     children: [
@@ -15,7 +17,9 @@ Meteor.publishComposite('applications', function() {
       // ALL LOGS APPLICATION
       {
         find(application) {
-          return Logs.find({ applicationId: application._id });
+          return Logs.find({ applicationId: application._id }, {
+            ...SORT_FILTERS
+          });
         }
       },
 
@@ -46,7 +50,9 @@ Meteor.publishComposite('application', function(_id) {
       // ALL LOGS APPLICATION
       {
         find(application) {
-          return Logs.find({ applicationId: application._id });
+          return Logs.find({ applicationId: application._id }, {
+            ...SORT_FILTERS
+          });
         }
       },
 

@@ -1,10 +1,6 @@
 Template.applications.helpers({
   apps() {
-    return Applications.find({}, {
-      sort: {
-        createdAt: -1
-      }
-    });
+    return Applications.find({}, { ...SORT_FILTER });
   }
 });
 
