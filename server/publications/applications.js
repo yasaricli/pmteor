@@ -26,7 +26,7 @@ Meteor.publishComposite('applications', function() {
             _id: {
               $in: application.memberIds
             }
-          });
+          }, { ...USERS_FIELDS });
         }
       }
     ]
@@ -57,7 +57,7 @@ Meteor.publishComposite('application', function(_id) {
             _id: {
               $in: application.memberIds
             }
-          });
+          }, { ...USERS_FIELDS });
         }
       }
     ]

@@ -4,6 +4,15 @@ PERMIT_LIST_ALL = [ 'insert', 'update', 'remove' ];
 // SECUR METHODS FUNCTION NAMES
 METHODS = ['start', 'stop', 'destroy'];
 
+USERS_FIELDS = {
+  fields: {
+    'username': 1,
+    'profile.fullname': 1,
+    'profile.avatarUrl': 1,
+    'roles': 1
+  }
+};
+
 // if application member list search found then return.
 Security.defineMethod("ifMemberAdmin", {
   fetch: [],
