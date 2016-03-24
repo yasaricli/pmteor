@@ -27,5 +27,13 @@
   "are-you-sure-text": "Sie finden diese Anwendung nicht wiederhergestellt werden können!",
   "delete-confirm": "Ja, löschen!",
   "deleted-application-title": "Anwendung gelöscht!",
-  "deleted-application-text": "Ihre Bewerbung wurde gelöscht."
+  "deleted-application-text": "Ihre Bewerbung wurde gelöscht.",
+  "manage": "Manage",
+  "members": "Members",
+  "add-collaborator": "Add collaborator",
+  "name": "Name",
+  "email": "Email",
+  "role": "Role",
+  "member": "Member",
+  "admin": "Admin"
 }

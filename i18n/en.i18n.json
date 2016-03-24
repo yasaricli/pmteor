@@ -27,5 +27,13 @@
   "are-you-sure-text": "You will not be able to recover this application!",
   "delete-confirm": "Yes, delete it!",
   "deleted-application-title": "Application Deleted!",
-  "deleted-application-text": "Your application has been deleted."
+  "deleted-application-text": "Your application has been deleted.",
+  "manage": "Manage",
+  "members": "Members",
+  "add-collaborator": "Add collaborator",
+  "name": "Name",
+  "email": "Email",
+  "role": "Role",
+  "member": "Member",
+  "admin": "Admin"
 }

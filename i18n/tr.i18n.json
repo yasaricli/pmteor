@@ -27,5 +27,13 @@
   "are-you-sure-text": "Bu uygulamayı silerseniz birdaha geri dönüşümü olmayacaktır!",
   "delete-confirm": "Evet, silmek istiyorum!",
   "deleted-application-title": "Uygulama silindi.",
-  "deleted-application-text": "Uygulamanız kalıcı olarak silinmiştir!"
+  "deleted-application-text": "Uygulamanız kalıcı olarak silinmiştir!",
+  "manage": "Manage",
+  "members": "Members",
+  "add-collaborator": "Add collaborator",
+  "name": "Name",
+  "email": "Email",
+  "role": "Role",
+  "member": "Member",
+  "admin": "Admin"
 }

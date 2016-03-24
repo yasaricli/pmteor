@@ -67,6 +67,7 @@
 
 .applications {
   margin-top: 50px;
+
   .panel-heading {
     overflow: hidden;
     line-height: 30px;
@@ -75,6 +76,7 @@
       text-transform: uppercase;
     }
   }
+
   .list {
     .empty {
       padding: 50px;
@@ -187,6 +189,17 @@
 
   .btn {
     font-size: 16px;
+  }
+
+  .manage-dropdown {
+    position: absolute;
+    right: 0px;
+    z-index: 10;
+
+    .dropdown-menu {
+      right: 0px;
+      left: inherit;
+    }
   }
 }
 
@@ -330,4 +343,19 @@
 
 .simple-dev-error-overlay {
   background-color: rgba(114, 102, 186, 0.44);
+}
+
+.membersModal {
+  table {
+    tr {
+      .admin {
+        color: #f05050;
+      }
+    }
+  }
+
+  .add-collaborator {
+    margin: 50px 10px 10px 10px;
+    float: right;
+  }
 }

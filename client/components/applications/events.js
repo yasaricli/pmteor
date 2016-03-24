@@ -37,4 +37,8 @@ Template.applications.events({
   }
 });
 
+Template.application.events({
+  'click .members': Modal.open('members')
+});
+
 Template.updateApplicationModal.inheritsEventsFrom('applications');

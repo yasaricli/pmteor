@@ -117,6 +117,16 @@
 <template name="application">
   <div class="application">
     {{# if this }}
+      <div class="btn-group manage-dropdown">
+         <button type="button" data-toggle="dropdown" class="dropdown-toggle btn btn-default btn-sm" aria-expanded="true">
+           {{ _ "manage" }}
+         </button>
+         <ul role="menu" class="dropdown-menu fadeIn animated">
+            <li>
+              <a href="#" class="members">{{ _ "members" }}</a>
+            </li>
+         </ul>
+      </div>
       <div class="text-center name">
         {{ name }}
         {{# if isOnline }}
@@ -162,6 +172,51 @@
         </ul>
       </div>
     {{/if}}
+  </div>
+</template>
+
+<template name="membersModal">
+  <div class="panel panel-default">
+    <p class="lead">{{ _ "members" }}</p>
+    <div class="panel-body">
+      <table class="table table-hover">
+        <thead>
+           <tr>
+              <th>{{ _ "name" }}</th>
+              <th>{{ _ "email" }}</th>
+              <th>{{ _ "role" }}</th>
+              {{# if isInRole 'admin' }}
+                <th></th>
+              {{/if}}
+           </tr>
+        </thead>
+        <tbody>
+        {{# each members }}
+          <tr>
+            <td>{{ username }}</td>
+            <td>{{ email }}</td>
+            <td class="{{# if _isEqual ../createdBy _id }}admin{{else}}member{{/if}}">
+              {{# if _isEqual ../createdBy _id }}
+                {{ _ "admin" }}
+              {{else}}
+                {{ _ "member" }}
+              {{/if}}
+            </td>
+            {{# if isInRole 'admin' }}
+              <td class="text-right">
+                {{# if _isEqual ../createdBy _id }}
+                  <button type="button" class="mb-sm btn btn-danger" disabled>{{ _ "delete" }}</button>
+                {{ else }}
+                  <button type="button" class="mb-sm btn btn-danger">{{ _ "delete" }}</button>
+                {{/if}}
+              </td>
+            {{/if}}
+          </tr>
+        {{/each}}
+        </tbody>
+     </table>
+     <button type="button" class="mb-sm btn btn-purple add-collaborator">{{ _ "add-collaborator" }}</button>
+    </div>
   </div>
 </template>
 
