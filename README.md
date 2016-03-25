@@ -2,7 +2,9 @@
 
 ![Pmteor Logo](https://raw.githubusercontent.com/pmteor/pmteor/develop/public/images/logo.png)
 
-It is a Process Manager that is constructed with Meteor framework and can deploy any application that is done with  Pmteor Meteorjs web framework  to production stage.
+Pmteor allows user to manage applications that are done using Pmteor meteor framework. Also already ready meteor applications can be deployed using pmteor. 
+
+Pmteor is an open-source application and has been developed using Meteor framework.
 
 ## The Pmteor Guide
 Detailed explanations of `Pmteor` features can be found in the [Guide][guide].
