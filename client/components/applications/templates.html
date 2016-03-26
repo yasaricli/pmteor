@@ -162,14 +162,16 @@
           <p class="lead">{{ _ "not-found" "Application" }}</p>
           <p class="desc">{{ _ "not-found-desc" }}</p>
         </div>
-        <ul class="list-inline text-center text-sm mb-xl">
-          <li>
-            <a href="{{ pathFor route='InsertApplication' }}" class="btn btn-purple btn-lg">
-              <em class="fa fa-hand-o-right"></em>
-              <span>{{ _ "create-application" }}</span>
-            </a>
-          </li>
-        </ul>
+        {{# if isInRole 'admin' }}
+          <ul class="list-inline text-center text-sm mb-xl">
+            <li>
+              <a href="{{ pathFor route='InsertApplication' }}" class="btn btn-purple btn-lg">
+                <em class="fa fa-hand-o-right"></em>
+                <span>{{ _ "create-application" }}</span>
+              </a>
+            </li>
+          </ul>
+        {{/if}}
       </div>
     {{/if}}
   </div>
@@ -182,8 +184,9 @@
       <table class="table table-hover">
         <thead>
            <tr>
-              <th>{{ _ "name" }}</th>
+              <th>{{ _ "username" }}</th>
               <th>{{ _ "email" }}</th>
+              <th>{{ _ "joining-date" }}</th>
               <th>{{ _ "role" }}</th>
               {{# if isInRole 'admin' }}
                 <th></th>
@@ -195,6 +198,7 @@
           <tr>
             <td>{{ username }}</td>
             <td>{{ email }}</td>
+            <td>{{ livestamp createdAt }}</td>
             <td class="{{# if _isEqual ../createdBy _id }}admin{{else}}member{{/if}}">
               {{# if _isEqual ../createdBy _id }}
                 {{ _ "admin" }}
@@ -228,12 +232,12 @@
     <div class="panel-body">
       {{> esInput index="users" class="mb-lg form-control input-lg" placeholder="SEARCH USER" }}
       {{# ifEsIsSearching index="users" }}
-        <div class="text-center">{{ _ "searching" }}</div>
+        <div class="text-center whirl traditional no-overlay"></div>
       {{ else }}
         {{# ifEsInputIsEmpty index="users" }}
         {{ else }}
           {{# ifEsHasNoResults index="users" }}
-            <div class="text-center">{{ _ "no-users-found" }}</div>
+            <div class="text-center yet">{{ _ "no-users-found" }}</div>
           {{ else }}
             <table class="table table-hover">
               <thead>
@@ -248,7 +252,7 @@
                   <tr>
                     <td>{{ username }}</td>
                     <td>{{ email }}</td>
-                    <td class="text-center">
+                    <td class="text-right">
                       <button type="button" class="mb-sm btn btn-purple add">{{ _ "add" }}</button>
                     </td>
                   </tr>
