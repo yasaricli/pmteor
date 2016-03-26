@@ -11,16 +11,8 @@ Avatar.setOptions({
 // Add Body class default.
 BodyClass.add('layout-h');
 
-// Protect all Routes
-Router.plugin('ensureSignedIn');
-
 AccountsTemplates.configure({
-  /*
-   * false	Specifies whether to forbid user registration from the client side.
-   * In case it is set to true, neither the link for user registration nor the
-   * sign up form will be shown.
-   */
-  forbidClientAccountCreation: true,
+  focusFirstInput: false,
 
   /*
    * Specifies whether to allow to show the form for password change.
@@ -30,8 +22,36 @@ AccountsTemplates.configure({
   enablePasswordChange: true
 });
 
+// Protect all Routes
+Router.plugin('ensureSignedIn');
+
 AccountsTemplates.configureRoute('signIn');
+AccountsTemplates.configureRoute('signUp');
 AccountsTemplates.configureRoute('changePwd');
+
+// REMOVE PASSWORD AND EMAIL FIELDS
+const pwd = AccountsTemplates.removeField('password');
+AccountsTemplates.removeField('email');
+
+// AND RESET FIELDS
+AccountsTemplates.addFields([
+  {
+      _id: "username",
+      type: "text",
+      displayName: "username",
+      required: true,
+      minLength: 5,
+  },
+  {
+      _id: 'email',
+      type: 'email',
+      required: true,
+      displayName: "email",
+      re: /.+@(.+){2,}\.(.+){2,}/,
+      errStr: 'Invalid email',
+  },
+  pwd
+]);
 
 // HOOK FORMS
 AutoForm.addHooks(['InsertApplicationForm', 'UpdateApplicationForm'], {
@@ -40,9 +60,4 @@ AutoForm.addHooks(['InsertApplicationForm', 'UpdateApplicationForm'], {
     // LAST CLOSE MODALS
     Modal.close();
   }
-});
-
-sAlert.config({
-    effect: 'jelly',
-    position: 'bottom-right'
 });
