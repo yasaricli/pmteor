@@ -1,4 +1,10 @@
 Template.application.onRendered(function() {
+
+  // if null application data then deny.
+  if (_.isNull(this.data)) {
+    return;
+  }
+
   if (this.data.isOnline()) {
     const morrisApplications = new MorrisApplications();
 
