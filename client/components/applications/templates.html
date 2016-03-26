@@ -207,7 +207,7 @@
                 {{# if _isEqual ../createdBy _id }}
                   <button type="button" class="mb-sm btn btn-danger" disabled>{{ _ "delete" }}</button>
                 {{ else }}
-                  <button type="button" class="mb-sm btn btn-danger">{{ _ "delete" }}</button>
+                  <button type="button" class="mb-sm btn btn-danger delete">{{ _ "delete" }}</button>
                 {{/if}}
               </td>
             {{/if}}
@@ -215,7 +215,49 @@
         {{/each}}
         </tbody>
      </table>
-     <button type="button" class="mb-sm btn btn-purple add-collaborator">{{ _ "add-collaborator" }}</button>
+    {{# if isInRole 'admin' }}
+      <button type="button" class="mb-sm btn btn-purple add-collaborator">{{ _ "add-collaborator" }}</button>
+    {{/if}}
+    </div>
+  </div>
+</template>
+
+<template name="addCollaboratorModal">
+  <div class="panel panel-default">
+    <p class="lead">{{ _ "add-collaborator" }}</p>
+    <div class="panel-body">
+      {{> esInput index="users" class="mb-lg form-control input-lg" placeholder="SEARCH USER" }}
+      {{# ifEsIsSearching index="users" }}
+        <div class="text-center">{{ _ "searching" }}</div>
+      {{ else }}
+        {{# ifEsInputIsEmpty index="users" }}
+        {{ else }}
+          {{# ifEsHasNoResults index="users" }}
+            <div class="text-center">{{ _ "no-users-found" }}</div>
+          {{ else }}
+            <table class="table table-hover">
+              <thead>
+                 <tr>
+                    <th>{{ _ "name" }}</th>
+                    <th>{{ _ "email" }}</th>
+                    <th></th>
+                 </tr>
+              </thead>
+              <tbody>
+                {{# esEach index="users" }}
+                  <tr>
+                    <td>{{ username }}</td>
+                    <td>{{ email }}</td>
+                    <td class="text-center">
+                      <button type="button" class="mb-sm btn btn-purple add">{{ _ "add" }}</button>
+                    </td>
+                  </tr>
+                {{/esEach}}
+              </tbody>
+            </table>
+          {{/ifEsHasNoResults}}
+        {{/ifEsInputIsEmpty}}
+      {{/ifEsIsSearching}}
     </div>
   </div>
 </template>

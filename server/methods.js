@@ -1,22 +1,53 @@
-Meteor.methods({
-  start(_id) {
-    const application = Applications.findOne(_id);
+/*
+ * Meteor methods validate secure.
+ *
+ * Meteor.call('application', { applicationId: String, helper: String })
+ *
+ * Helper is contains ['start', 'end', 'destroy']
+ */
+new ValidatedMethod({
+  name: 'application',
+  validate({ applicationId, helper }) {
 
-    // START
-    application.start();
+    // check to validate arguments
+    check(helper, String);
+    check(applicationId, String);
+
+    // GET APPLICATION
+    const application = Applications.findOne({
+      _id: applicationId,
+      memberIds: this.userId
+    });
+
+    // if application undefined then throw error 404.
+    if (_.isUndefined(application)) {
+      throw new Meteor.Error(404, `${applicationId} Application isn't found`);
+    }
+
+    if (!_.contains(METHODS, helper)) {
+      throw new Meteor.Error(404, `Application no helper ${helper}`);
+    }
   },
 
-  stop(_id) {
-    const application = Applications.findOne(_id);
+  run({ applicationId, helper }) {
+    const application = Applications.findOne(applicationId);
 
-    // STOP
-    application.stop();
+    // RUN HELPER
+    return application[helper]();
+  }
+});
+
+
+// Create User is Authenticated admin role then run call.
+new ValidatedMethod({
+  name: 'createNewUser',
+  checkRoles: { roles: ['admin'] },
+
+  validate({ email, password }) {
+    check(userId, String);
   },
 
-  destroy(_id) {
-    const application = Applications.findOne(_id);
+  run({ email, password }) {
 
-    // DESTROY
-    application.destroy();
   }
 });

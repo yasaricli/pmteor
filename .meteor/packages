@@ -69,3 +69,5 @@ hitchcott:method-hooks
 pmteor:modal
 aldeed:template-extension
 simple:dev-error-overlay
+mdg:validated-method
+matteodem:easy-search@1.6.4

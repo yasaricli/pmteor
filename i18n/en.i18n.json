@@ -35,5 +35,8 @@
   "email": "Email",
   "role": "Role",
   "member": "Member",
-  "admin": "Admin"
+  "admin": "Admin",
+  "add": "Add",
+  "no-users-found": "No users found",
+  "searching": "Searching"
 }

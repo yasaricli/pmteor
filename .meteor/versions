@@ -98,9 +98,14 @@ logging@1.0.8
 lookback:body-class@0.4.0
 manuel:reactivearray@1.0.5
 matb33:collection-hooks@0.8.1
+matteodem:easy-search@1.6.4
+mdg:validated-method@1.0.2
 mdg:validation-error@0.2.0
 meteor@1.1.10
 meteor-base@1.0.1
+meteor-platform@1.2.3
+meteorhacks:aggregate@1.2.1
+meteorhacks:collection-utils@1.2.0
 meteorhacks:inject-initial@1.0.3
 meteorspark:util@0.2.0
 minifiers@1.1.7
