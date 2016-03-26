@@ -19,7 +19,7 @@
               <tbody>
                 <tr>
                   <td class="wd-xs">
-                    <div class="ph status {{ status }} {{# if isExit }}whirl traditional{{/if}} {{# if isOnline }}onlineInOut{{/if}}"></div>
+                    <div class="ph status {{ status }} {{# if isExit }}whirl pm-loading{{/if}} {{# if isOnline }}onlineInOut{{/if}}"></div>
                   </td>
                   <td>
                     <div class="ph url-container">
@@ -142,7 +142,7 @@
             <p class="lead text-center">{{ _ 'memory' }}</p>
              <div class="panel panel-default">
                 <div class="panel-body">
-                   <div id="morris-memory" class="whirl ringed no-overlay"></div>
+                   <div id="morris-memory" class="whirl pm-loading no-overlay"></div>
                 </div>
              </div>
           </div>
@@ -150,7 +150,7 @@
             <p class="lead text-center">{{ _ 'cpu' }}</p>
              <div class="panel panel-default">
                 <div class="panel-body">
-                   <div id="morris-cpu" class="whirl ringed no-overlay"></div>
+                   <div id="morris-cpu" class="whirl pm-loading no-overlay"></div>
                 </div>
              </div>
           </div>
@@ -232,7 +232,7 @@
     <div class="panel-body">
       {{> esInput index="users" class="mb-lg form-control input-lg" placeholder="SEARCH USER" }}
       {{# ifEsIsSearching index="users" }}
-        <div class="text-center whirl traditional no-overlay"></div>
+        <div class="text-center whirl pm-loading no-overlay"></div>
       {{ else }}
         {{# ifEsInputIsEmpty index="users" }}
         {{ else }}
@@ -282,7 +282,7 @@
 </template>
 
 <template name="updateApplicationModal">
-  <div class="panel panel-default {{# unless Template.subscriptionsReady }}whirl traditional{{/unless}}">
+  <div class="panel panel-default {{# unless Template.subscriptionsReady }}whirl pm-loading{{/unless}}">
     <p class="lead">{{ _ "update-application" }}</p>
     <div class="panel-body">
       {{# autoForm collection="Applications" id="UpdateApplicationForm" type="update" doc=application }}
