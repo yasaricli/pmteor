@@ -1,13 +1,16 @@
 ### v.NEXT
 
+* Register First user set to admin. [#68](https://github.com/pmteor/pmteor/issues/68)
 * Application detail page Logs.[#52](https://github.com/pmteor/pmteor/issues/52)
 * Application dump (Mongodb, Bundle) [#40](https://github.com/pmteor/pmteor/issues/40)
-* Members add pmteor projects. [#58](https://github.com/pmteor/pmteor/issues/58)
+* Members add pmteor projects (Register member.). [#58](https://github.com/pmteor/pmteor/issues/58)
 * Morris Chart design top. [#56](https://github.com/pmteor/pmteor/issues/56)
 * Security Collectionfs Bundles. [#64](https://github.com/pmteor/pmteor/issues/64)
-* Application Create and Update modals. [#65](https://github.com/pmteor/pmteor/issues/65)
+* Application Create and Update modals (New Modal system). [#65](https://github.com/pmteor/pmteor/issues/65)
 * Provides before/after hooks for Meteor methods. [#62](https://github.com/pmteor/pmteor/issues/62)
 * Publications Users collection find fields. [#66](https://github.com/pmteor/pmteor/issues/66)
+* Member not found page [#70](https://github.com/pmteor/pmteor/issues/70)
+* TypeError: Cannot read property 'isOnline' of null fix. [#69](https://github.com/pmteor/pmteor/issues/69)
 
 #### v0.1.1, 2016-March-04
 * Methods and publish functions auth secure. [#23](https://github.com/pmteor/pmteor/issues/59)
