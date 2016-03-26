@@ -5,11 +5,9 @@ Meteor.startup(() => {
     pm2.connect(Meteor.bindEnvironment((connect_err) => {
       if (_.isNull(connect_err)) {
         pm2.list(Meteor.bindEnvironment((list_err, procs) => {
-          const onlines = _.filter(procs, (proc) => {
-            return !_.isEqual(proc.pid, 0);
-          });
+          const onlines = _.reject(procs, (proc) => _.isEqual(proc.pid, 0));
 
-          if (!_.isEmpty(onlines)) {
+          if (onlines.length) {
             onlines.forEach(Meteor.bindEnvironment((proc) => {
               const { name, monit } = proc;
 
