@@ -10,7 +10,7 @@ new ValidatedMethod({
   validate({ applicationId, helper }) {
 
     // check to validate arguments
-    check(helper, String)
+    check(helper, String);
     check(applicationId, String);
 
     // GET APPLICATION
@@ -24,6 +24,7 @@ new ValidatedMethod({
       throw new Meteor.Error(404, `${applicationId} Application isn't found`);
     }
 
+    // NOT CONTAINS METHOD THEN
     if (!_.contains(METHODS, helper)) {
       throw new Meteor.Error(404, `Application no helper ${helper}`);
     }

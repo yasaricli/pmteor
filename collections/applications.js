@@ -151,37 +151,6 @@ Dev.isServer(() => {
           pm2.disconnect();
         });
       });
-    },
-
-    destroy() {
-      const self = this;
-      if (Roles.userIsInRole(Meteor.userId(), 'admin')) {
-        return Applications.remove(self._id, () => {
-          pm2.connect((connect_err) => {
-            pm2.delete(self.bundleId, (delete_err) => {
-
-              // CD BUNDLES DIR
-              shell.cd(BUNDLE_DIR);
-
-              // REMOVE APPLICATON DIR AND BUNDLE FILE
-              shell.rm('-rf', [
-
-                // DIR
-                self.bundleId,
-
-                // TAR.GZ
-                `${self.bundleId}.tar.gz`
-              ]);
-
-              // DISCONNECT
-              pm2.disconnect();
-            });
-          });
-        });
-      }
-
-      // if user not in role then
-      throw new Meteor.Error(403, "Not user administrator. That's why you can not delete.");
     }
   });
 
@@ -194,11 +163,33 @@ Dev.isServer(() => {
     doc.memberIds = [userId];
   });
 
+
+  // REMOVE APPLICATION AFTER 
   Applications.after.remove((userId, doc) => {
 
     // Applications all logs removed.
-    Logs.remove({
-      applicationId: doc._id
+    Logs.remove({ applicationId: doc._id });
+
+    // CONNECT AND DELETE APPLICATION
+    pm2.connect((connect_err) => {
+      pm2.delete(doc.bundleId, (delete_err) => {
+
+        // CD BUNDLES DIR
+        shell.cd(BUNDLE_DIR);
+
+        // REMOVE APPLICATON DIR AND BUNDLE FILE
+        shell.rm('-rf', [
+
+          // DIR
+          doc.bundleId,
+
+          // TAR.GZ
+          `${doc.bundleId}.tar.gz`
+        ]);
+
+        // DISCONNECT
+        pm2.disconnect();
+      });
     });
   });
 

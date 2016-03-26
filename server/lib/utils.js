@@ -2,7 +2,7 @@
 PERMIT_LIST_ALL = [ 'insert', 'update', 'remove' ];
 
 // SECUR METHODS FUNCTION NAMES
-METHODS = ['start', 'stop', 'destroy'];
+METHODS = ['start', 'stop'];
 
 // USERS FIELDS PUBLISH
 USERS_FIELDS = {

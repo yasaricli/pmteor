@@ -25,10 +25,7 @@ Template.applications.events({
       showLoaderOnConfirm: true,
       html: false
     }, () => {
-      Meteor.call('application', {
-        applicationId: this._id,
-        helper: 'destroy'
-      }, () => {
+      Applications.remove(this._id, () => {
         swal({
           title: TAPi18n.__('deleted-application-title'),
           text: TAPi18n.__('deleted-application-text'),
