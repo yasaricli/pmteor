@@ -59,6 +59,10 @@ Applications.helpers({
       _id: {
         $in: this.memberIds
       }
+    }, {
+      sort: {
+        createdAt: 1
+      }
     });
   },
 
