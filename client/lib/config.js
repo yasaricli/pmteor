@@ -12,7 +12,7 @@ Avatar.setOptions({
 BodyClass.add('layout-h');
 
 AccountsTemplates.configure({
-  focusFirstInput: false,
+  focusFirstInput: true,
 
   /*
    * Specifies whether to allow to show the form for password change.
