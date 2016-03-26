@@ -9,3 +9,5 @@ Template.updateApplicationModal.helpers({
     return Applications.findOne(this._id);
   }
 });
+
+Template.membersModal.inheritsHelpersFrom('updateApplicationModal');
