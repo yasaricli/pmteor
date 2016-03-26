@@ -31,12 +31,13 @@
   "manage": "Manage",
   "members": "Members",
   "add-collaborator": "Add collaborator",
-  "name": "Name",
+  "username": "Username",
   "email": "Email",
   "role": "Role",
   "member": "Member",
   "admin": "Admin",
   "add": "Add",
   "no-users-found": "No users found",
-  "searching": "Searching"
+  "searching": "Searching",
+  "joining-date": "Joining Date"
 }
