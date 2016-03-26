@@ -10,7 +10,7 @@ new ValidatedMethod({
   validate({ applicationId, helper }) {
 
     // check to validate arguments
-    check(helper, String);
+    check(helper, String)
     check(applicationId, String);
 
     // GET APPLICATION
@@ -34,20 +34,5 @@ new ValidatedMethod({
 
     // RUN HELPER
     return application[helper]();
-  }
-});
-
-
-// Create User is Authenticated admin role then run call.
-new ValidatedMethod({
-  name: 'createNewUser',
-  checkRoles: { roles: ['admin'] },
-
-  validate({ email, password }) {
-    check(userId, String);
-  },
-
-  run({ email, password }) {
-
   }
 });
