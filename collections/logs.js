@@ -21,10 +21,9 @@ Dev.isServer(() => {
 
       // SEND EMAIL
       if (application) {
-        const user = Users.findOne(userId);
 
         // SEND EMAILS
-        application.sendEmailMembers('log', { user, application });
+        application.sendEmailMembers('log', { application });
       }
   });
 });
