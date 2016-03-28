@@ -1,8 +1,7 @@
 ### v.NEXT
 
 * Register First user set to admin. [#68](https://github.com/pmteor/pmteor/issues/68)
-* Application detail page Logs.[#52](https://github.com/pmteor/pmteor/issues/52)
-* Application dump (Mongodb, Bundle) [#40](https://github.com/pmteor/pmteor/issues/40)
+* Application Log email.[#22](https://github.com/pmteor/pmteor/issues/22)
 * Members add pmteor projects (Register member.). [#58](https://github.com/pmteor/pmteor/issues/58)
 * Morris Chart design top. [#56](https://github.com/pmteor/pmteor/issues/56)
 * Security Collectionfs Bundles. [#64](https://github.com/pmteor/pmteor/issues/64)
