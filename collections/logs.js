@@ -15,4 +15,16 @@ Logs.helpers({
   }
 });
 
-Dev.isServer(() => { });
+Dev.isServer(() => {
+  Logs.after.insert((userId, doc, fieldNames, modifier, options) => {
+      const application = Applications.findOne(doc.applicationId);
+
+      // SEND EMAIL
+      if (application) {
+        const user = Users.findOne(userId);
+
+        // SEND EMAILS
+        application.sendEmailMembers('log', { user, application });
+      }
+  });
+});

@@ -31,14 +31,18 @@ Meteor.startup(() => {
       // PROCESS ALL EVENTS
       bus.on('process:event', Meteor.bindEnvironment((query) => {
         const { PORT, name } = query.process;
+        const application = Applications.findOne({ bundleId: name });
 
-        // SET STATUS QUERY EVENT
-        Applications.update({ bundleId: name }, {
-          $set: {
-            status: STATUS_MAPPER[query.event.toUpperCase()],
-            'env.PORT': PORT
-          }
-        });
+        if (application) {
+
+          // CHANGE STATUS
+          Applications.update({ bundleId: name }, {
+            $set: {
+              status: STATUS_MAPPER[query.event.toUpperCase()],
+              'env.PORT': PORT
+            }
+          });
+        }
       }));
 
       // IF ERROR THEN ON EVENT
@@ -68,14 +72,10 @@ Meteor.startup(() => {
      pm2.list((err, procs) => {
        const _ids = _.without(procs.map((proc) => proc.name), 'pmteor');
 
-       _.forEach(_ids, (_id) => {
+       // stop list applications.
+       _.forEach(_ids, (_id) => pm2.stop(_id, () => {
 
-         // STOP APPLICATION
-         pm2.stop(_id, () => {
-
-           // SUCCESS
-         });
-       });
+       }));
      });
    });
 });

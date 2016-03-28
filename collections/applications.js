@@ -110,6 +110,7 @@ Dev.isServer(() => {
         name: this.bundleId,
         script: 'main.js',
         cwd: this.dir(),
+        autorestart: false,
         env: _.extend(this.env, {
           PORT: this.env.PORT || PORT,
         })
@@ -151,6 +152,32 @@ Dev.isServer(() => {
           pm2.disconnect();
         });
       });
+    },
+
+    sendEmailMembers(template, data) {
+      const members = Users.find({
+        _id: {
+          $in: this.memberIds
+        }
+      });
+
+      // USERS EACH
+      members.forEach((user) => {
+
+        // MAIL URL PARSE AND EXISTS MAIL URL
+        Dev.hasEnv('MAIL_URL', (MAIL_URL) => {
+          const { emails } = user;
+          const { email } = Dev.parseMailUrl(MAIL_URL);
+
+          // SEND EMAIL
+          Email.send({
+            from: email,
+            to: _.first(emails).address,
+            subject: `Pmteor - ${this.name}`,
+            html: SSR.render(template, data)
+          });
+        });
+      });
     }
   });
 
@@ -164,7 +191,7 @@ Dev.isServer(() => {
   });
 
 
-  // REMOVE APPLICATION AFTER 
+  // REMOVE APPLICATION AFTER
   Applications.after.remove((userId, doc) => {
 
     // Applications all logs removed.
@@ -193,14 +220,11 @@ Dev.isServer(() => {
     });
   });
 
-  Applications.before.update((userId, doc, fieldNames, modifier, options) => {
-    if (_.has(modifier.$set, 'status')) {
+  Applications.after.update((userId, doc, fieldNames, modifier, options) => {
+    if (_.contains(fieldNames, 'status')) {
 
       // INSERT ERROR LOG
-      Logs.insert({
-        applicationId: doc._id,
-        type: modifier.$set.status
-      });
+      Logs.insert({ applicationId: doc._id, type: doc.status });
     }
   });
 });
