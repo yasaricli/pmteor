@@ -1,5 +1,7 @@
 ### v.NEXT
 
+
+#### v0.2.0, 2016-March-28
 * Register First user set to admin. [#68](https://github.com/pmteor/pmteor/issues/68)
 * Application Log email.[#22](https://github.com/pmteor/pmteor/issues/22)
 * Members add pmteor projects (Register member.). [#58](https://github.com/pmteor/pmteor/issues/58)
