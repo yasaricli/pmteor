@@ -22,10 +22,23 @@
 <template name="index">
   <div class="row">
     <div class="col-lg-4 col-sm-6">
+      <div class="panel widget bg-success">
+         <div class="row row-table">
+            <div class="col-xs-4 text-center bg-success-dark pv-lg">
+               <em class="fa fa-bullseye fa-3x"></em>
+            </div>
+            <div class="col-xs-8 pv-lg">
+               <div class="h2 mt0 text-bold">{{ onlines.count }}</div>
+               <div class="text-uppercase">{{ _ "onlines" }}</div>
+            </div>
+         </div>
+      </div>
+    </div>
+    <div class="col-lg-4 col-sm-6">
       <div class="panel widget bg-primary">
          <div class="row row-table">
             <div class="col-xs-4 text-center bg-primary-dark pv-lg">
-               <em class="fa fa-rocket fa-3x"></em>
+               <img src="/images/pm.png" class="pm">
             </div>
             <div class="col-xs-8 pv-lg">
                <div class="h2 mt0 text-bold">{{ apps.count }}</div>
@@ -41,25 +54,8 @@
                <em class="fa fa-exclamation-triangle fa-3x"></em>
             </div>
             <div class="col-xs-8 pv-lg">
-               <div class="h2 mt0 text-bold">{{ getPublishedCount 'errors-counter' }}</div>
+               <div class="h2 mt0 text-bold">{{ errors.count }}</div>
                <div class="text-uppercase">{{ _ "errors" }}</div>
-            </div>
-         </div>
-      </div>
-    </div>
-    <div class="col-lg-4 col-md-6 col-sm-12">
-      <div class="panel widget">
-         <div class="row row-table">
-            <div class="col-xs-4 text-center bg-green pv-lg">
-               <div data-now="" data-format="MMMM" class="text-sm">{{ moFormat moNow 'MMMM' }}</div>
-               <br>
-               <div data-now="" data-format="D" class="h2 mt0">{{ moFormat moNow 'D' }}</div>
-            </div>
-            <div class="col-xs-8 pv-lg">
-               <div data-now="" data-format="dddd" class="text-uppercase">{{ moFormat moNow 'dddd' }}</div>
-               <br>
-               <div data-now="" data-format="h:mm" class="h2 mt0">{{ moFormat moNow 'h:mm:ss' }}</div>
-               <div data-now="" data-format="a" class="text-muted text-sm">{{ moFormat moNow 'a' }}</div>
             </div>
          </div>
       </div>

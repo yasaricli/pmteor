@@ -1,12 +1,6 @@
 Meteor.publishComposite('applications', function() {
   return {
     find() {
-
-      // ALL APPLICATIONS ERROR LOGS COUNTER
-      Counts.publish(this, 'errors-counter', Logs.find({
-        type: STATUS_ALLOWED_VALUES[4] // ERRORED STATUS CODE
-      }));
-
       return Applications.find({ memberIds: this.userId }, {
         ...SORT_FILTERS
       });
