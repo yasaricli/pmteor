@@ -25,7 +25,7 @@ new ValidatedMethod({
     }
 
     // NOT CONTAINS METHOD THEN
-    if (!_.contains(METHODS, helper)) {
+    if (!_.contains(['start', 'stop'], helper)) {
       throw new Meteor.Error(404, `Application no helper ${helper}`);
     }
   },
