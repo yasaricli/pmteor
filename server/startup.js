@@ -54,7 +54,7 @@ Meteor.startup(() => {
         if (application) {
           Logs.insert({
             applicationId: application._id,
-            type: STATUS_ALLOWED_VALUES[4],
+            type: STATUS_MAPPER.ERRORED,
             data: query.data
           });
         }

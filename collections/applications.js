@@ -14,7 +14,7 @@ Applications.attachSchema(new SimpleSchema({
   status: {
     type: String,
     allowedValues: STATUS_ALLOWED_VALUES,
-    defaultValue: STATUS_ALLOWED_VALUES[1], // EXIT.
+    defaultValue: STATUS_MAPPER.EXIT,
     autoform: {
       type: 'hidden',
       firstOption: false
@@ -83,19 +83,19 @@ Applications.helpers({
   },
 
   isStop() {
-    return _.isEqual(this.status, STATUS_ALLOWED_VALUES[0]);
+    return _.isEqual(this.status, STATUS_MAPPER.STOP);
   },
 
   isExit() {
-    return _.isEqual(this.status, STATUS_ALLOWED_VALUES[1]);
+    return _.isEqual(this.status, STATUS_MAPPER.EXIT);
   },
 
   isOnline() {
-    return _.isEqual(this.status, STATUS_ALLOWED_VALUES[2]);
+    return _.isEqual(this.status, STATUS_MAPPER.ONLINE);
   },
 
   isReady() {
-    return _.isEqual(this.status, STATUS_ALLOWED_VALUES[3]);
+    return _.isEqual(this.status, STATUS_MAPPER.READY);
   }
 });
 
