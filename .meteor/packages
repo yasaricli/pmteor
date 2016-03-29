@@ -33,8 +33,6 @@ cfs:autoform
 less
 adriancbo:chalk
 zimme:active-route
-momentjs:moment
-lbee:moment-helpers
 check
 pmteor:freeport
 pmteor:shell
@@ -48,10 +46,7 @@ useraccounts:core
 accounts-password
 useraccounts:iron-routing
 lookback:body-class
-jparker:gravatar
 alanning:roles
-juliancwirko:s-alert
-juliancwirko:s-alert-jelly
 tap:i18n
 pmteor:pm2
 useraccounts:bootstrap
@@ -74,3 +69,4 @@ email
 meteorhacks:ssr
 standard-minifier-css
 standard-minifier-js
+momentjs:moment

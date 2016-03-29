@@ -86,12 +86,9 @@ jparker:crypto-core@0.1.0
 jparker:crypto-md5@0.1.1
 jparker:gravatar@0.4.1
 jquery@1.11.6
-juliancwirko:s-alert@3.1.4
-juliancwirko:s-alert-jelly@3.1.3
 kevohagan:sweetalert@1.0.0
 lai:collection-extensions@0.2.1_1
 launch-screen@1.0.8
-lbee:moment-helpers@0.2.0
 less@2.5.6
 livedata@1.0.16
 localstorage@1.0.7
