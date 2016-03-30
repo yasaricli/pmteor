@@ -27,7 +27,7 @@ class MorrisChart {
   }
 }
 
-class MorrisApps {
+export class MorrisApps {
   constructor() {
     this._instance = Template.instance();
 
@@ -64,6 +64,3 @@ class MorrisApps {
     this.memory.add(filesize(monit.memory, { output: 'object' }));
   }
 }
-
-
-MorrisApplications = MorrisApps;

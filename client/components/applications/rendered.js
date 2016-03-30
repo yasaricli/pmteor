@@ -1,3 +1,5 @@
+import { MorrisApps } from '../../lib/morris';
+
 Template.application.onRendered(function() {
 
   // if null application data then deny.
@@ -6,17 +8,17 @@ Template.application.onRendered(function() {
   }
 
   if (this.data.isOnline()) {
-    const morrisApplications = new MorrisApplications();
+    const morris = new MorrisApps();
 
     // OBSERVE
     this.cursor = Applications.find(this.data._id).observe({
       changed(doc) {
 
         // PUSH NEW MEMORY AND CPU
-        morrisApplications.add(doc.monit);
+        morris.add(doc.monit);
 
         // RELOAD
-        morrisApplications.reload();
+        morris.reload();
       }
     });
   }
