@@ -1,4 +1,6 @@
+import { FS } from 'meteor/cfs:base-package';
 import { Dev } from 'meteor/pmteor:dev';
+import { Modal } from 'meteor/pmteor:modal';
 import { Applications } from '../applications/applications.js';
 
 export const Bundles = new FS.Collection("bundles", {

@@ -15,3 +15,6 @@ import '../../ui/applications/routers.js';
 import '../../ui/applications/events.js';
 import '../../ui/applications/helpers.js';
 import '../../ui/applications/rendered.js';
+
+// CONFIG
+import './configuration.js';

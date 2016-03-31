@@ -8,20 +8,7 @@ import { Logs } from '../logs/logs.js';
 import { Users } from '../users/users.js';
 import { Bundles } from '../bundles/bundles.js';
 
-class ApplicationsCollection extends Mongo.Collection {
-  insert(doc, callback) {
-
-    // MONGO URL DEFAULT
-    doc.env.MONGO_URL = `mongodb://localhost:27017/${doc.bundleId}`;
-
-    // DEFAULT MEMBER ADMIN USER
-    doc.memberIds = [Meteor.userId()];
-
-    return super.insert(doc, callback);
-  }
-}
-
-export const Applications = new ApplicationsCollection('applications');
+export const Applications = new Mongo.Collection('applications');
 
 // Attach behaviour with the default options
 Applications.attachBehaviour('timestampable');
@@ -204,6 +191,14 @@ Dev.isServer(() => {
     }
   });
 
+  Applications.before.insert((userId, doc) => {
+
+    // MONGO URL DEFAULT
+    doc.env.MONGO_URL = `mongodb://localhost:27017/${doc.bundleId}`;
+
+    // DEFAULT MEMBER ADMIN USER
+    doc.memberIds = [userId];
+  });
 
   // REMOVE APPLICATION AFTER
   Applications.after.remove((userId, doc) => {

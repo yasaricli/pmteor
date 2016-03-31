@@ -1,3 +1,10 @@
+import { AccountsTemplates } from 'meteor/useraccounts:core';
+import { BodyClass } from 'meteor/lookback:body-class';
+import { AutoForm } from 'meteor/aldeed:autoform';
+import { Avatar } from 'meteor/utilities:avatar';
+import { Router } from 'meteor/iron:router';
+import { Modal } from 'meteor/pmteor:modal';
+
 Router.configure({
   layoutTemplate: 'layout',
   loadingTemplate: 'loading',
