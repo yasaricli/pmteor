@@ -4,7 +4,7 @@ import '../../ui/main/events.js';
 import '../../ui/main/helpers.js';
 import '../../ui/main/rendered.js';
 
-// APPLICATIONS
+// AUTH
 import '../../ui/auth/routers.js';
 import '../../ui/auth/events.js';
 import '../../ui/auth/helpers.js';
