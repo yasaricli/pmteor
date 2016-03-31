@@ -1,3 +1,11 @@
+import './templates.html';
+
+import { Meteor } from 'meteor/meteor';
+import { Template } from 'meteor/templating';
+import { Modal } from 'meteor/pmteor:modal';
+import { TAPi18n } from 'meteor/tap:i18n';
+import { Applications } from '../../collections/applications/applications.js';
+
 Template.applications.events({
   'click .insert': Modal.open('insertApplication'),
   'click .name': Modal.open('updateApplication'),

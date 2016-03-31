@@ -1,6 +1,7 @@
 import { Mongo } from 'meteor/mongo';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { _ } from 'meteor/underscore';
+import { Dev } from 'meteor/pmteor:dev';
 
 import { Logs } from '../logs/logs.js';
 import { Users } from '../users/users.js';

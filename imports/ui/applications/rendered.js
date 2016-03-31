@@ -1,4 +1,8 @@
-import { MorrisApps } from '../../lib/morris';
+import './templates.html';
+
+import { Template } from 'meteor/templating';
+import { MorrisApps } from '../lib/morris';
+import { Applications } from '../../collections/applications/applications.js';
 
 Template.application.onRendered(function() {
 

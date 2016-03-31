@@ -1,4 +1,8 @@
-import { Logs } from '../../../imports/collections/logs/logs.js';
+import './templates.html';
+
+import { Template } from 'meteor/templating';
+import { Applications } from '../../collections/applications/applications.js';
+import { Logs } from '../../collections/logs/logs.js';
 
 Template.index.helpers({
   apps(status) {
