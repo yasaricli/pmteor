@@ -7,7 +7,9 @@ import { Dev } from 'meteor/pmteor:dev';
 import { Logs } from '../logs/logs.js';
 import { Users } from '../users/users.js';
 import { Bundles } from '../bundles/bundles.js';
+
 import { STATUS_ALLOWED_VALUES, STATUS_MAPPER } from './utils.js';
+import { BUNDLE_DIR } from '../bundles/utils.js';
 
 export const Applications = new Mongo.Collection('applications');
 

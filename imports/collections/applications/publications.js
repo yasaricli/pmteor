@@ -9,7 +9,9 @@ Meteor.publishComposite('applications', function() {
   return {
     find() {
       return Applications.find({ memberIds: this.userId }, {
-        ...SORT_FILTERS
+        sort: {
+          createdAt: -1
+        }
       });
     },
 
@@ -19,7 +21,9 @@ Meteor.publishComposite('applications', function() {
       {
         find(application) {
           return Logs.find({ applicationId: application._id }, {
-            ...SORT_FILTERS
+            sort: {
+              createdAt: -1
+            }
           });
         }
       },
@@ -56,7 +60,9 @@ Meteor.publishComposite('application', function(_id) {
       {
         find(application) {
           return Logs.find({ applicationId: application._id }, {
-            ...SORT_FILTERS
+            sort: {
+              createdAt: -1
+            }
           });
         }
       },
