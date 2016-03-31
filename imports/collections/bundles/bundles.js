@@ -1,4 +1,7 @@
-Bundles = new FS.Collection("bundles", {
+import { Dev } from 'meteor/pmteor:dev';
+import { Applications } from '../applications/applications.js';
+
+export const Bundles = new FS.Collection("bundles", {
 
   // BUNDLES STORES LIST see libs/utils.js
   stores: [ ...BUNDLES_STORES ],

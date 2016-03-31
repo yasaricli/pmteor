@@ -5,6 +5,8 @@ import { Dev } from 'meteor/pmteor:dev';
 
 import { Logs } from '../logs/logs.js';
 import { Users } from '../users/users.js';
+import { Bundles } from '../bundles/bundles.js';
+
 
 export const Applications = new Mongo.Collection('applications');
 
@@ -51,7 +53,7 @@ Applications.attachSchema(new SimpleSchema({
     autoform: {
       afFieldInput: {
         type: "cfs-file",
-        collection: "bundles"
+        collection: Bundles
       }
     }
   }

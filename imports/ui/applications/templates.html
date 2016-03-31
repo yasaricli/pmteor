@@ -268,7 +268,7 @@
   <div class="panel panel-default">
     <p class="lead">{{ _ "create-application" }}</p>
     <div class="panel-body">
-      {{# autoForm collection="Applications" id="InsertApplicationForm" type="insert" }}
+      {{# autoForm collection=applications id="InsertApplicationForm" type="insert" }}
         {{> afQuickField name='name' class='mb-lg form-control input-lg' placeholder='NAME' label=false autofocus='' }}
         {{> afQuickField name='env.ROOT_URL' class='mb-lg form-control input-lg' placeholder='ROOT URL' label=false }}
         {{> afQuickField name='env.MAIL_URL' class='mb-lg form-control input-lg' placeholder='MAIL URL' label=false }}
@@ -283,7 +283,7 @@
   <div class="panel panel-default {{# unless Template.subscriptionsReady }}whirl pm-loading{{/unless}}">
     <p class="lead">{{ _ "update-application" }}</p>
     <div class="panel-body">
-      {{# autoForm collection="Applications" id="UpdateApplicationForm" type="update" doc=application }}
+      {{# autoForm collection=applications id="UpdateApplicationForm" type="update" doc=application }}
         {{> afQuickField name='name' class='mb-lg form-control input-lg' placeholder='NAME' label=false autofocus='' }}
         {{> afQuickField name='env.ROOT_URL' class='mb-lg form-control input-lg' placeholder='ROOT URL' label=false }}
         {{> afQuickField name='env.MONGO_URL' class='mb-lg form-control input-lg' placeholder='MONGO URL' label=false }}

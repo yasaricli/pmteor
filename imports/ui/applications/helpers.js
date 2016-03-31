@@ -16,4 +16,11 @@ Template.updateApplicationModal.helpers({
   }
 });
 
+Template.insertApplicationModal.helpers({
+  applications() {
+    return Applications;
+  }
+});
+
+Template.insertApplicationModal.inheritsHelpersFrom('insertApplicationModal');
 Template.membersModal.inheritsHelpersFrom('updateApplicationModal');
