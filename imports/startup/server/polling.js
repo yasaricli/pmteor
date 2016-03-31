@@ -1,5 +1,7 @@
-import { Applications } from '../imports/collections/applications/applications.js';
-import { Logs } from '../imports/collections/logs/logs.js';
+import { Meteor } from 'meteor/meteor';
+import { Applications } from '../../collections/applications/applications.js';
+import { Logs } from '../../collections/logs/logs.js';
+import { STATUS_MAPPER } from '../../collections/applications/utils.js';
 
 Meteor.startup(() => {
 
@@ -14,7 +16,6 @@ Meteor.startup(() => {
             onlines.forEach(Meteor.bindEnvironment((proc) => {
               const { name, monit } = proc;
 
-              // UPDATE MONITORING
               Applications.update({ bundleId: name }, {
                 $set: {
                   monit
