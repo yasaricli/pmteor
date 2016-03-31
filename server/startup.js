@@ -1,3 +1,6 @@
+import { Applications } from '../imports/collections/applications/applications.js';
+import { Logs } from '../imports/collections/logs/logs.js';
+
 Meteor.startup(() => {
 
   // INTERVAL LIST APPLICATIONS MONITORING

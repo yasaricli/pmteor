@@ -1,3 +1,9 @@
+import { Meteor } from 'meteor/meteor';
+
+// COLLECTIONS
+import { Logs } from '../../collections/logs/logs.js';
+import { Users } from '../../collections/users/users.js';
+
 Meteor.publishComposite('applications', function() {
   return {
     find() {
@@ -24,7 +30,11 @@ Meteor.publishComposite('applications', function() {
             _id: {
               $in: application.memberIds
             }
-          }, { ...USERS_FIELDS });
+          }, {
+            fields: {
+              services: 0
+            }
+          });
         }
       }
     ]
@@ -57,7 +67,11 @@ Meteor.publishComposite('application', function(_id) {
             _id: {
               $in: application.memberIds
             }
-          }, { ...USERS_FIELDS });
+          }, {
+            fields: {
+              services: 0
+            }
+          });
         }
       }
     ]

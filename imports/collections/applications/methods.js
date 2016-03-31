@@ -1,10 +1,8 @@
-/*
- * Meteor methods validate secure.
- *
- * Meteor.call('application', { applicationId: String, helper: String })
- *
- * Helper is contains ['start', 'end', 'destroy']
- */
+import { _ } from 'meteor/underscore';
+import { ValidatedMethod } from 'meteor/mdg:validated-method';
+
+import { Applications } from './applications.js';
+
 new ValidatedMethod({
   name: 'application',
   validate({ applicationId, helper }) {

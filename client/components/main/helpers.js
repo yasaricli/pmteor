@@ -1,3 +1,5 @@
+import { Logs } from '../../../imports/collections/logs/logs.js';
+
 Template.index.helpers({
   apps(status) {
     return Applications.find();
