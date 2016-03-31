@@ -1,37 +1,43 @@
 import { _ } from 'meteor/underscore';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
-
 import { Applications } from './applications.js';
 
-new ValidatedMethod({
-  name: 'application',
-  validate({ applicationId, helper }) {
-
-    // check to validate arguments
-    check(helper, String);
-    check(applicationId, String);
+const hasApplicationMixin = (options) => {
+  options.validate = function({ _id }) {
+    check(_id, String);
 
     // GET APPLICATION
-    const application = Applications.findOne({
-      _id: applicationId,
-      memberIds: this.userId
-    });
+    const application = Applications.findOne({ _id, memberIds: this.userId });
 
     // if application undefined then throw error 404.
     if (_.isUndefined(application)) {
-      throw new Meteor.Error(404, `${applicationId} Application isn't found`);
+      throw new Meteor.Error(404, `${_id} Application isn't found`);
     }
+  };
+  
+  return options;
+}
 
-    // NOT CONTAINS METHOD THEN
-    if (!_.contains(['start', 'stop'], helper)) {
-      throw new Meteor.Error(404, `Application no helper ${helper}`);
-    }
-  },
+export const startApplication = new ValidatedMethod({
+  name: 'application.start',
+  mixins: [ hasApplicationMixin ],
 
-  run({ applicationId, helper }) {
-    const application = Applications.findOne(applicationId);
+  run({ _id }) {
+    const application = Applications.findOne(_id);
 
-    // RUN HELPER
-    return application[helper]();
+    // START
+    return application.start();
+  }
+});
+
+export const stopApplication = new ValidatedMethod({
+  name: 'application.stop',
+  mixins: [ hasApplicationMixin ],
+
+  run({ _id }) {
+    const application = Applications.findOne(_id);
+
+    // START
+    return application.stop();
   }
 });

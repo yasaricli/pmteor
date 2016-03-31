@@ -6,22 +6,22 @@ import { Modal } from 'meteor/pmteor:modal';
 import { TAPi18n } from 'meteor/tap:i18n';
 import { Applications } from '../../collections/applications/applications.js';
 
+
 Template.applications.events({
   'click .insert': Modal.open('insertApplication'),
   'click .name': Modal.open('updateApplication'),
-  'click .start'() {
-    Meteor.call('application', {
-      applicationId: this._id,
-      helper: 'start'
-    });
+
+  'click .start'(event, instance) {
+    const { _id } = this;
+    Meteor.call('application.start', { _id });
   },
-  'click .stop'() {
-    Meteor.call('application', {
-      applicationId: this._id,
-      helper: 'stop'
-    });
+
+  'click .stop'(event, instance) {
+    const { _id } = this;
+    Meteor.call('application.stop', { _id });
   },
-  'click .delete'() {
+
+  'click .delete'(event, instance) {
     swal({
       title: TAPi18n.__('are-you-sure-title'),
       text: TAPi18n.__('are-you-sure-text'),
@@ -43,7 +43,7 @@ Template.applications.events({
       });
     });
   },
-  'click .absoluteUrl'(event) {
+  'click .absoluteUrl'(event, instance) {
     event.preventDefault();
 
     // in container then  go to click stop.
