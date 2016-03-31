@@ -17,10 +17,10 @@ Template.updateApplicationModal.helpers({
 });
 
 Template.insertApplicationModal.helpers({
-  applications() {
+  collection() {
     return Applications;
   }
 });
 
-Template.insertApplicationModal.inheritsHelpersFrom('insertApplicationModal');
+Template.updateApplicationModal.inheritsHelpersFrom('insertApplicationModal');
 Template.membersModal.inheritsHelpersFrom('updateApplicationModal');
