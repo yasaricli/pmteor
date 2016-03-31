@@ -1,0 +1,301 @@
+<template name="applications">
+  <div class="applications">
+    <div class="panel-heading applications-heading">
+      <div class="pull-right btn-group">
+        {{# if isInRole 'admin' }}
+          <a href="#" class="btn btn-purple insert">
+            <em class="fa fa-hand-o-right"></em>
+            <span>{{ _ "create-application" }}</span>
+          </a>
+        {{/if}}
+      </div>
+      <div class="panel-title">{{ _ "applications" }}</div>
+    </div>
+    <div class="list">
+      {{# each apps }}
+        <div class="list-group">
+          <a href="{{ pathFor route='Application' }}" class="list-group-item">
+            <table class="wd-wide">
+              <tbody>
+                <tr>
+                  <td class="wd-xs">
+                    <div class="ph status {{ status }} {{# if isExit }}whirl pm-loading{{/if}} {{# if isOnline }}onlineInOut{{/if}}"></div>
+                  </td>
+                  <td>
+                    <div class="ph url-container">
+                      <a href="#" class="name">{{ name }}</a>
+                        <small class="text-muted">
+                          {{# if isOnline }}
+                            <a href="{{ absoluteUrl }}" class="absoluteUrl">{{ env.ROOT_URL }}</a>
+                          {{ else }}
+                            {{ env.ROOT_URL }}
+                          {{/if}}
+                        </small>
+                    </div>
+                  </td>
+                  <td class="wd-sm hidden-xs hidden-sm">
+                    <div class="ph">
+                      <p class="m0">{{ _ "created-at" }}</p>
+                      <small class="text-muted">{{ livestamp createdAt }}</small>
+                    </div>
+                  </td>
+                  <td class="wd-xs hidden-xs hidden-sm">
+                    <div class="ph">
+                      <p class="m0">{{ _ "status" }}</p>
+                      <small class="text-muted">{{ status }}</small>
+                    </div>
+                  </td>
+                  <td class="wd-xs hidden-xs hidden-sm">
+                    <div class="ph">
+                      <p class="m0">{{ _ "port" }}</p>
+                      <small class="text-muted">
+                        {{# if env.PORT }}
+                          {{ env.PORT }}
+                        {{ else }}
+                          <i class="fa fa-circle"></i>
+                        {{/if}}
+                      </small>
+                    </div>
+                  </td>
+                  <td class="wd-xs hidden-xs hidden-sm">
+                    <div class="ph">
+                      <p class="m0">{{ _ "memory" }}</p>
+                      <small class="text-muted">
+                        {{# if monit.memory }}
+                          {{ filesize monit.memory }}
+                        {{ else }}
+                          <i class="fa fa-circle"></i>
+                        {{/if}}
+                      </small>
+                    </div>
+                  </td>
+                  <td class="wd-xs hidden-xs hidden-sm">
+                    <div class="ph">
+                      {{> progressCircle progress=monit.cpu radius=40 class=status }}
+                    </div>
+                  </td>
+                  <td class="wd-xs hidden-xs hidden-sm">
+                    <div class="ph">
+                      <div class="btn-group">
+                        <button data-toggle="dropdown" class="btn btn-default" aria-expanded="false">
+                          {{ _ "more" }} <i class="fa fa-chevron-down"></i>
+                        </button>
+                        <ul role="menu" class="dropdown-menu animated flipInX">
+                          <li>
+                            <a href="#" class="start">
+                              {{# if isOnline }}{{ _ "restart" }}{{ else }}{{ _ "start" }}{{/if}}
+                            </a>
+                          </li>
+                          {{# if isOnline }}
+                            <li><a href="#" class="stop">{{ _ "stop" }}</a></li>
+                          {{/if}}
+                          {{# unless isOnline }}
+                            {{# if isInRole 'admin' }}
+                              <li class="divider"></li>
+                              <li><a href="#" class="delete">{{ _ "delete" }}</a></li>
+                            {{/if}}
+                          {{/unless}}
+                        </ul>
+                     </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </a>
+        </div>
+      {{ else }}
+        <div class="text-center empty">
+          <span>{{ _ "no-applications" }}</span>
+          <span class="yet">{{ _ "yet-applications-yet" }}</span>
+        </div>
+      {{/each}}
+    </div>
+  </div>
+</template>
+
+<template name="application">
+  <div class="application">
+    {{# if this }}
+      <div class="btn-group manage-dropdown">
+         <button type="button" data-toggle="dropdown" class="dropdown-toggle btn btn-default btn-sm" aria-expanded="true">
+           {{ _ "manage" }}
+         </button>
+         <ul role="menu" class="dropdown-menu fadeIn animated">
+            <li>
+              <a href="#" class="members">{{ _ "members" }}</a>
+            </li>
+         </ul>
+      </div>
+      <div class="text-center name">
+        {{ name }}
+        {{# if isOnline }}
+          <a href="{{ absoluteUrl }}" class="absoluteUrl" target="_blank">{{ env.ROOT_URL }}</a>
+        {{ else }}
+          <span>{{ env.ROOT_URL }}</span>
+        {{/if}}
+      </div>
+      <div class="ph status {{ status }} {{# if isOnline }}onlineInOut{{/if}}"></div>
+      {{# if isOnline }}
+        <div class="row morris-container">
+          <div class="col-md-6">
+            <p class="lead text-center">{{ _ 'memory' }}</p>
+             <div class="panel panel-default">
+                <div class="panel-body">
+                   <div id="morris-memory" class="whirl pm-loading no-overlay"></div>
+                </div>
+             </div>
+          </div>
+          <div class="col-md-6">
+            <p class="lead text-center">{{ _ 'cpu' }}</p>
+             <div class="panel panel-default">
+                <div class="panel-body">
+                   <div id="morris-cpu" class="whirl pm-loading no-overlay"></div>
+                </div>
+             </div>
+          </div>
+        </div>
+      {{/if}}
+    {{ else }}
+      <div class="abs-center not-found">
+        <div class="text-center mb-xl">
+          <p class="lead">{{ _ "not-found" "Application" }}</p>
+          <p class="desc">{{ _ "not-found-desc" }}</p>
+        </div>
+        {{# if isInRole 'admin' }}
+          <ul class="list-inline text-center text-sm mb-xl">
+            <li>
+              <a href="{{ pathFor route='InsertApplication' }}" class="btn btn-purple btn-lg">
+                <em class="fa fa-hand-o-right"></em>
+                <span>{{ _ "create-application" }}</span>
+              </a>
+            </li>
+          </ul>
+        {{/if}}
+      </div>
+    {{/if}}
+  </div>
+</template>
+
+<template name="membersModal">
+  <div class="panel panel-default">
+    <p class="lead">{{ _ "members" }}</p>
+    <div class="panel-body">
+      <table class="table table-hover">
+        <thead>
+           <tr>
+              <th>{{ _ "username" }}</th>
+              <th>{{ _ "email" }}</th>
+              <th>{{ _ "joining-date" }}</th>
+              <th>{{ _ "role" }}</th>
+              {{# if isInRole 'admin' }}
+                <th></th>
+              {{/if}}
+           </tr>
+        </thead>
+        <tbody>
+        {{# each application.members }}
+          <tr>
+            <td>{{ username }}</td>
+            <td>{{ email }}</td>
+            <td>{{ livestamp createdAt }}</td>
+            <td class="{{# if _isEqual ../createdBy _id }}admin{{else}}member{{/if}}">
+              {{# if _isEqual ../createdBy _id }}
+                {{ _ "admin" }}
+              {{else}}
+                {{ _ "member" }}
+              {{/if}}
+            </td>
+            {{# if isInRole 'admin' }}
+              <td class="text-right">
+                {{# if _isEqual ../createdBy _id }}
+                  <button type="button" class="mb-sm btn btn-danger" disabled>{{ _ "delete" }}</button>
+                {{ else }}
+                  <button type="button" class="mb-sm btn btn-danger delete">{{ _ "delete" }}</button>
+                {{/if}}
+              </td>
+            {{/if}}
+          </tr>
+        {{/each}}
+        </tbody>
+     </table>
+     <button type="button" class="mb-sm btn btn-purple add-collaborator">{{ _ "add-collaborator" }}</button>
+    </div>
+  </div>
+</template>
+
+<template name="addCollaboratorModal">
+  <div class="panel panel-default">
+    <p class="lead">{{ _ "add-collaborator" }}</p>
+    <div class="panel-body">
+      {{> esInput index="users" class="mb-lg form-control input-lg" placeholder="SEARCH USER" }}
+      {{# ifEsIsSearching index="users" }}
+        <div class="text-center whirl pm-loading no-overlay"></div>
+      {{ else }}
+        {{# ifEsInputIsEmpty index="users" }}
+        {{ else }}
+          {{# ifEsHasNoResults index="users" }}
+            <div class="text-center yet">{{ _ "no-users-found" }}</div>
+          {{ else }}
+            <table class="table table-hover">
+              <thead>
+                 <tr>
+                    <th>{{ _ "name" }}</th>
+                    <th>{{ _ "email" }}</th>
+                    <th></th>
+                 </tr>
+              </thead>
+              <tbody>
+                {{# esEach index="users" }}
+                  <tr>
+                    <td>{{ username }}</td>
+                    <td>{{ email }}</td>
+                    <td class="text-right">
+                      <button type="button" class="mb-sm btn btn-purple add">{{ _ "add" }}</button>
+                    </td>
+                  </tr>
+                {{/esEach}}
+              </tbody>
+            </table>
+          {{/ifEsHasNoResults}}
+        {{/ifEsInputIsEmpty}}
+      {{/ifEsIsSearching}}
+    </div>
+  </div>
+</template>
+
+<template name="insertApplicationModal">
+  <div class="panel panel-default">
+    <p class="lead">{{ _ "create-application" }}</p>
+    <div class="panel-body">
+      {{# autoForm collection=collection id="InsertApplicationForm" type="insert" }}
+        {{> afQuickField name='name' class='mb-lg form-control input-lg' placeholder='NAME' label=false autofocus='' }}
+        {{> afQuickField name='env.ROOT_URL' class='mb-lg form-control input-lg' placeholder='ROOT URL' label=false }}
+        {{> afQuickField name='env.MAIL_URL' class='mb-lg form-control input-lg' placeholder='MAIL URL' label=false }}
+        {{> afQuickField name="bundleId" type="cfs-file" collection="bundles" label=false }}
+        <button type="submit" class="mb-sm btn btn-purple btn-lg">{{ _ "create" }}</button>
+      {{/ autoForm }}
+    </div>
+  </div>
+</template>
+
+<template name="updateApplicationModal">
+  <div class="panel panel-default {{# unless Template.subscriptionsReady }}whirl pm-loading{{/unless}}">
+    <p class="lead">{{ _ "update-application" }}</p>
+    <div class="panel-body">
+      {{# autoForm collection=collection id="UpdateApplicationForm" type="update" doc=application }}
+        {{> afQuickField name='name' class='mb-lg form-control input-lg' placeholder='NAME' label=false autofocus='' }}
+        {{> afQuickField name='env.ROOT_URL' class='mb-lg form-control input-lg' placeholder='ROOT URL' label=false }}
+        {{> afQuickField name='env.MONGO_URL' class='mb-lg form-control input-lg' placeholder='MONGO URL' label=false }}
+        {{> afQuickField name='env.MAIL_URL' class='mb-lg form-control input-lg' placeholder='MAIL URL' label=false }}
+        {{> afQuickField name='env.PORT' class='mb-lg form-control input-lg' placeholder='PORT' label=false }}
+        {{> afQuickField name="bundleId" label=false }}
+        {{# if application.isOnline }}
+          <a class="mb-sm btn btn-warning btn-lg stop">{{ _ "stop-and-update" }}</a>
+        {{ else }}
+          <button type="submit" class="mb-sm btn btn-purple btn-lg">{{ _ "update" }}</button>
+        {{/if}}
+      {{/ autoForm }}
+    </div>
+  </div>
+</template>
