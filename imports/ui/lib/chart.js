@@ -3,7 +3,7 @@ class Chart {
     this._list = [];
     this._morris = new Morris[type](_.extend({
       data: this._list,
-      xkey: 'hours',
+      xkey: 'time',
       resize: true,
       parseTime: false,
       hideHover: 'auto'
@@ -15,10 +15,14 @@ class Chart {
     // REMOVE LOADER CLASSES
     this._morris.el.removeClass('whirl ringed no-overlay');
 
+    if (_.isEqual(this._list.length, 10)) {
+      this._list.shift();
+    }
+
     // AND PUSH
-    this._list.push(_.extend({
+    this._list.push(_.defaults({
       createdAt: new Date(),
-      hours: moment().format('HH:mm')
+      time: moment().format('HH:mm')
     }, doc));
   }
 
@@ -36,6 +40,10 @@ export class MorrisLineArea {
       ykeys: ['value'],
       labels: ["Memory"],
       lineColors: ["#31C0BE"],
+      lineWidth: 5,
+      pointSize: 6,
+      pointFillColors: ['#37a3a2'],
+      pointStrokeColors: ['#37a3a2'],
       hoverCallback(index, options, content, row) {
         const from = moment(row.createdAt).fromNow();
         return `${from}<br/><b>${row.value} ${row.suffix}</b>`;
@@ -47,6 +55,10 @@ export class MorrisLineArea {
       ykeys: ['cpu'],
       labels: ["Cpu"],
       lineColors: ["#7266ba"],
+      lineWidth: 5,
+      pointSize: 6,
+      pointFillColors: ['#685abb'],
+      pointStrokeColors: ['#685abb'],
       hoverCallback(index, options, content, row) {
         const from = moment(row.createdAt).fromNow();
         return `${from}<br/><b>${row.cpu} %</b>`;
