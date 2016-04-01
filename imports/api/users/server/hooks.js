@@ -1,5 +1,5 @@
-import { Users } from './users.js';
 import { Roles } from 'meteor/alanning:roles';
+import { Users } from '../users.js';
 
 Users.before.insert((userId, doc) => {
 

@@ -8,7 +8,8 @@ import { Logs } from '../logs/logs.js';
 import { Users } from '../users/users.js';
 import { Bundles } from '../bundles/bundles.js';
 
-import { STATUS_ALLOWED_VALUES, STATUS_MAPPER } from './utils.js';
+import { STATUS_ALLOWED_VALUES, NODE_ENV_ALLOWED_VALUES, DEFAULT_NODE_ENV,
+  STATUS_MAPPER } from './utils.js';
 
 export const Applications = new Mongo.Collection('applications');
 
@@ -48,6 +49,13 @@ Applications.attachSchema(new SimpleSchema({
   'env.PORT': { type: Number, optional: true },
   'env.DISABLE_WEBSOCKETS': { type: Number, optional: true },
   'env.MONGO_OPLOG_URL': { type: String, optional: true },
+
+  // RUNNING APPLICATION ENV VARIABLE
+  'env.NODE_ENV': {
+    type: String,
+    allowedValues: NODE_ENV_ALLOWED_VALUES,
+    defaultValue: DEFAULT_NODE_ENV
+  },
 
   bundleId: {
     type: String,

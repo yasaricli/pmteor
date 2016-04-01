@@ -1,20 +1,24 @@
 // APPLICATIONS
-import '../../api/applications/publications.js';
-import '../../api/applications/migrations.js';
-import '../../api/applications/security.js';
-import '../../api/applications/methods.js';
-import '../../api/applications/hooks.js';
+import '../../api/applications/server/publications.js';
+import '../../api/applications/server/migrations.js';
+import '../../api/applications/server/security.js';
+import '../../api/applications/server/methods.js';
+import '../../api/applications/server/helpers.js';
+import '../../api/applications/server/hooks.js';
+
 
 // BUNDLES
-import '../../api/bundles/security.js';
-import '../../api/bundles/hooks.js';
+import '../../api/bundles/server/security.js';
+import '../../api/bundles/server/hooks.js';
 
 // LOGS
-import '../../api/logs/security.js';
-import '../../api/logs/hooks.js';
+import '../../api/logs/server/security.js';
+import '../../api/logs/server/helpers.js';
+import '../../api/logs/server/hooks.js';
 
 // USERS
-import '../../api/users/hooks.js';
+import '../../api/users/server/helpers.js';
+import '../../api/users/server/hooks.js';
 
 // PM2 POLLING (BUS AND INTERVAL)
 import './polling.js';

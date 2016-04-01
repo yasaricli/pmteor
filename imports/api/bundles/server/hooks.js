@@ -1,6 +1,6 @@
-import { Applications } from '../applications/applications.js';
-import { Bundles } from './bundles';
-import { BUNDLE_DIR, SYNC_EXEC_OPTIONS, ASYNC_EXEC_OPTIONS } from './utils.js';
+import { Applications } from '../../applications/applications.js';
+import { Bundles } from '../bundles.js';
+import { BUNDLE_DIR, SYNC_EXEC_OPTIONS, ASYNC_EXEC_OPTIONS } from '../utils.js';
 
 // NPM PACKAGES
 import { cd, rm, mkdir, exec, test } from 'shelljs';

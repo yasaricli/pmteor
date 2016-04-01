@@ -13,10 +13,3 @@ Logs.attachSchema(new SimpleSchema({
   type: { type: String },
   data: { type: String, optional: true }
 }));
-
-// HELPERS
-Logs.helpers({
-  application() {
-    return Applications.findOne(this.applicationId);
-  }
-});

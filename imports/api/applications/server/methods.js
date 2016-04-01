@@ -1,6 +1,6 @@
 import { _ } from 'meteor/underscore';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
-import { Applications } from './applications.js';
+import { Applications } from '../applications.js';
 
 const hasApplicationMixin = (options) => {
   options.validate = function({ _id }) {
@@ -14,7 +14,7 @@ const hasApplicationMixin = (options) => {
       throw new Meteor.Error(404, `${_id} Application isn't found`);
     }
   };
-  
+
   return options;
 }
 

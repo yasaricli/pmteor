@@ -1,4 +1,4 @@
-import { Applications } from './applications.js';
+import { Applications } from '../applications.js';
 
 // if application member list search found then return.
 Security.defineMethod("ifMembers", {
