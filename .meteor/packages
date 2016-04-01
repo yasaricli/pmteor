@@ -47,7 +47,6 @@ useraccounts:iron-routing
 lookback:body-class
 alanning:roles
 tap:i18n
-pmteor:pm2
 useraccounts:bootstrap
 pmteor:dropdown
 utilities:avatar

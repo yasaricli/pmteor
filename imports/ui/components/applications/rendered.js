@@ -13,7 +13,7 @@ Template.application.onRendered(function() {
   }
 
   if (this.data.isOnline()) {
-    const morris = new MorrisApps();
+    const morris = new MorrisLineArea();
 
     // OBSERVE
     this.cursor = Applications.find(this.data._id).observe({

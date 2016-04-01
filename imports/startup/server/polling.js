@@ -3,6 +3,9 @@ import { Applications } from '../../api/applications/applications.js';
 import { Logs } from '../../api/logs/logs.js';
 import { STATUS_MAPPER } from '../../api/applications/utils.js';
 
+// NPM PACKAGES
+import pm2 from 'pm2';
+
 Meteor.startup(() => {
 
   // INTERVAL LIST APPLICATIONS MONITORING

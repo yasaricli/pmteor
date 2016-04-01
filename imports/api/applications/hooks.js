@@ -7,6 +7,7 @@ import { Applications } from './applications.js';
 import { BUNDLE_DIR } from '../bundles/utils.js';
 
 // NPM PACKAGES
+import pm2 from 'pm2';
 import { cd, rm } from 'shelljs';
 
 Applications.helpers({
