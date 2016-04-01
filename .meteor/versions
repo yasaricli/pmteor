@@ -127,8 +127,6 @@ ordered-dict@1.0.5
 pmteor:dev@0.0.3
 pmteor:dropdown@0.0.1
 pmteor:modal@0.0.1
-pmteor:os@0.0.1
-pmteor:sparkline@0.0.3
 pmteor:underscore-helpers@0.0.1
 pmteor:whirl@0.0.1
 promise@0.6.5

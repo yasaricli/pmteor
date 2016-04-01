@@ -49,9 +49,7 @@ tap:i18n
 useraccounts:bootstrap
 pmteor:dropdown
 utilities:avatar
-pmteor:os
 manuel:reactivearray
-pmteor:sparkline
 bshamblen:morrisjs
 random
 pmteor:dev
