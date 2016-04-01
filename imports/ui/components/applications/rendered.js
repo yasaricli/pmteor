@@ -2,8 +2,7 @@ import './templates.html';
 
 import { Template } from 'meteor/templating';
 import { Applications } from '../../../api/applications/applications.js';
-
-import { MorrisLineArea } from '../../lib/chart.js';
+import { Charts } from '../../lib/charts.js';
 
 Template.application.onRendered(function() {
 
@@ -13,17 +12,17 @@ Template.application.onRendered(function() {
   }
 
   if (this.data.isOnline()) {
-    const morris = new MorrisLineArea();
+    const charts = new Charts();
 
     // OBSERVE
     this.cursor = Applications.find(this.data._id).observe({
       changed(doc) {
 
         // PUSH NEW MEMORY AND CPU
-        morris.add(doc.monit);
+        charts.add(doc.monit);
 
         // RELOAD
-        morris.reload();
+        charts.reload();
       }
     });
   }
