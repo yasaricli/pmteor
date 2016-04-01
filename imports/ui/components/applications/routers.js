@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Router } from 'meteor/iron:router';
 
-import { Applications } from '../../collections/applications/applications.js';
+import { Applications } from '../../../collections/applications/applications.js';
 
 Router.route('/applications/:_id', {
   name: 'Application',

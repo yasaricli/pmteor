@@ -1,9 +1,9 @@
 import './templates.html';
 
 import { Template } from 'meteor/templating';
-import { Applications } from '../../collections/applications/applications.js';
-import { Logs } from '../../collections/logs/logs.js';
-import { STATUS_MAPPER } from '../../collections/applications/utils.js';
+import { Applications } from '../../../collections/applications/applications.js';
+import { Logs } from '../../../collections/logs/logs.js';
+import { STATUS_MAPPER } from '../../../collections/applications/utils.js';
 
 
 Template.index.helpers({

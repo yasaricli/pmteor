@@ -1,20 +1,20 @@
 // MAIN
-import '../../ui/main/routers.js';
-import '../../ui/main/events.js';
-import '../../ui/main/helpers.js';
-import '../../ui/main/rendered.js';
+import '../../ui/components/main/routers.js';
+import '../../ui/components/main/events.js';
+import '../../ui/components/main/helpers.js';
+import '../../ui/components/main/rendered.js';
 
 // AUTH
-import '../../ui/auth/routers.js';
-import '../../ui/auth/events.js';
-import '../../ui/auth/helpers.js';
-import '../../ui/auth/rendered.js';
+import '../../ui/components/auth/routers.js';
+import '../../ui/components/auth/events.js';
+import '../../ui/components/auth/helpers.js';
+import '../../ui/components/auth/rendered.js';
 
 // APPLICATIONS
-import '../../ui/applications/routers.js';
-import '../../ui/applications/events.js';
-import '../../ui/applications/helpers.js';
-import '../../ui/applications/rendered.js';
+import '../../ui/components/applications/routers.js';
+import '../../ui/components/applications/events.js';
+import '../../ui/components/applications/helpers.js';
+import '../../ui/components/applications/rendered.js';
 
 // CONFIG
 import './configuration.js';
