@@ -1,6 +1,13 @@
 import { _ } from 'meteor/underscore';
+
+import { Logs } from '../logs/logs.js';
+import { Users } from '../users/users.js';
 import { Applications } from './applications.js';
+
 import { BUNDLE_DIR } from '../bundles/utils.js';
+
+// NPM PACKAGES
+import { cd, rm } from 'shelljs';
 
 Applications.helpers({
   dir() {
@@ -103,10 +110,10 @@ Applications.after.remove((userId, doc) => {
     pm2.delete(doc.bundleId, (delete_err) => {
 
       // CD BUNDLES DIR
-      shell.cd(BUNDLE_DIR);
+      cd(BUNDLE_DIR);
 
       // REMOVE APPLICATON DIR AND BUNDLE FILE
-      shell.rm('-rf', [
+      rm('-rf', [
 
         // DIR
         doc.bundleId,

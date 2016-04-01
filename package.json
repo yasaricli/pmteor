@@ -10,5 +10,8 @@
   "bugs": {
     "url": "https://github.com/pmteor/pmteor/issues"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "shelljs": "^0.6.0"
+  }
 }
