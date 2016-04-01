@@ -1,8 +1,9 @@
 import './templates.html';
 
 import { Template } from 'meteor/templating';
-import { MorrisApps } from '../lib/morris.js';
 import { Applications } from '../../collections/applications/applications.js';
+
+import { MorrisLineArea } from './lib/chart.js';
 
 Template.application.onRendered(function() {
 

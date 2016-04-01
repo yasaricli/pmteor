@@ -1,0 +1,46 @@
+<head>
+  <title>Production process manager for Meteor applications</title>
+  <link rel="icon" href="favicon.png" type="image/png" />
+</head>
+
+<template name="layout">
+  <div class="wrapper">
+    <header class="topnavbar-wrapper">
+      <nav role="navigation" class="navbar topnavbar">
+        <div class="navbar-collapse collapse">
+          <a href="{{ pathFor route='Index' }}" class="logo">
+            <img src="/images/logo.png">
+          </a>
+          {{ > currentUserNav }}
+        </div>
+      </nav>
+    </header>
+    <section>
+      <div class="content-wrapper">
+        {{# if loggingIn }}
+          {{ > loading }}
+        {{ else }}
+          {{ > yield }}
+        {{/if}}
+      </div>
+    </section>
+  </div>
+</template>
+
+<template name="notFound">
+  <div class="abs-center not-found">
+    <div class="text-center mb-xl">
+      <p class="lead">{{ _ "not-found" "Page" }}</p>
+      <p class="desc">{{ _ "not-found-desc" }}</p>
+    </div>
+    <ul class="list-inline text-center text-sm mb-xl">
+      <li>
+        <a href="{{ pathFor route='Index' }}" class="text-muted">{{ _ "go-home-page" }}</a>
+      </li>
+    </ul>
+  </div>
+</template>
+
+<template name="loading">
+  <div class="loading whirl pm-loading no-overlay"></div>
+</template>

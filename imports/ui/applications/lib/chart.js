@@ -1,4 +1,4 @@
-class MorrisChart {
+class Chart {
   constructor(type, options) {
     this._list = [];
     this._morris = new Morris[type](_.extend({
@@ -27,11 +27,11 @@ class MorrisChart {
   }
 }
 
-export class MorrisApps {
+export class MorrisLineArea {
   constructor() {
     this._instance = Template.instance();
 
-    this.memory = new MorrisChart('Line', {
+    this.memory = new Chart('Line', {
       element: this._instance.$('#morris-memory'),
       ykeys: ['value'],
       labels: ["Memory"],
@@ -42,7 +42,7 @@ export class MorrisApps {
       }
     });
 
-    this.cpu = new MorrisChart('Area', {
+    this.cpu = new Chart('Area', {
       element: this._instance.$('#morris-cpu'),
       ykeys: ['cpu'],
       labels: ["Cpu"],
