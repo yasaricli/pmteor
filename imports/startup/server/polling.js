@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
-import { Applications } from '../../collections/applications/applications.js';
-import { Logs } from '../../collections/logs/logs.js';
-import { STATUS_MAPPER } from '../../collections/applications/utils.js';
+import { Applications } from '../../api/applications/applications.js';
+import { Logs } from '../../api/logs/logs.js';
+import { STATUS_MAPPER } from '../../api/applications/utils.js';
 
 Meteor.startup(() => {
 

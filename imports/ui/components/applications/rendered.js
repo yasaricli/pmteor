@@ -1,7 +1,7 @@
 import './templates.html';
 
 import { Template } from 'meteor/templating';
-import { Applications } from '../../../collections/applications/applications.js';
+import { Applications } from '../../../api/applications/applications.js';
 
 import { MorrisLineArea } from '../../lib/chart.js';
 
