@@ -30,14 +30,14 @@ Bundles.on('stored', Meteor.bindEnvironment((file, storeName) => {
 
     // FIX BCRYPT
     if (test('-e', 'npm/npm-bcrypt')) {
-      exec('npm install bcrypt', SYNC_EXEC_OPTIONS);
       rm('-rf', 'npm/npm-bcrypt');
+      exec('npm install bcrypt', SYNC_EXEC_OPTIONS);
     }
 
     // FIX BSON
     if (test('-e', 'npm/cfs_gridfs')) {
-      cd('npm/cfs_gridfs/node_modules/mongodb/node_modules/bson');
-      exec('make', SYNC_EXEC_OPTIONS);
+      rm('-rf', 'npm/cfs_gridfs/node_modules/mongodb/node_modules/bson');
+      exec('npm install bson', SYNC_EXEC_OPTIONS);
     }
 
     const application = Applications.findOne({
