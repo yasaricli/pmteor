@@ -34,20 +34,32 @@
                     </div>
                   </td>
                   <td class="wd-sm hidden-xs hidden-sm">
-                    <div class="ph">
-                      <p class="m0">{{ _ "created-at" }}</p>
+                    <div class="ph text-center">
+                      <p>{{ _ "uptime" }}</p>
+                      <small class="text-muted">
+                        {{# if isOnline }}
+                          {{ livestamp monit.pm_uptime }}
+                        {{ else }}
+                          <i class="fa fa-circle"></i>
+                        {{/if}}
+                      </small>
+                    </div>
+                  </td>
+                  <td class="wd-sm hidden-xs hidden-sm">
+                    <div class="ph text-center">
+                      <p>{{ _ "created-at" }}</p>
                       <small class="text-muted">{{ livestamp createdAt }}</small>
                     </div>
                   </td>
                   <td class="wd-xs hidden-xs hidden-sm">
-                    <div class="ph">
-                      <p class="m0">{{ _ "status" }}</p>
+                    <div class="ph text-center">
+                      <p>{{ _ "status" }}</p>
                       <small class="text-muted">{{ status }}</small>
                     </div>
                   </td>
                   <td class="wd-xs hidden-xs hidden-sm">
-                    <div class="ph">
-                      <p class="m0">{{ _ "port" }}</p>
+                    <div class="ph text-center">
+                      <p>{{ _ "port" }}</p>
                       <small class="text-muted">
                         {{# if env.PORT }}
                           {{ env.PORT }}
@@ -58,11 +70,11 @@
                     </div>
                   </td>
                   <td class="wd-xs hidden-xs hidden-sm">
-                    <div class="ph">
-                      <p class="m0">{{ _ "memory" }}</p>
+                    <div class="ph text-center">
+                      <p>{{ _ "restart" }}</p>
                       <small class="text-muted">
-                        {{# if monit.memory }}
-                          {{ filesize monit.memory }}
+                        {{# if isOnline }}
+                          {{ monit.restart_time }}
                         {{ else }}
                           <i class="fa fa-circle"></i>
                         {{/if}}
@@ -272,7 +284,7 @@
         {{> afQuickField name='name' class='mb-lg form-control input-lg' placeholder='NAME' label=false autofocus='' }}
         {{> afQuickField name='env.ROOT_URL' class='mb-lg form-control input-lg' placeholder='ROOT URL' label=false }}
         {{> afQuickField name='env.MAIL_URL' class='mb-lg form-control input-lg' placeholder='MAIL URL' label=false }}
-        {{> afQuickField name="bundleId" type="cfs-file" collection="bundles" label=false }}
+        {{> afQuickField name="bundleId" label=false }}
         <button type="submit" class="mb-sm btn btn-purple btn-lg">{{ _ "create" }}</button>
       {{/ autoForm }}
     </div>

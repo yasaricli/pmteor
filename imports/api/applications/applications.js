@@ -38,6 +38,8 @@ Applications.attachSchema(new SimpleSchema({
   memberIds: { type: [String], optional: true },
 
   monit: { type: Object, optional: true, autoform: { type: 'hidden' } },
+  'monit.restart_time': { type: Number },
+  'monit.pm_uptime': { type: Number },
   'monit.memory': { type: Number },
   'monit.cpu': { type: Number },
 
@@ -63,7 +65,7 @@ Applications.attachSchema(new SimpleSchema({
     autoform: {
       afFieldInput: {
         type: "cfs-file",
-        collection: Bundles
+        collection: "bundles"
       }
     }
   }

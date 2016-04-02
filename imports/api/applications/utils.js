@@ -1,3 +1,6 @@
+import { _ } from 'meteor/underscore';
+import { Applications } from './applications';
+
 // NODE ENV
 const NODE_ENV_ALLOWED_VALUES = ['PMTEOR'];
 
@@ -17,9 +20,28 @@ const STATUS_MAPPER = {
   'RESTART': STATUS_ALLOWED_VALUES[2]
 }
 
+const hasApplicationMixin = (options) => {
+  options.validate = function({ _id }) {
+    check(_id, String);
+
+    // GET APPLICATION
+    const application = Applications.findOne({ _id, memberIds: this.userId });
+
+    // if application undefined then throw error 404.
+    if (_.isUndefined(application)) {
+      throw new Meteor.Error(404, `${_id} Application isn't found`);
+    }
+  };
+
+  return options;
+}
+
 export {
   NODE_ENV_ALLOWED_VALUES,
   DEFAULT_NODE_ENV,
   STATUS_ALLOWED_VALUES,
-  STATUS_MAPPER
+  STATUS_MAPPER,
+
+  // VALIDATE METHODS MIXINS
+  hasApplicationMixin
 }

@@ -1,24 +1,8 @@
-import { _ } from 'meteor/underscore';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { Applications } from '../applications.js';
+import { hasApplicationMixin } from '../utils.js';
 
-const hasApplicationMixin = (options) => {
-  options.validate = function({ _id }) {
-    check(_id, String);
-
-    // GET APPLICATION
-    const application = Applications.findOne({ _id, memberIds: this.userId });
-
-    // if application undefined then throw error 404.
-    if (_.isUndefined(application)) {
-      throw new Meteor.Error(404, `${_id} Application isn't found`);
-    }
-  };
-
-  return options;
-}
-
-export const startApplication = new ValidatedMethod({
+const startApplication = new ValidatedMethod({
   name: 'application.start',
   mixins: [ hasApplicationMixin ],
 
@@ -30,7 +14,7 @@ export const startApplication = new ValidatedMethod({
   }
 });
 
-export const stopApplication = new ValidatedMethod({
+const stopApplication = new ValidatedMethod({
   name: 'application.stop',
   mixins: [ hasApplicationMixin ],
 
@@ -41,3 +25,8 @@ export const stopApplication = new ValidatedMethod({
     return application.stop();
   }
 });
+
+export {
+  stopApplication,
+  startApplication
+}

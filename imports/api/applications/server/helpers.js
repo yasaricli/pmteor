@@ -29,24 +29,50 @@ Applications.helpers({
     // RUNNING UPDATE
     self.setStatus(1);
 
-    /*
-     * Listening port and connect production process manager. if connected
-     * process manager and started application then change application status
-     * to running.
-     */
-    freeport((freeport_err, port) => {
-      if (_.isNull(freeport_err)) {
-        pm2.connect((connect_err) => {
-          if (_.isNull(connect_err)) {
-            pm2.start(self.options(port), () => {
+   /*
+    * Listening port and connect production process manager. if connected
+    * process manager and started application then change application status
+    * to running.
+    */
+    freeport(Meteor.bindEnvironment((freeport_err, port) => {
 
-              // DISCONNECT
-              pm2.disconnect();
+      // CONNECT
+      pm2.connect(Meteor.bindEnvironment((connect_error) => {
+
+        // START
+        pm2.start(self.options(port), Meteor.bindEnvironment((start_error) => {
+
+          // LIST
+          pm2.list(Meteor.bindEnvironment((start_error, procs) => {
+            const application = _.findWhere(procs, {
+              name: self.bundleId
             });
-          }
-        });
-      }
-    });
+
+            if (application) {
+              const { name, monit } = application;
+              const { pm_uptime, restart_time } = application.pm2_env;
+
+              Applications.update({ bundleId: name }, {
+                $set: {
+                  monit: {
+
+                    // UPTIME AND RESTART TIME
+                    pm_uptime,
+                    restart_time,
+
+                    // MONIT OBJECT INJECT
+                    ...monit
+                  }
+                }
+              });
+            }
+
+            // DISCONNECT
+            pm2.disconnect();
+          }));
+        }));
+      }));
+    }));
   },
 
   stop() {

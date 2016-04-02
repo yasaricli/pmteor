@@ -18,10 +18,19 @@ Meteor.startup(() => {
           if (onlines.length) {
             onlines.forEach(Meteor.bindEnvironment((proc) => {
               const { name, monit } = proc;
+              const { pm_uptime, restart_time } = proc.pm2_env;
 
               Applications.update({ bundleId: name }, {
                 $set: {
-                  monit
+                  monit: {
+
+                    // UPTIME AND RESTART TIME
+                    pm_uptime,
+                    restart_time,
+
+                    // MONIT OBJECT INJECT
+                    ...monit
+                  }
                 }
               });
             }));

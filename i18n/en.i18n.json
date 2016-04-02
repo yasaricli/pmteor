@@ -39,5 +39,6 @@
   "add": "Add",
   "no-users-found": "No users found",
   "searching": "Searching",
-  "joining-date": "Joining Date"
+  "joining-date": "Joining Date",
+  "uptime": "Uptime"
 }
