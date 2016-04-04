@@ -1,5 +1,5 @@
 import { _ } from 'meteor/underscore';
-import { Users } from '../users.js';
+import Users from '../users.js';
 
 Users.helpers({
   email() {

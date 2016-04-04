@@ -1,7 +1,7 @@
 import { _ } from 'meteor/underscore';
 
+import Users from '../../users/users.js';
 import { Logs } from '../../logs/logs.js';
-import { Users } from '../../users/users.js';
 import { Applications } from '../applications.js';
 
 import { BUNDLE_DIR } from '../../bundles/utils.js';

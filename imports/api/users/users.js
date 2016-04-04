@@ -1,6 +1,8 @@
-export const Users = Meteor.users;
+import { Meteor } from 'meteor/meteor';
 
 // USER SEARCH
-Users.initEasySearch('username', {
+Meteor.users.initEasySearch('username', {
   use: 'mongo-db'
 });
+
+export default Meteor.users;

@@ -1,9 +1,9 @@
 import { Meteor } from 'meteor/meteor';
 
 // COLLECTIONS
+import Users from '../../users/users.js';
 import { Applications } from '../applications.js';
 import { Logs } from '../../logs/logs.js';
-import { Users } from '../../users/users.js';
 
 Meteor.publishComposite('applications', function() {
   return {
