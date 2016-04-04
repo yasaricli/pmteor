@@ -4,8 +4,8 @@ import { _ } from 'meteor/underscore';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Dev } from 'meteor/pmteor:dev';
 
+import Users from '../users/users.js';
 import { Logs } from '../logs/logs.js';
-import { Users } from '../users/users.js';
 import { Bundles } from '../bundles/bundles.js';
 
 import { STATUS_ALLOWED_VALUES, NODE_ENV_ALLOWED_VALUES, DEFAULT_NODE_ENV,

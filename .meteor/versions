@@ -144,7 +144,7 @@ routepolicy@1.0.8
 service-configuration@1.0.7
 session@1.1.3
 sha@1.0.5
-simple:dev-error-overlay@1.4.0
+simple:dev-error-overlay@1.5.1
 softwarerero:accounts-t9n@1.1.7
 spacebars@1.0.9
 spacebars-compiler@1.0.9

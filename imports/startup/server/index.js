@@ -17,7 +17,6 @@ import '../../api/logs/server/helpers.js';
 import '../../api/logs/server/hooks.js';
 
 // USERS
-import '../../api/users/server/helpers.js';
 import '../../api/users/server/hooks.js';
 
 // PM2 POLLING (BUS AND INTERVAL)
