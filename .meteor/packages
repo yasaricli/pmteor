@@ -65,3 +65,4 @@ meteorhacks:ssr
 standard-minifier-css
 standard-minifier-js
 momentjs:moment
+templates:tabs

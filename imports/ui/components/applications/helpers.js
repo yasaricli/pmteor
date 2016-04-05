@@ -13,6 +13,15 @@ Template.applications.helpers({
   }
 });
 
+Template.application.helpers({
+  tabs() {
+    return [
+      { name: 'Monitoring', slug: 'monitoring' },
+      { name: 'Logs', slug: 'logs' }
+    ];
+  }
+});
+
 Template.updateApplicationModal.helpers({
   application() {
     return Applications.findOne(this._id);

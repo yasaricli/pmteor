@@ -4,18 +4,14 @@ import { Template } from 'meteor/templating';
 import { Applications } from '../../../api/applications/applications.js';
 import { Charts } from '../../lib/charts.js';
 
-Template.application.onRendered(function() {
+Template.monitoring.onRendered(function() {
+  const { application } = this.data;
 
-  // if null application data then deny.
-  if (_.isNull(this.data)) {
-    return;
-  }
-
-  if (this.data.isOnline()) {
+  if (application.isOnline()) {
     const charts = new Charts();
 
     // OBSERVE
-    this.cursor = Applications.find(this.data._id).observe({
+    this.cursor = Applications.find(application._id).observe({
       changed(doc) {
 
         // PUSH NEW MEMORY AND CPU
@@ -28,8 +24,8 @@ Template.application.onRendered(function() {
   }
 });
 
-Template.application.onDestroyed(function() {
-  // CURSOR OBSERVE SROP
+// CURSOR OBSERVE STOP
+Template.monitoring.onDestroyed(function() {
   if (this.cursor) {
     this.cursor.stop();
   }
@@ -37,4 +33,10 @@ Template.application.onDestroyed(function() {
 
 Template.updateApplicationModal.onCreated(function() {
   this.subscribe('application', this.data._id);
+});
+
+
+// Try the included basicTabs template. First, register it with ReactiveTabs:
+ReactiveTabs.createInterface({
+  template: 'basicTabs'
 });

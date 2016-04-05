@@ -147,26 +147,15 @@
           <span>{{ env.ROOT_URL }}</span>
         {{/if}}
       </div>
-      {{# if isOnline }}
-        <div class="row morris-container">
-          <div class="col-md-6">
-            <p class="lead text-center">{{ _ 'cpu' }}</p>
-             <div class="panel panel-default">
-                <div class="panel-body">
-                   <div id="morris-cpu" class="whirl pm-loading no-overlay"></div>
-                </div>
-             </div>
-          </div>
-          <div class="col-md-6">
-            <p class="lead text-center">{{ _ 'memory' }}</p>
-             <div class="panel panel-default">
-                <div class="panel-body">
-                   <div id="morris-memory" class="whirl pm-loading no-overlay"></div>
-                </div>
-             </div>
-          </div>
-        </div>
-      {{/if}}
+      {{# basicTabs tabs=tabs }}
+        {{# tabContent slug="monitoring" }}
+          {{ > monitoring application=.. }}
+        {{/ tabContent }}
+
+        {{# tabContent slug="logs" }}
+          {{ > logs application=.. }}
+        {{/ tabContent }}
+      {{/ basicTabs }}
     {{ else }}
       <div class="abs-center not-found">
         <div class="text-center mb-xl">
@@ -186,6 +175,41 @@
       </div>
     {{/if}}
   </div>
+</template>
+
+<template name="monitoring">
+  {{# if application.isOnline }}
+    <div class="row morris-container monitoring">
+      <div class="col-md-6">
+        <p class="lead text-center">{{ _ 'cpu' }}</p>
+         <div class="panel panel-default">
+            <div class="panel-body">
+               <div id="morris-cpu" class="whirl pm-loading no-overlay"></div>
+            </div>
+         </div>
+      </div>
+      <div class="col-md-6">
+        <p class="lead text-center">{{ _ 'memory' }}</p>
+         <div class="panel panel-default">
+            <div class="panel-body">
+               <div id="morris-memory" class="whirl pm-loading no-overlay"></div>
+            </div>
+         </div>
+      </div>
+    </div>
+  {{ else }}
+    offline
+  {{/if}}
+</template>
+
+<template name="logs">
+  <ul class="logs">
+    {{# each application.logs }}
+      <li class="log {{ type }}">{{ type }} - {{ livestamp createdAt }}</li>
+    {{ else }}
+      yok
+    {{/each}}
+  </ul>
 </template>
 
 <template name="membersModal">
