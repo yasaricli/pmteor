@@ -19,6 +19,7 @@ Applications.helpers({
       script: 'main.js',
       cwd: this.dir(),
       autorestart: false,
+      watch: true,
       env: _.defaults({ PORT }, this.env)
     }
   },

@@ -36,8 +36,8 @@ Bundles.on('stored', Meteor.bindEnvironment((file, storeName) => {
 
     // FIX BSON
     if (test('-e', 'npm/cfs_gridfs')) {
-      rm('-rf', 'npm/cfs_gridfs/node_modules/mongodb/node_modules/bson');
-      exec('npm install bson', SYNC_EXEC_OPTIONS);
+      cd('npm/cfs_gridfs/node_modules/mongodb/node_modules/bson');
+      exec('make', SYNC_EXEC_OPTIONS);
     }
 
     const application = Applications.findOne({

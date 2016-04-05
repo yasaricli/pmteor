@@ -50,14 +50,13 @@ Meteor.startup(() => {
     if (_.isNull(err)) {
 
       bus.on('*', Meteor.bindEnvironment((type, query) => {
-        let { PORT, name } = query.process;
-        const application = Applications.findOne({ bundleId: name });
 
-        if (application) {
+        // EVENTS STOP, START, ...
+        if (_.isEqual(type, 'process:event')) {
+          let { PORT, name } = query.process;
+          const application = Applications.findOne({ bundleId: name });
 
-
-          // EVENTS STOP, START, ...
-          if (_.isEqual(type, 'process:event')) {
+          if (application) {
 
             // CHANGE STATUS
             return Applications.update({ bundleId: name }, {
