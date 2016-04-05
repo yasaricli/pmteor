@@ -20,7 +20,7 @@ Meteor.publishComposite('applications', function() {
       // ALL LOGS APPLICATION
       {
         find(application) {
-          return Logs.find({ applicationId: application._id }, {
+          return Logs.find({ 'process.name': application.bundleId }, {
             sort: {
               createdAt: -1
             }
@@ -59,7 +59,7 @@ Meteor.publishComposite('application', function(_id) {
       // ALL LOGS APPLICATION
       {
         find(application) {
-          return Logs.find({ applicationId: application._id }, {
+          return Logs.find({ 'process.name': application.bundleId }, {
             sort: {
               createdAt: -1
             }

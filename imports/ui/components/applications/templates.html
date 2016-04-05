@@ -198,16 +198,25 @@
       </div>
     </div>
   {{ else }}
-    offline
+    <div class="text-center empty">
+      <span>{{ _ "application-is" application.status }}</span>
+      <span class="yet">{{ _ "must-start-application" }}</span>
+    </div>
   {{/if}}
 </template>
 
 <template name="logs">
   <ul class="logs">
     {{# each application.logs }}
-      <li class="log {{ type }}">{{ type }} - {{ livestamp createdAt }}</li>
+      <li class="log {{ slugify type }}">
+        <b>{{ process.name }} - {{ livestamp createdAt }} - ({{ type }})</b>
+        <span>{{{ data }}}</span>
+      </li>
     {{ else }}
-      yok
+      <div class="text-center empty">
+        <span>{{ _ "no-logs" }}</span>
+        <span class="yet">{{ _ "not-find-logs" }}</span>
+      </div>
     {{/each}}
   </ul>
 </template>

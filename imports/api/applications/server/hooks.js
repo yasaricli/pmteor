@@ -47,11 +47,3 @@ Applications.after.remove((userId, doc) => {
     });
   });
 });
-
-Applications.after.update((userId, doc, fieldNames, modifier, options) => {
-  if (_.contains(fieldNames, 'status')) {
-
-    // INSERT ERROR LOG
-    Logs.insert({ applicationId: doc._id, type: doc.status });
-  }
-});

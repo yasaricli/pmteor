@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor';
+import { _ } from 'meteor/underscore';
 
 // USER SEARCH
 Meteor.users.initEasySearch('username', {

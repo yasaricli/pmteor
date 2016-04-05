@@ -4,7 +4,7 @@ import { Template } from 'meteor/templating';
 import { Applications } from '../../../api/applications/applications.js';
 import { Logs } from '../../../api/logs/logs.js';
 import { STATUS_MAPPER } from '../../../api/applications/utils.js';
-
+import { LOG_TYPE_MAPPER } from '../../../api/logs/utils.js';
 
 Template.index.helpers({
   apps(status) {
@@ -19,7 +19,7 @@ Template.index.helpers({
 
   errors() {
     return Logs.find({
-      type: STATUS_MAPPER.ERRORED
+      type: LOG_TYPE_MAPPER.ERRORED
     });
   }
 });

@@ -14,20 +14,6 @@
   }
 
   .list {
-    .empty {
-      padding: 50px;
-      span {
-        display: block;
-        &:first-child {
-          text-transform: uppercase;
-          font-size: 20px;
-          margin-bottom: 10px;
-        }
-        &.yet {
-          color: #AFAFAF;
-        }
-      }
-    }
     .list-group {
       margin-top: 20px;
       margin-bottom: 0px;
@@ -192,6 +178,10 @@
           left: 0px;
         }
 
+        &:hover {
+          opacity: 0.8;
+        }
+
         &.active {
           color: #7266ba;
 
@@ -214,12 +204,12 @@
       margin-top: 50px;
       border-radius: 3px;
       background-color: white;
-      padding-bottom: 0px;
 
       .monitoring {
         overflow: hidden;
         margin-top: 25px;
-        
+        padding-bottom: 10px;
+
         .morris-hover {
           border: 5px solid #cfdbe2!important;
           padding: 15px!important;
@@ -248,7 +238,30 @@
         }
       }
       .logs {
+        list-style: none;
+        padding: 0px;
+        margin: 0px;
 
+        li {
+          font-weight: 200;
+          font-size: 15px;
+          line-height: 30px;
+          margin-bottom: 10px;
+          background-color: #f5f7fa;
+          padding: 10px;
+          border-radius: 3px;
+          word-wrap: break-word;
+
+          b { margin-right: 30px; }
+          span { font-size: 13px; }
+          
+          &.logout {
+            span { color: #1e983b; }
+          }
+          &.logerr {
+            span { color: #ec2121; }
+          }
+        }
       }
     }
   }

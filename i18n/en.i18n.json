@@ -40,5 +40,9 @@
   "no-users-found": "No users found",
   "searching": "Searching",
   "joining-date": "Joining Date",
-  "uptime": "Uptime"
+  "uptime": "Uptime",
+  "application-is": "Application is %s",
+  "must-start-application": "You must start the application.",
+  "no-logs": "No Logs",
+  "not-find-logs": "Could not find any logs."
 }

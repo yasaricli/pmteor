@@ -1,0 +1,13 @@
+const ALLOWED_LOG_TYPES = ['log:err', 'log:PM2', 'log:out'];
+
+// ALL LOG TYPE MAPPER
+const LOG_TYPE_MAPPER = {
+  ERRORED: ALLOWED_LOG_TYPES[0],
+  PM2: ALLOWED_LOG_TYPES[1],
+  OUT: ALLOWED_LOG_TYPES[2]
+};
+
+export {
+  ALLOWED_LOG_TYPES,
+  LOG_TYPE_MAPPER
+};

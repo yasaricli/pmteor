@@ -5,20 +5,21 @@ import { Applications } from '../../../api/applications/applications.js';
 import { Monitoring } from '../../lib/monitoring.js';
 
 Template.monitoring.onRendered(function() {
+  const self = this;
   const { application } = this.data;
 
   if (application.isOnline()) {
-    const charts = new Monitoring();
+    this.charts = new Monitoring();
 
     // OBSERVE
     this.cursor = Applications.find(application._id).observe({
       changed(doc) {
 
         // PUSH NEW MEMORY AND CPU
-        charts.add(doc.monit);
+        self.charts.add(doc.monit);
 
         // RELOAD
-        charts.reload();
+        self.charts.reload();
       }
     });
   }

@@ -16,7 +16,24 @@ Template.applications.helpers({
 Template.application.helpers({
   tabs() {
     return [
-      { name: 'Monitoring', slug: 'monitoring' },
+      {
+        name: 'Monitoring',
+        slug: 'monitoring',
+
+        /*
+         * On render Monitoring then chart cpu and memory reload.
+         * if not then resize errors.
+         */
+        onRender(slug, instance) {
+          const monitoring = _.find(Template._renderedInstances, (doc) => {
+            return _.isEqual(doc.view.name, 'Template.monitoring');
+          });
+
+          if (_.has(monitoring, 'charts')) {
+            monitoring.charts.reload();
+          }
+        }
+      },
       { name: 'Logs', slug: 'logs' }
     ];
   }

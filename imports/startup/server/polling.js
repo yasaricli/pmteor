@@ -1,7 +1,12 @@
 import { Meteor } from 'meteor/meteor';
+import { _ } from 'meteor/underscore';
+
+
 import { Applications } from '../../api/applications/applications.js';
 import { Logs } from '../../api/logs/logs.js';
 import { STATUS_MAPPER } from '../../api/applications/utils.js';
+import { ALLOWED_LOG_TYPES } from '../../api/logs/utils.js';
+
 
 // NPM PACKAGES
 import pm2 from 'pm2';
@@ -44,35 +49,31 @@ Meteor.startup(() => {
   pm2.launchBus(Meteor.bindEnvironment((err, bus) => {
     if (_.isNull(err)) {
 
-      // PROCESS ALL EVENTS
-      bus.on('process:event', Meteor.bindEnvironment((query) => {
-        const { PORT, name } = query.process;
+      bus.on('*', Meteor.bindEnvironment((type, query) => {
+        let { PORT, name } = query.process;
         const application = Applications.findOne({ bundleId: name });
 
         if (application) {
 
-          // CHANGE STATUS
-          Applications.update({ bundleId: name }, {
-            $set: {
-              status: STATUS_MAPPER[query.event.toUpperCase()],
-              'env.PORT': PORT
-            }
-          });
+
+          // EVENTS STOP, START, ...
+          if (_.isEqual(type, 'process:event')) {
+
+            // CHANGE STATUS
+            return Applications.update({ bundleId: name }, {
+              $set: {
+                status: STATUS_MAPPER[query.event.toUpperCase()],
+                'env.PORT': PORT
+              }
+            });
+          }
         }
-      }));
 
-      // IF ERROR THEN ON EVENT
-      bus.on('log:err', Meteor.bindEnvironment((query) => {
-        const { name } = query.process;
-        const application = Applications.findOne({ bundleId: name });
+        // ALLOWED TYPES INSERT LOG
+        if (_.contains(ALLOWED_LOG_TYPES, type)) {
 
-        // INSERT ERROR LOG
-        if (application) {
-          Logs.insert({
-            applicationId: application._id,
-            type: STATUS_MAPPER.ERRORED,
-            data: query.data
-          });
+          // OMIT AT KEY AND INSERT LOG
+          Logs.insert(_.defaults({ type }, query));
         }
       }));
     }
