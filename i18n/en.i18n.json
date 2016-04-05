@@ -44,5 +44,7 @@
   "application-is": "Application is %s",
   "must-start-application": "You must start the application.",
   "no-logs": "No Logs",
-  "not-find-logs": "Could not find any logs."
+  "not-find-logs": "Could not find any logs.",
+  "monitoring": "Monitoring",
+  "logs": "Logs"
 }

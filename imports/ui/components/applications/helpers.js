@@ -1,6 +1,7 @@
 import './templates.html';
 
 import { Template } from 'meteor/templating';
+import { TAPi18n } from 'meteor/tap:i18n';
 import { Applications } from '../../../api/applications/applications.js';
 
 Template.applications.helpers({
@@ -17,7 +18,7 @@ Template.application.helpers({
   tabs() {
     return [
       {
-        name: 'Monitoring',
+        name: TAPi18n.__('monitoring'),
         slug: 'monitoring',
 
         /*
@@ -34,7 +35,7 @@ Template.application.helpers({
           }
         }
       },
-      { name: 'Logs', slug: 'logs' }
+      { name: TAPi18n.__('logs'), slug: 'logs' }
     ];
   }
 });
