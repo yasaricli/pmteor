@@ -1,6 +1,5 @@
 // APPLICATIONS
 import '../../api/applications/server/publications.js';
-import '../../api/applications/server/migrations.js';
 import '../../api/applications/server/security.js';
 import '../../api/applications/server/methods.js';
 import '../../api/applications/server/helpers.js';
