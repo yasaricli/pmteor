@@ -159,6 +159,99 @@
       margin-bottom: 0px!important;
     }
   }
+
+  .basicTabs-container {
+    .tabs-list {
+      padding: 0px;
+      text-align: center;
+      margin-top: 30px;
+
+      .tab-item {
+        position: relative;
+        text-transform: uppercase;
+        font-size: 20px;
+        font-weight: 400;
+        color: #777777;
+
+        border: 0px;
+        padding: 0px 10px!important;
+        background-color: inherit;
+
+        &:first-child {
+          padding-left: 0px!important;
+        }
+
+        &:before {
+          width: 100%;
+          font-family: FontAwesome;
+          content: "\f10c";
+          position: absolute;
+          color: #777777;
+          font-size: 15px;
+          top: 30px;
+          left: 0px;
+        }
+
+        &.active {
+          color: #7266ba;
+
+          &:before {
+            width: 100%;
+            font-family: FontAwesome;
+            content: "\f111";
+            position: absolute;
+            color: #7266ba;
+            font-size: 15px;
+            top: 30px;
+            left: 0px;
+          }
+        }
+      }
+    }
+
+    .tabs-content-container {
+      border-top: 0px;
+      margin-top: 50px;
+      border-radius: 3px;
+      background-color: white;
+      padding-bottom: 0px;
+
+      .monitoring {
+        overflow: hidden;
+        margin-top: 25px;
+        
+        .morris-hover {
+          border: 5px solid #cfdbe2!important;
+          padding: 15px!important;
+          border-radius: 3px!important;
+
+          .morris-hover-point {
+            color: #cfdbe2!important;
+          }
+        }
+
+        .lead {
+          font-size: 17px;
+          margin-bottom: 0px;
+        }
+
+        #morris-cpu {
+          > svg {
+            overflow: overlay!important;
+          }
+        }
+
+        #morris-memory {
+          > svg {
+            overflow: overlay!important;
+          }
+        }
+      }
+      .logs {
+
+      }
+    }
+  }
 }
 
 #InsertApplicationForm,
@@ -178,30 +271,6 @@
 
     .cfsaf-field {
       height: 45px;
-    }
-  }
-}
-
-.monitoring {
-  .morris-hover {
-    border: 5px solid #cfdbe2!important;
-    padding: 15px!important;
-    border-radius: 3px!important;
-
-    .morris-hover-point {
-      color: #cfdbe2!important;
-    }
-  }
-
-  #morris-cpu {
-    > svg {
-      overflow: overlay!important;
-    }
-  }
-
-  #morris-memory {
-    > svg {
-      overflow: overlay!important;
     }
   }
 }

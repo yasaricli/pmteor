@@ -2,13 +2,13 @@ import './templates.html';
 
 import { Template } from 'meteor/templating';
 import { Applications } from '../../../api/applications/applications.js';
-import { Charts } from '../../lib/charts.js';
+import { Monitoring } from '../../lib/monitoring.js';
 
 Template.monitoring.onRendered(function() {
   const { application } = this.data;
 
   if (application.isOnline()) {
-    const charts = new Charts();
+    const charts = new Monitoring();
 
     // OBSERVE
     this.cursor = Applications.find(application._id).observe({

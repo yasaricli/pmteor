@@ -31,7 +31,7 @@ class Chart {
   }
 }
 
-export class Charts {
+export class Monitoring {
   constructor() {
     this._instance = Template.instance();
 
