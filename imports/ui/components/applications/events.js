@@ -2,6 +2,7 @@ import './templates.html';
 
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
+import { Session } from 'meteor/session';
 import { Modal } from 'meteor/pmteor:modal';
 import { TAPi18n } from 'meteor/tap:i18n';
 import { Applications } from '../../../api/applications/applications.js';
@@ -81,6 +82,15 @@ Template.addCollaboratorModal.events({
       // Close and back.
       Modal.close();
     });
+  }
+});
+
+Template.logs.events({
+  'click .filter .btn'(event, instance) {
+    const $this = $(event.currentTarget);
+
+    // SET FILTER
+    Session.set('logs-filter', $this.attr('type') || null);
   }
 });
 

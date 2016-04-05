@@ -1,6 +1,7 @@
 import './templates.html';
 
 import { Template } from 'meteor/templating';
+import { Session } from 'meteor/session';
 import { TAPi18n } from 'meteor/tap:i18n';
 import { Applications } from '../../../api/applications/applications.js';
 
@@ -49,6 +50,12 @@ Template.updateApplicationModal.helpers({
 Template.insertApplicationModal.helpers({
   collection() {
     return Applications;
+  }
+});
+
+Template.logs.helpers({
+  filter() {
+    return Session.get('logs-filter');
   }
 });
 

@@ -72,8 +72,16 @@ Applications.attachSchema(new SimpleSchema({
 }));
 
 Applications.helpers({
-  logs() {
-    return Logs.find({}, {
+  logs(type) {
+    const filter = {};
+
+    // if type then set type ket value.
+    if (type) {
+      filter.type = type;
+    }
+
+    // and filter logs.
+    return Logs.find(filter, {
       sort: {
         createdAt: -1
       }

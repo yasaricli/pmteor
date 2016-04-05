@@ -206,8 +206,14 @@
 </template>
 
 <template name="logs">
+  <div class="text-right">
+    <div class="btn-group filter">
+      <label class="btn btn-purple {{#if _isNull filter }}active{{/if}}" type="">{{ _ "all" }}</label>
+      <label class="btn btn-purple {{#if _isEqual filter "log:err" }}active{{/if}}" type="log:err">{{ _ "errors" }}</label>
+    </div>
+  </div>
   <ul class="logs">
-    {{# each application.logs }}
+    {{# each application.logs filter }}
       <li class="log {{ slugify type }}">
         <b>{{ process.name }} - {{ livestamp createdAt }} - ({{ type }})</b>
         <span>{{{ data }}}</span>

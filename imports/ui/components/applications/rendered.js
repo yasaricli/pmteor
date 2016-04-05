@@ -4,6 +4,9 @@ import { Template } from 'meteor/templating';
 import { Applications } from '../../../api/applications/applications.js';
 import { Monitoring } from '../../lib/monitoring.js';
 
+// Default null log filter
+Session.set('logs-filter', null);
+
 Template.monitoring.onRendered(function() {
   const self = this;
   const { application } = this.data;
