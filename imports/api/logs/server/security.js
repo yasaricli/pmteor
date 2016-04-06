@@ -1,3 +1,7 @@
 import { Logs } from '../logs.js';
 
-Logs.permit(['insert', 'update', 'remove']).ifLoggedIn().apply();
+// INSERT AND REMOVE PERMIT
+Logs.permit(['insert', 'remove']).ifLoggedIn().allowInClientCode();
+
+// NEVER UPDATE
+Logs.permit('update').never().allowInClientCode();

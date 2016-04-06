@@ -19,7 +19,6 @@ insecure                # Allow all DB writes from clients (for prototyping)
 aldeed:collection2
 reywood:publish-composite
 matb33:collection-hooks
-ongoworks:security
 dburles:collection-helpers
 tmeasday:publish-counts
 fortawesome:fontawesome
@@ -66,3 +65,4 @@ standard-minifier-js
 momentjs:moment
 templates:tabs
 yasaricli:slugify
+ongoworks:security
