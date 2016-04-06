@@ -3,52 +3,70 @@ import { Bundles } from '../bundles.js';
 import { BUNDLE_DIR, SYNC_EXEC_OPTIONS, ASYNC_EXEC_OPTIONS } from '../utils.js';
 
 // NPM PACKAGES
-import { cd, rm, mkdir, exec, test } from 'shelljs';
+import { rm, cd, mkdir, exec, test, find } from 'shelljs';
 
 Bundles.on('stored', Meteor.bindEnvironment((file, storeName) => {
-  const APPLICATION_DIR  = `${BUNDLE_DIR}/${file._id}`;
+  const { _id } = file;
 
-  // REMOVE OLD APPLICATION
-  rm('-rf', APPLICATION_DIR);
-
-  // CREATE NEW APPLICATION DIR
-  mkdir(APPLICATION_DIR);
-
-  // GO TO BUNDLE DIR
+  // CD BUNDLE DIRECTORY
   cd(BUNDLE_DIR);
 
+  // CREATE NEW APPLICATION DIR
+  mkdir(_id);
+
   // EXTRACT
-  exec(`tar -xvzf ${file._id}.tar.gz -C ${file._id} --strip 1`, SYNC_EXEC_OPTIONS);
+  exec(`tar -xvzf ${_id}.tar.gz -C ${_id} --strip 1`, SYNC_EXEC_OPTIONS);
 
-  // CD SERVER PACKAGES
-  cd(`${file._id}/programs/server`);
+  // --------- REBUILDING FIBERS --------------
+  cd(`${_id}/programs/server`);
 
-  // NPM CORE PACKAGES INSTALL
-  const npm = exec('npm install', ASYNC_EXEC_OPTIONS);
+  // GO NPM PACKAGES
+  cd('npm');
 
-  npm.stdout.on('end', Meteor.bindEnvironment(() => {
+  // BINARY NPM MODULES
+  const bindingFiles = find('.').filter((file) => {
+    return file.match(/\.gyp$/);
+  });
 
-    // FIX BCRYPT
-    if (test('-e', 'npm/npm-bcrypt')) {
-      rm('-rf', 'npm/npm-bcrypt');
-      exec('npm install bcrypt', SYNC_EXEC_OPTIONS);
-    }
+  bindingFiles.forEach((file) => {
+    const dir = file.replace('/binding.gyp', '');
 
-    // FIX BSON
-    if (test('-e', 'npm/cfs_gridfs')) {
-      cd('npm/cfs_gridfs/node_modules/mongodb/node_modules/bson');
-      exec('make', SYNC_EXEC_OPTIONS);
-    }
+    // GO TO BINDING FILE DIR
+    cd(dir);
 
-    const application = Applications.findOne({
-      bundleId: file._id
-    });
+    // REMOVE BEFORE MODULES
+    rm('-rf', 'node_modules');
 
-   /*
-    * IMPORTANT!!!!
-    * After installation is completed it will be updated before
-    * the start if the application fix begin.
-    */
-    application.setStatus(3);
-  }));
+    // INSTALL MODULES
+    exec('npm install', SYNC_EXEC_OPTIONS);
+
+    // AND REBUILD BINDINGS PACKAGES.
+    exec('node-gyp rebuild', SYNC_EXEC_OPTIONS);
+
+    // PREV DIR
+    cd('-');
+  });
+
+  // PROGRAMS SERVER DIR
+  cd('..');
+
+  // support for 0.9
+  if (test('-e', 'package.json')) {
+
+    exec('npm install', SYNC_EXEC_OPTIONS);
+  } else {
+
+    // support for older versions
+    exec('npm install fibers bcrypt', SYNC_EXEC_OPTIONS);
+  }
+
+  // APPLICATION
+  const application = Applications.findOne({ bundleId: _id });
+
+ /*
+  * IMPORTANT!!!!
+  * After installation is completed it will be updated before
+  * the start if the application fix begin.
+  */
+  application.setStatus(3);
 }));
