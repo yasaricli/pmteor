@@ -20,7 +20,7 @@ Applications.helpers({
       cwd: this.dir(),
       autorestart: false,
       watch: true,
-      env: _.defaults({ PORT }, this.env)
+      env: _.extend({ PORT}, this.env)
     }
   },
 
