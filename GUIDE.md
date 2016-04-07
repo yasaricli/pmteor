@@ -16,7 +16,7 @@ or other `versions`
 
 ### Install Node.js
 
-Make sure Node.js is installed (currently Version 0.12.XX is required). If you don't have this version, you can use the [node packages][node-packages].
+Make sure Node.js is installed (currently Version 0.10.XX is required). If you don't have this version, you can use the [node packages][node-packages].
 
 ### Install MongoDB
 In order to run Pmteor you need to have MongoDB installed. You can either install your distributions package, if they offer any or see the [MongoDB website][mongodb-website] how to install it.
@@ -55,7 +55,7 @@ node main.js
 This is the most complex way, suitable if you know what you are doing and want to have the most flexibility to adapt the installation to your needs. Let's go!
 
 ### Install Node.js
-If you haven't already, you need to install Node.js, given that we need node version 0.12.XX, make sure to either use the [custom packages][node-packages] (the ones of your OS are likely too old) or install the correct version from the Node.js [website][node-web].
+If you haven't already, you need to install Node.js, given that we need node version 0.10.XX, make sure to either use the [custom packages][node-packages] (the ones of your OS are likely too old) or install the correct version from the Node.js [website][node-web].
 
 ### Install Meteor
 As you might have noticed already, Pmteor is built using the Meteor web framework, so we need to install this as well. This can be done easily using their install script ([read it][meteor-script] if you don't trust it):
