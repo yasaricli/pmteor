@@ -28,7 +28,6 @@ iron:router
 aldeed:autoform
 cfs:standard-packages
 cfs:filesystem
-cfs:autoform
 less
 adriancbo:chalk
 zimme:active-route
@@ -66,3 +65,8 @@ momentjs:moment
 templates:tabs
 yasaricli:slugify
 ongoworks:security
+yogiben:autoform-file
+juliancwirko:s-alert
+juliancwirko:s-alert-slide
+cfs:power-queue
+froatsnook:sleep

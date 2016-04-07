@@ -13,13 +13,13 @@
     </div>
     <div class="list">
       {{# each apps }}
-        <div class="list-group">
+        <div class="list-group {{# if isProgress }}whirl pm-loading{{/if}}">
           <a href="{{ pathFor route='Application' }}" class="list-group-item">
             <table class="wd-wide">
               <tbody>
                 <tr>
                   <td class="wd-xs">
-                    <div class="ph status {{ status }} {{# if isExit }}whirl pm-loading{{/if}} {{# if isOnline }}onlineInOut{{/if}}"></div>
+                    <div class="ph status {{ status }} {{# if isOnline }}onlineInOut{{/if}}"></div>
                   </td>
                   <td>
                     <div class="ph url-container">
@@ -100,6 +100,8 @@
                           </li>
                           {{# if isOnline }}
                             <li><a href="#" class="stop">{{ _ "stop" }}</a></li>
+                          {{ else }}
+                            <li><a href="#" class="build">{{ _ "build" }}</a></li>
                           {{/if}}
                           {{# unless isOnline }}
                             {{# if isInRole 'admin' }}
@@ -339,13 +341,19 @@
         {{> afQuickField name='env.MONGO_URL' class='mb-lg form-control input-lg' placeholder='MONGO URL' label=false }}
         {{> afQuickField name='env.MAIL_URL' class='mb-lg form-control input-lg' placeholder='MAIL URL' label=false }}
         {{> afQuickField name='env.PORT' class='mb-lg form-control input-lg' placeholder='PORT' label=false }}
-        {{> afQuickField name="bundleId" label=false }}
         {{# if application.isOnline }}
           <a class="mb-sm btn btn-warning btn-lg stop">{{ _ "stop-and-update" }}</a>
         {{ else }}
+          {{> afQuickField name="bundleId" label=false }}
           <button type="submit" class="mb-sm btn btn-purple btn-lg">{{ _ "update" }}</button>
         {{/if}}
       {{/ autoForm }}
     </div>
   </div>
+</template>
+
+<template name="bundleRemoveFileBtn">
+  <button type="button" class="js-af-remove-file btn btn-default btn-danger">
+    {{ _ 'remove' }}
+  </button>
 </template>

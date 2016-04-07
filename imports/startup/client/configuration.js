@@ -68,3 +68,13 @@ AutoForm.addHooks(['InsertApplicationForm', 'UpdateApplicationForm'], {
     Modal.close();
   }
 });
+
+// The defaults are below:
+sAlert.config({
+    effect: 'slide',
+    position: 'bottom-right',
+    timeout: 5000,
+    html: true,
+    onRouteClose: true,
+    stack: true
+});

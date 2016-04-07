@@ -1,12 +1,9 @@
-import './templates.html';
-
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { Session } from 'meteor/session';
 import { Modal } from 'meteor/pmteor:modal';
 import { TAPi18n } from 'meteor/tap:i18n';
 import { Applications } from '../../../api/applications/applications.js';
-
 
 Template.applications.events({
   'click .insert': Modal.open('insertApplication'),
@@ -20,6 +17,11 @@ Template.applications.events({
   'click .stop'(event, instance) {
     const { _id } = this;
     Meteor.call('application.stop', { _id });
+  },
+
+  'click .build'(event, instance) {
+    const { _id } = this;
+    Meteor.call('application.build', { _id });
   },
 
   'click .delete'(event, instance) {

@@ -1,5 +1,3 @@
-import './templates.html';
-
 import { Template } from 'meteor/templating';
 import { AccountsTemplates } from 'meteor/useraccounts:core';
 

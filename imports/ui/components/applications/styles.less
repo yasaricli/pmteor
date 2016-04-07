@@ -71,7 +71,7 @@
           &:extend(.bg-success);
         }
         &.STOP:extend(.bg-gray) {}
-        &.EXIT:extend(.bg-warning) {}
+        &.EXIT:extend(.bg-gray) {}
         &.READY:extend(.bg-yellow) {}
         &.ERRORED:extend(.bg-danger-dark) {}
       }
@@ -289,6 +289,24 @@
     .cfsaf-field {
       height: 45px;
     }
+  }
+
+  .js-af-select-file,
+  .btn-default {
+    width: 100%;
+    font-weight: 300;
+    font-size: 18px;
+  }
+
+  .js-af-remove-file {
+    border: 0px;
+    position: absolute;
+    width: auto;
+    top: 0px;
+    right: 0px;
+    padding-bottom: 8px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
   }
 }
 

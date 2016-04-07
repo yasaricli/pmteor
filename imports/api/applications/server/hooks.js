@@ -3,6 +3,7 @@ import { _ } from 'meteor/underscore';
 import Users from '../../users/users.js';
 import { Logs } from '../../logs/logs.js';
 import { Applications } from '../applications.js';
+import { Notifications } from '../../notifications/notifications.js';
 
 import { BUNDLE_DIR } from '../../bundles/utils.js';
 
@@ -23,7 +24,10 @@ Applications.before.insert((userId, doc) => {
 Applications.after.remove((userId, doc) => {
 
   // Applications all logs removed.
-  Logs.remove({ applicationId: doc._id });
+  Logs.remove({ 'process.name': doc.bundleId });
+
+  // Notifications removed
+  Notifications.remove({ applicationId: doc._id });
 
   // CONNECT AND DELETE APPLICATION
   pm2.connect((connect_err) => {

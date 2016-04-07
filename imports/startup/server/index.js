@@ -19,5 +19,8 @@ import '../../api/logs/server/security.js';
 import '../../api/logs/server/helpers.js';
 import '../../api/logs/server/hooks.js';
 
+// NOTIFICATIONS
+import '../../api/notifications/server/security.js';
+
 // USERS
 import '../../api/users/server/hooks.js';

@@ -7,6 +7,7 @@ import { Dev } from 'meteor/pmteor:dev';
 import Users from '../users/users.js';
 import { Logs } from '../logs/logs.js';
 import { Bundles } from '../bundles/bundles.js';
+import { Notifications } from '../notifications/notifications.js';
 
 import { STATUS_ALLOWED_VALUES, NODE_ENV_ALLOWED_VALUES, DEFAULT_NODE_ENV,
   STATUS_MAPPER } from './utils.js';
@@ -50,7 +51,6 @@ Applications.attachSchema(new SimpleSchema({
   'env.MAIL_URL': { type: String, optional: true },
   'env.PORT': { type: Number, optional: true },
   'env.DISABLE_WEBSOCKETS': { type: Number, optional: true },
-  'env.MONGO_OPLOG_URL': { type: String, optional: true },
 
   // RUNNING APPLICATION ENV VARIABLE
   'env.NODE_ENV': {
@@ -64,8 +64,10 @@ Applications.attachSchema(new SimpleSchema({
     label: 'Bundle',
     autoform: {
       afFieldInput: {
-        type: "cfs-file",
-        collection: "bundles"
+        type: 'fileUpload',
+        collection: 'bundles',
+        label: 'Choose application bundle file',
+        removeFileBtnTemplate: 'bundleRemoveFileBtn'
       }
     }
   }
@@ -100,20 +102,22 @@ Applications.helpers({
     });
   },
 
+  notifications(callback) {
+    return Notifications.find({
+      applicationId: this._id
+    }, callback);
+  },
+
+  notification({ type, message }) {
+    return Notifications.insert({ applicationId: this._id, type, message });
+  },
+
   bundle() {
     return Bundles.findOne(this.bundleId);
   },
 
   absoluteUrl() {
     return Dev.isDevelopmentReturned(`http://localhost:${this.env.PORT}`, this.env.ROOT_URL);
-  },
-
-  setStatus(statusCode) {
-    return Applications.update(this._id, {
-      $set: {
-        status: STATUS_ALLOWED_VALUES[statusCode]
-      }
-    });
   },
 
   isStop() {
@@ -130,5 +134,9 @@ Applications.helpers({
 
   isReady() {
     return _.isEqual(this.status, STATUS_MAPPER.READY);
+  },
+
+  isProgress() {
+    return _.isEqual(this.status, STATUS_MAPPER.PROGRESS);
   }
 });

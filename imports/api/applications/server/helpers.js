@@ -1,12 +1,14 @@
+import { TAPi18n } from 'meteor/tap:i18n';
 import { _ } from 'meteor/underscore';
 
 import Users from '../../users/users.js';
 import { Applications } from '../applications.js';
-import { BUNDLE_DIR } from '../../bundles/utils.js';
+import { BUNDLE_DIR, SYNC_EXEC_OPTIONS } from '../../bundles/utils.js';
 
 // NPM PACKAGES
 import pm2 from 'pm2';
 import freeport from 'freeport';
+import { cd, find, rm, exec, test } from 'shelljs';
 
 Applications.helpers({
   dir() {
@@ -26,9 +28,6 @@ Applications.helpers({
 
   start() {
     const self = this;
-
-    // RUNNING UPDATE
-    self.setStatus(1);
 
    /*
     * Listening port and connect production process manager. if connected
@@ -68,6 +67,11 @@ Applications.helpers({
               });
             }
 
+            self.notification({
+              type: 'success',
+              message: TAPi18n.__('started-application', self.name)
+            });
+
             // DISCONNECT
             pm2.disconnect();
           }));
@@ -78,12 +82,76 @@ Applications.helpers({
 
   stop() {
     const self = this;
-    pm2.connect((connect_err) => {
-      pm2.stop(self.bundleId, (stop_err) => {
+    pm2.connect(Meteor.bindEnvironment(() => {
+      pm2.stop(self.bundleId, Meteor.bindEnvironment(() => {
+
+        self.notification({
+          type: 'success',
+          message: TAPi18n.__('stopped-application', self.name)
+        });
 
         // DISCONNECT
         pm2.disconnect();
-      });
+      }))
+    }));
+  },
+
+  // ##### --------- REBUILDING FIBERS -------------- #######
+  build() {
+
+    this.notification({
+      type: 'info',
+      message: TAPi18n.__('build-started', this.name)
+    });
+
+    // async sleep statements
+    Meteor.sleep(1000);
+
+    cd(`${this.dir()}/programs/server`);
+
+    // GO NPM PACKAGES
+    cd('npm');
+
+    // BINARY NPM MODULES
+    const bindingFiles = find('.').filter((file) => {
+      return file.match(/\.gyp$/);
+    });
+
+    bindingFiles.forEach((file) => {
+      const dir = file.replace('/binding.gyp', '');
+
+      // GO TO BINDING FILE DIR
+      cd(dir);
+
+      // REMOVE BEFORE MODULES
+      rm('-rf', 'node_modules');
+
+      // INSTALL MODULES
+      exec('npm install', SYNC_EXEC_OPTIONS);
+
+      // AND REBUILD BINDINGS PACKAGES.
+      exec('node-gyp rebuild', SYNC_EXEC_OPTIONS);
+
+      // PREV DIR
+      cd('-');
+    });
+
+    // PROGRAMS SERVER DIR
+    cd('..');
+
+    // support for 0.9
+    if (test('-e', 'package.json')) {
+
+      exec('npm install', SYNC_EXEC_OPTIONS);
+    } else {
+
+      // support for older versions
+      exec('npm install fibers bcrypt', SYNC_EXEC_OPTIONS);
+    }
+
+    this.notification({
+      type: 'success',
+      message: TAPi18n.__('build-completed', this.name)
     });
   },
 

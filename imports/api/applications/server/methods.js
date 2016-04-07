@@ -26,7 +26,20 @@ const stopApplication = new ValidatedMethod({
   }
 });
 
+const buildApplication = new ValidatedMethod({
+  name: 'application.build',
+  mixins: [ hasApplicationMixin ],
+
+  run({ _id }) {
+    const application = Applications.findOne(_id);
+
+    // BULD APPLICATION
+    application.build();
+  }
+});
+
 export {
   stopApplication,
-  startApplication
+  startApplication,
+  buildApplication
 }

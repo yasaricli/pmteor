@@ -18,6 +18,7 @@
   "all": "All",
   "create": "Create",
   "update": "Update",
+  "build": "Build",
   "stop-and-update": "Stop Application And Update",
   "change-password": "Change Password",
   "log-out": "Log Out",
@@ -47,5 +48,10 @@
   "no-logs": "No Logs",
   "not-find-logs": "Could not find any logs.",
   "monitoring": "Monitoring",
-  "logs": "Logs"
+  "logs": "Logs",
+  "build-started": "<b>%s</b> is to build application started.",
+  "build-completed": "<b>%s</b> build is completed.",
+  "started-application": "<b>%s</b> application started successfully.",
+  "stopped-application": "<b>%s</b> stopped successfully.",
+  "errored-application": "<b>%s</b> application is errored."
 }

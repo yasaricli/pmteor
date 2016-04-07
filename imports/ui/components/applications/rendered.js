@@ -1,5 +1,3 @@
-import './templates.html';
-
 import { Template } from 'meteor/templating';
 import { Applications } from '../../../api/applications/applications.js';
 import { Monitoring } from '../../lib/monitoring.js';
