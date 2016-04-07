@@ -67,7 +67,8 @@ Applications.attachSchema(new SimpleSchema({
         type: 'fileUpload',
         collection: 'bundles',
         label: 'Choose application bundle file',
-        removeFileBtnTemplate: 'bundleRemoveFileBtn'
+        removeFileBtnTemplate: 'bundleRemoveFileBtn',
+        uploadProgressTemplate: 'uploadBundlesProgressTemplate'
       }
     }
   }
