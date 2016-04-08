@@ -6,7 +6,7 @@ const BUNDLE_DIR = Dev.isServer(() => {
 
   // if the developer mode if you then installed in the default folder.
   if (Dev.isDevelopment) {
-    return `${process.env.HOME}/bundles`
+    return `${process.env.HOME}/bundles`;
   }
 
   // BUNDLE DIR

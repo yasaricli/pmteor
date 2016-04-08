@@ -4,8 +4,7 @@ import { BUNDLE_DIR, SYNC_EXEC_OPTIONS } from '../utils.js';
 // NPM PACKAGES
 import { cd, mkdir, exec } from 'shelljs';
 
-Bundles.on('stored', Meteor.bindEnvironment((file, storeName) => {
-  const { _id } = file;
+Bundles.on('stored', ({ _id }) => {
 
   // CD BUNDLE DIRECTORY
   cd(BUNDLE_DIR);
@@ -15,4 +14,4 @@ Bundles.on('stored', Meteor.bindEnvironment((file, storeName) => {
 
   // EXTRACT
   exec(`tar -xvzf ${_id}.tar.gz -C ${_id} --strip 1`, SYNC_EXEC_OPTIONS);
-}));
+});

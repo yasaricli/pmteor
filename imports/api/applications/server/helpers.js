@@ -110,6 +110,10 @@ Applications.helpers({
       message: TAPi18n.__('build-started', this.name)
     });
 
+    // async sleep statements
+    Meteor.sleep(500);
+
+    // GO TO APPLICATION DIR
     cd(`${this.dir()}/programs/server`);
 
     // GO NPM PACKAGES
@@ -123,7 +127,7 @@ Applications.helpers({
     bindingFiles.forEach((file) => {
       const dir = file.replace('/binding.gyp', '');
 
-      // SLEEP
+      // async sleep statements
       Meteor.sleep(500);
 
       // GO TO BINDING FILE DIR

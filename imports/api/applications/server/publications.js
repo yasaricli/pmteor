@@ -3,6 +3,7 @@ import { Meteor } from 'meteor/meteor';
 // COLLECTIONS
 import Users from '../../users/users.js';
 import { Applications } from '../applications.js';
+import { Bundles } from '../../bundles/bundles.js';
 import { Notifications } from '../../notifications/notifications.js';
 import { Logs } from '../../logs/logs.js';
 
@@ -54,6 +55,13 @@ Meteor.publishComposite('applications', function() {
              }
           });
         }
+      },
+
+      // BUNDLES
+      {
+        find(application) {
+          return Bundles.find({ _id: application.bundleId });
+        }
       }
     ]
   }
@@ -104,6 +112,13 @@ Meteor.publishComposite('application', function(_id) {
                $gt: new Date() // Publish current Date after .
             }
           });
+        }
+      },
+
+      // BUNDLES
+      {
+        find(application) {
+          return Bundles.find({ _id: application.bundleId });
         }
       }
     ]
