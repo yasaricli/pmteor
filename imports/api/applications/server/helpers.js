@@ -42,39 +42,45 @@ Applications.helpers({
         // START
         pm2.start(self.options(port), Meteor.bindEnvironment((start_error) => {
 
-          // LIST
-          pm2.list(Meteor.bindEnvironment((start_error, procs) => {
-            const application = _.findWhere(procs, {
-              name: self.bundleId
-            });
+          if (_.isNull(start_error)) {
 
-            if (application) {
-              const { name, monit } = application;
-              const { pm_uptime, restart_time } = application.pm2_env;
-
-              Applications.update({ bundleId: name }, {
-                $set: {
-                  monit: {
-
-                    // UPTIME AND RESTART TIME
-                    pm_uptime,
-                    restart_time,
-
-                    // MONIT OBJECT INJECT
-                    ...monit
-                  }
-                }
+            // LIST
+            return pm2.list(Meteor.bindEnvironment((list_error, procs) => {
+              const application = _.findWhere(procs, {
+                name: self.bundleId
               });
-            }
 
-            self.notification({
-              type: 'success',
-              message: TAPi18n.__('started-application', self.name)
-            });
+              if (application) {
+                const { name, monit } = application;
+                const { pm_uptime, restart_time } = application.pm2_env;
 
-            // DISCONNECT
-            pm2.disconnect();
-          }));
+                Applications.update({ bundleId: name }, {
+                  $set: {
+                    monit: {
+
+                      // UPTIME AND RESTART TIME
+                      pm_uptime,
+                      restart_time,
+
+                      // MONIT OBJECT INJECT
+                      ...monit
+                    }
+                  }
+                });
+              }
+
+              self.notification({
+                type: 'success',
+                message: TAPi18n.__('started-application', self.name)
+              });
+
+              // DISCONNECT
+              pm2.disconnect();
+            }));
+          }
+
+          // IF STARTED ERROR THEN DISCONNECT
+          pm2.disconnect();
         }));
       }));
     }));
@@ -104,9 +110,6 @@ Applications.helpers({
       message: TAPi18n.__('build-started', this.name)
     });
 
-    // async sleep statements
-    Meteor.sleep(1000);
-
     cd(`${this.dir()}/programs/server`);
 
     // GO NPM PACKAGES
@@ -119,6 +122,9 @@ Applications.helpers({
 
     bindingFiles.forEach((file) => {
       const dir = file.replace('/binding.gyp', '');
+
+      // SLEEP
+      Meteor.sleep(500);
 
       // GO TO BINDING FILE DIR
       cd(dir);
