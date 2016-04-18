@@ -104,14 +104,13 @@ Applications.helpers({
 
   // ##### --------- REBUILDING FIBERS -------------- #######
   build() {
-
     this.notification({
       type: 'info',
       message: TAPi18n.__('build-started', this.name)
     });
 
     // async sleep statements
-    Meteor.sleep(500);
+    Meteor.sleep(50);
 
     // GO TO APPLICATION DIR
     cd(`${this.dir()}/programs/server`);
@@ -128,7 +127,7 @@ Applications.helpers({
       const dir = file.replace('/binding.gyp', '');
 
       // async sleep statements
-      Meteor.sleep(500);
+      Meteor.sleep(100);
 
       // GO TO BINDING FILE DIR
       cd(dir);

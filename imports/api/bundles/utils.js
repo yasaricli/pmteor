@@ -27,12 +27,12 @@ const MAX_BUNDLE_SIZE = Dev.isServer(() => {
 
 const ASYNC_EXEC_OPTIONS = {
   async: true,
-  silent: true
+  silent: Dev.isDevelopmentReturned(false, true)
 };
 
 const SYNC_EXEC_OPTIONS = {
   async: false,
-  silent: true
+  silent: Dev.isDevelopmentReturned(false, true)
 };
 
 export {
