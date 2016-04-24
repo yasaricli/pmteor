@@ -162,31 +162,5 @@ Applications.helpers({
       type: 'success',
       message: TAPi18n.__('build-completed', this.name)
     });
-  },
-
-  sendEmailMembers(template, data) {
-    const members = Users.find({
-      _id: {
-        $in: this.memberIds
-      }
-    });
-
-    // USERS EACH
-    members.forEach((user) => {
-
-      // MAIL URL PARSE AND EXISTS MAIL URL
-      Dev.hasEnv('MAIL_URL', (MAIL_URL) => {
-        const { emails } = user;
-        const { email } = Dev.parseMailUrl(MAIL_URL);
-
-        // SEND EMAIL
-        Email.send({
-          from: email,
-          to: _.first(emails).address,
-          subject: `Pmteor - ${this.name}`,
-          html: SSR.render(template, data)
-        });
-      });
-    });
   }
 });

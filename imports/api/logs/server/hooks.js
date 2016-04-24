@@ -11,9 +11,6 @@ Logs.before.insert((userId, doc) => {
   // HAS APPLICATION
   if (application) {
 
-    // SEND EMAILS
-    application.sendEmailMembers('log', { application });
-
     // TYPE ERROR THEN SEND NOTIFICATIONS
     if (_.isEqual(doc.type, LOG_TYPE_MAPPER.ERRORED)) {
 
