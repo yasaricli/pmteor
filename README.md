@@ -1,12 +1,13 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/pmteor/pmteor/develop/public/images/logo.png">
+  <img src="https://raw.githubusercontent.com/pmteor/pmteor/develop/public/images/logo.png"></br>
+  <a href="https://travis-ci.org/pmteor/pmteor">
+    <img src="https://travis-ci.org/pmteor/pmteor.png">
+  </a>
 </p>
 
 > Pmteor allows user to manage applications that are done using Pmteor meteor framework. Also already ready meteor applications can be deployed using pmteor. 
 
 **Pmteor is an open-source application and has been developed using Meteor framework.**
-
-[![Build Status](https://travis-ci.org/pmteor/pmteor.png)](https://travis-ci.org/pmteor/pmteor)
 
 ![Pmteor Screencapture](https://raw.githubusercontent.com/pmteor/pmteor/develop/public/images/screencapture.png)
 
