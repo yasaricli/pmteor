@@ -7,8 +7,6 @@
 
 > Pmteor allows user to manage applications that are done using Pmteor meteor framework. Also already ready meteor applications can be deployed using pmteor. 
 
-**Pmteor is an open-source application and has been developed using Meteor framework.**
-
 ![Pmteor Screencapture](https://raw.githubusercontent.com/pmteor/pmteor/develop/public/images/screencapture.png)
 
 ## The Pmteor Guide
