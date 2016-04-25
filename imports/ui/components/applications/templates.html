@@ -352,6 +352,17 @@
   </div>
 </template>
 
+<template name="removeApplicationModal">
+  <div class="panel panel-default {{# if progress.get }}whirl pm-loading{{/if}}">
+    <p class="lead">{{ _ "are-you-sure-title" }}</p>
+    <div class="panel-body text-center">
+      <p class="desc mb-xl">{{ _ "are-you-sure-text" }}</p>
+      <button type="submit" class="mb-sm btn btn-danger btn-lg js-confirm">{{ _ "delete-confirm" }}</button>
+      <button type="submit" class="mb-sm btn btn-cancel btn-lg js-close">{{ _ "close" }}</button>
+    </div>
+  </div>
+</template>
+
 <template name="bundleRemoveFileBtn">
   <button type="button" class="js-af-remove-file btn btn-default btn-danger">
     {{ _ 'remove' }}

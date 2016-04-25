@@ -88,7 +88,6 @@ jparker:gravatar@0.4.1
 jquery@1.11.8
 juliancwirko:s-alert@3.1.4
 juliancwirko:s-alert-slide@3.1.3
-kevohagan:sweetalert@1.0.0
 lai:collection-extensions@0.2.1_1
 launch-screen@1.0.11
 less@2.6.0
@@ -130,7 +129,7 @@ ongoworks:security@2.0.1
 ordered-dict@1.0.7
 pmteor:dev@0.0.4
 pmteor:dropdown@0.0.1
-pmteor:modal@0.0.1
+pmteor:modal@0.0.2
 pmteor:underscore-helpers@0.0.1
 pmteor:whirl@0.0.1
 promise@0.6.7

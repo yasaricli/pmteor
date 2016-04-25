@@ -24,28 +24,14 @@ Template.applications.events({
     Meteor.call('application.build', { _id });
   },
 
-  'click .delete'(event, instance) {
-    swal({
-      title: TAPi18n.__('are-you-sure-title'),
-      text: TAPi18n.__('are-you-sure-text'),
-      type: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#f05050",
-      confirmButtonText: TAPi18n.__('delete-confirm'),
-      closeOnConfirm: false,
-      showLoaderOnConfirm: true,
-      html: false
-    }, () => {
-      Applications.remove(this._id, () => {
-        swal({
-          title: TAPi18n.__('deleted-application-title'),
-          text: TAPi18n.__('deleted-application-text'),
-          type: "success",
-          confirmButtonColor: "#7266ba"
-        });
-      });
+  'click .delete': Modal.confirm('removeApplication', (instance, data) => {
+    Applications.remove(data._id, (err) => {
+
+      // Close all modals
+      Modal.close();
     });
-  },
+  }),
+
   'click .absoluteUrl'(event, instance) {
     event.preventDefault();
 
