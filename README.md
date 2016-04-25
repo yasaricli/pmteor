@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/pmteor/pmteor.png)](https://travis-ci.org/pmteor/pmteor)
 
-![Pmteor Logo](https://raw.githubusercontent.com/pmteor/pmteor/develop/public/images/logo.png)
+![Pmteor Screencapture](https://raw.githubusercontent.com/pmteor/pmteor/develop/public/images/screencapture.png)
 
 Pmteor allows user to manage applications that are done using Pmteor meteor framework. Also already ready meteor applications can be deployed using pmteor. 
 
