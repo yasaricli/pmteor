@@ -2,11 +2,10 @@
 
 * Meteor 1.3 update [#77](https://github.com/pmteor/pmteor/issues/77)
 * Header Onlines widget [#78](https://github.com/pmteor/pmteor/issues/78)
-* METEOR_SETTINGS application env. [#75](https://github.com/pmteor/pmteor/issues/75)
-* New Member application email. [#74](https://github.com/pmteor/pmteor/issues/74)
-* Change Application members roles. [#72](https://github.com/pmteor/pmteor/issues/72)
 * Application detail page Logs. [#52](https://github.com/pmteor/pmteor/issues/52)
-
+* Upload Bundle Progress [#44](https://github.com/pmteor/pmteor/issues/44)
+* New Confirm Modal [#86](https://github.com/pmteor/pmteor/issues/86)
+* started pm2 error then pm2.disconnect bugfix. [#85](https://github.com/pmteor/pmteor/issues/85)
 
 #### v0.2.0, 2016-March-28
 * Register First user set to admin. [#68](https://github.com/pmteor/pmteor/issues/68)
