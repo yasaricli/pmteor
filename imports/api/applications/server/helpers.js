@@ -88,8 +88,9 @@ Applications.helpers({
 
   stop() {
     const self = this;
+
     pm2.connect(Meteor.bindEnvironment(() => {
-      pm2.stop(self.bundleId, Meteor.bindEnvironment(() => {
+      pm2.delete(self.bundleId, Meteor.bindEnvironment(() => {
 
         self.notification({
           type: 'success',
