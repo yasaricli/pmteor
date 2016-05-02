@@ -5,7 +5,7 @@ import { Dev } from 'meteor/pmteor:dev';
 const BUNDLE_DIR = Dev.isServer(() => {
 
   // if the developer mode if you then installed in the default folder.
-  if (Dev.isDevelopment) {
+  if (Dev.isDevelopment()) {
     return `${process.env.HOME}/bundles`;
   }
 
@@ -17,7 +17,7 @@ const BUNDLE_DIR = Dev.isServer(() => {
 const MAX_BUNDLE_SIZE = Dev.isServer(() => {
 
   // if is development then upload limit 50MB
-  if (Dev.isDevelopment) {
+  if (Dev.isDevelopment()) {
     return 50 * 1024 * 1024;
   }
 
