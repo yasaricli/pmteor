@@ -2,8 +2,12 @@ import { TAPi18n } from 'meteor/tap:i18n';
 import { _ } from 'meteor/underscore';
 
 import Users from '../../users/users.js';
+import { Logs } from '../../logs/logs.js';
 import { Applications } from '../applications.js';
+
+// Utils
 import { BUNDLE_DIR, SYNC_EXEC_OPTIONS } from '../../bundles/utils.js';
+import { LOG_TYPE_MAPPER } from '../../logs/utils.js';
 
 // NPM PACKAGES
 import pm2 from 'pm2';
@@ -22,7 +26,7 @@ Applications.helpers({
       cwd: this.dir(),
       autorestart: false,
       watch: true,
-      env: _.extend({ PORT}, this.env)
+      env: _.extend({ PORT }, this.env)
     }
   },
 
@@ -79,6 +83,13 @@ Applications.helpers({
             }));
           }
 
+          // ERRORED LOGS INSERT
+          Logs.insert({
+            process: { name: self.bundleId },
+            type: LOG_TYPE_MAPPER.ERRORED,
+            data: start_error.msg
+          });
+
           // IF STARTED ERROR THEN DISCONNECT
           pm2.disconnect();
         }));
@@ -103,7 +114,7 @@ Applications.helpers({
     }));
   },
 
-  // ##### --------- REBUILDING FIBERS -------------- #######
+  // ##### --------- REBUILDING -------------- #######
   build() {
     this.notification({
       type: 'info',

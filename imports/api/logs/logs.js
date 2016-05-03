@@ -15,7 +15,7 @@ Logs.attachSchema(new SimpleSchema({
   process: { type: Object },
 
   // PROCESS ID
-  'process.pm_id': { type: String },
+  'process.pm_id': { type: String, optional: true },
 
   // APPLICATION BUNDLE ID
   'process.name': { type: String },
