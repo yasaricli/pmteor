@@ -84,3 +84,15 @@ else
   npm install fibers
   npm install bcrypt
 fi
+
+# GO TO MAIN DIR
+cd ../..
+
+# PM2 START
+pm2 start main.js
+
+# SLEEP
+sleep 15
+
+# CAT LOGS
+cat ~/.pm2/logs/*
