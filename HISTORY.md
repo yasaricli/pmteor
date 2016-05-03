@@ -3,10 +3,10 @@
 
 
 #### v0.3.2, 2016-May-02
-Error: listen EADDRINUSE [#88](https://github.com/pmteor/pmteor/issues/88)
+* Error: listen EADDRINUSE [#88](https://github.com/pmteor/pmteor/issues/88)
 
 #### v0.3.1, 2016-May-01
-Dev isDevelopment is function fix [#87](https://github.com/pmteor/pmteor/issues/87)
+* Dev isDevelopment is function fix [#87](https://github.com/pmteor/pmteor/issues/87)
 
 #### v0.3.0, 2016-April-29
 * Meteor 1.3 update [#77](https://github.com/pmteor/pmteor/issues/77)
