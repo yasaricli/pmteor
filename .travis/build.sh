@@ -56,20 +56,23 @@ rebuild_binary_npm_modules () {
   done
 }
 
+# NPM INSTALL METEOR SAFE
+meteor npm install
+
 # BUILD
 meteor build .
 
-# EXTRACT
-tar -xvf pmteor.tar.gz
+# EXTRACT NO PRINT
+tar -xvf pmteor.tar.gz > /dev/null 2>&1
 
 # GO TO INSTALL DIR
 cd bundle/programs/server
 
 # NPM REBUILD BINARY
 if [ -d ./npm ]; then
-  cd npm
+  cd npm/node_modules/meteor
   rebuild_binary_npm_modules
-  cd ../
+  cd ../../..
 fi
 
 # PACKAGE INSTALL
