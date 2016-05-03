@@ -26,5 +26,4 @@ before_install:
   - export PATH=$HOME/.meteor:$PATH
 
 script:
-  - meteor build /tmp/build
-  - ".travis/build.sh"
+  - bash .travis/build.sh
