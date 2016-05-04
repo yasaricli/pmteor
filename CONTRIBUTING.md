@@ -28,7 +28,7 @@ any file of the source code, just play with it to see how it behaves!
 ## Style guide
 
 We follow the
-[meteor style guide](https://github.com/meteor/meteor/wiki/Meteor-Style-Guide).
+[meteor style guide](http://guide.meteor.com/code-style.html#javascript).
 
 Please read the meteor style guide before making any significant contribution.
 
