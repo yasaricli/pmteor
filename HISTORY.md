@@ -1,5 +1,6 @@
 ### v.NEXT
 * Started script not found error log [#89](https://github.com/pmteor/pmteor/issues/89)
+* Mobile viewport Support [#91](https://github.com/pmteor/pmteor/issues/91)
 
 
 #### v0.3.2, 2016-May-02
