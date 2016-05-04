@@ -3,6 +3,8 @@
 * Mobile viewport Support [#91](https://github.com/pmteor/pmteor/issues/91)
 
 
+<hr/>
+
 #### v0.3.2, 2016-May-02
 * Error: listen EADDRINUSE [#88](https://github.com/pmteor/pmteor/issues/88)
 
