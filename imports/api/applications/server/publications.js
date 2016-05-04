@@ -30,22 +30,7 @@ Meteor.publishComposite('applications', function() {
         }
       },
 
-      // MEMBERS APPLICATION
-      {
-        find(application) {
-          return Users.find({
-            _id: {
-              $in: application.memberIds
-            }
-          }, {
-            fields: {
-              services: 0
-            }
-          });
-        }
-      },
-
-      // Notifications
+      // NOTIFICATIONS
       {
         find(application) {
           return Notifications.find({
@@ -54,13 +39,6 @@ Meteor.publishComposite('applications', function() {
                $gt: new Date() // Publish current Date after .
              }
           });
-        }
-      },
-
-      // BUNDLES
-      {
-        find(application) {
-          return Bundles.find({ _id: application.bundleId });
         }
       }
     ]
