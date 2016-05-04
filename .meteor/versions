@@ -129,7 +129,7 @@ ongoworks:security@2.0.1
 ordered-dict@1.0.7
 pmteor:dev@0.0.4
 pmteor:dropdown@0.0.1
-pmteor:modal@0.0.2
+pmteor:modal@0.0.3
 pmteor:underscore-helpers@0.0.1
 pmteor:whirl@0.0.1
 promise@0.6.7
